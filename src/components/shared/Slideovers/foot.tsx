@@ -1,6 +1,6 @@
-import { AppContext } from "@utils/contexts";
-import { SlideoverModes } from "@utils/enums";
 import { useContext } from "react";
+import { AppContext } from "utils/contexts";
+import { SlideoverModes } from "utils/enums";
 
 interface Props {
   close: () => void;

@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 import { Combobox } from "@headlessui/react";
-import { classNames } from "@utils/index";
+import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useEffect, useState } from "react";
 import { Control, useController } from "react-hook-form";
+import { classNames } from "utils/index";
 import { SceletonForInput } from "../Sceleton";
 
 interface Props {

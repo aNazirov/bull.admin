@@ -1,7 +1,7 @@
-import { ActerTbody } from "@components/pages/acter";
-import { Table } from "@components/pages/table";
-import { CInput } from "@components/shared";
 import { FilterIcon } from "@heroicons/react/solid";
+import { ActerTbody } from "components/pages/acter";
+import { Table } from "components/pages/table";
+import { CInput } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { getAll, setActer } from "store/acter/acter.thunks";

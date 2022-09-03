@@ -1,5 +1,5 @@
-import { CInput } from "@components/shared/CInput";
-import { ILogin } from "@interfaces/interfaces";
+import { CInput } from "components/shared/CInput";
+import { ILogin } from "interfaces/interfaces";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { loginByPassword } from "store/global/global.thunks";

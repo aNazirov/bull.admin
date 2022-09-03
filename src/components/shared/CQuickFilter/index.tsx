@@ -1,7 +1,7 @@
-import { IStatus } from "@interfaces/interfaces";
-import { classNames } from "@utils/index";
+import { IStatus } from "interfaces/interfaces";
 import React from "react";
 import { Control, useController } from "react-hook-form";
+import { classNames } from "utils/index";
 
 interface Props {
   title?: string;

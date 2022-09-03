@@ -1,5 +1,5 @@
-import { THead } from "@utils/enums";
 import React from "react";
+import { THead } from "utils/enums";
 
 interface Props {
   tableNames: string[];

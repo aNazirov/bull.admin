@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { SlideoverModes } from "@utils/enums";
+import React, { useContext } from "react";
+import { AppContext } from "utils/contexts";
+import { SlideoverModes } from "utils/enums";
 import { SlideoversHead } from "./head";
-import { AppContext } from "@utils/contexts";
 export * from "./foot";
 
 interface Props {

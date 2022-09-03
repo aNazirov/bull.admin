@@ -1,15 +1,15 @@
-import { PrivateComponent, SlideOvers } from "@components/shared";
-import { MDelete } from "@components/shared/MDelete";
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
-import { CreateGenre } from "@pages/genre/create";
-import { EditGenre } from "@pages/genre/edit";
-import { removeService, Toast } from "@services/global";
-import { AppContext } from "@utils/contexts";
-import { RoleType, SlideoverModes } from "@utils/enums";
-import { classNames } from "@utils/index";
+import { PrivateComponent, SlideOvers } from "components/shared";
+import { MDelete } from "components/shared/MDelete";
+import { CreateGenre } from "pages/genre/create";
+import { EditGenre } from "pages/genre/edit";
 import { useContext, useState } from "react";
+import { removeService, Toast } from "services/global";
 import { getAll, setGenre } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { AppContext } from "utils/contexts";
+import { RoleType, SlideoverModes } from "utils/enums";
+import { classNames } from "utils/index";
 
 interface Props {
   path: string[];

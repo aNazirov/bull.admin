@@ -1,6 +1,6 @@
-import api from "@api/index";
-import { IAutoComplete, ILogin } from "@interfaces/interfaces";
+import api from "api/index";
 import { AxiosError } from "axios";
+import { IAutoComplete, ILogin } from "interfaces/interfaces";
 import { toast } from "react-toastify";
 
 class ToastClass {

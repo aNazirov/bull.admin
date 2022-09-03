@@ -1,12 +1,12 @@
-import Header from "@components/global/header";
-import Sidebar from "@components/global/sidebar";
-import { PrivateRoute } from "@components/shared";
-import { Acters } from "@pages/acter";
-import { Genres } from "@pages/genre";
-import { AppContext } from "@utils/contexts";
-import { RoleType, SlideoverModes } from "@utils/enums";
+import Header from "components/global/header";
+import Sidebar from "components/global/sidebar";
+import { PrivateRoute } from "components/shared";
+import { Acters } from "pages/acter";
+import { Genres } from "pages/genre";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { AppContext } from "utils/contexts";
+import { RoleType, SlideoverModes } from "utils/enums";
 
 export const Layout: React.FC = () => {
   const [open, setOpen] = useState(false);

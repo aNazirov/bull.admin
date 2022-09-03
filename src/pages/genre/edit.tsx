@@ -1,6 +1,6 @@
-import { CInput, SlideoversFoot } from "@components/shared";
-import { Toast, updateService } from "@services/index";
+import { CInput, SlideoversFoot } from "components/shared";
 import { useForm } from "react-hook-form";
+import { Toast, updateService } from "services/index";
 import { getAll } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 

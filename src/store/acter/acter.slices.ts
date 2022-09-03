@@ -1,5 +1,5 @@
-import { IActer } from "@interfaces/interfaces";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IActer } from "interfaces/interfaces";
 
 interface IState {
   acters: IActer[];

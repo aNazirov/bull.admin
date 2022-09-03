@@ -8,6 +8,7 @@ import {
 import { actersReducer } from "./acter/acter.slices";
 import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
+import { producersReducer } from "./producer/producer.slices";
 
 // export type RootState = ReturnType<typeof combinedReducer>;
 
@@ -15,6 +16,7 @@ const State = {
   global: globalReducer,
   genres: genresReducer,
   acters: actersReducer,
+  producers: producersReducer,
 };
 
 export const appReducer = combineReducers(State);

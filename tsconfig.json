@@ -17,6 +17,5 @@
     "jsx": "preserve",
     "baseUrl": "./src"
   },
-  // "extends": "./tsconfig.paths.json",
   "include": ["src"]
 }

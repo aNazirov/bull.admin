@@ -1,4 +1,4 @@
-import { CLink, PrivateRoute } from "@components/shared";
+import { CLink, PrivateRoute } from "components/shared";
 import React from "react";
 import { sidebarNavigation } from "_data/titles";
 

@@ -1,7 +1,6 @@
-import { ILogin, IUser } from "@interfaces/interfaces";
-import { getUserByToken, loginService, Toast } from "@services/index";
+import { ILogin, IUser } from "interfaces/interfaces";
+import { getUserByToken, loginService, Toast } from "services/index";
 import { globalAction } from "./global.slices";
-
 
 const clearStorage = () => {
   localStorage.removeItem("token");

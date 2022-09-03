@@ -1,5 +1,5 @@
 import { Switch } from "@headlessui/react";
-import { classNames } from "@utils/index";
+import { classNames } from "utils/index";
 
 interface Props {
   disabled: boolean;
@@ -27,6 +27,5 @@ export const CToggle: React.FC<Props> = ({ disabled, checked, onToggle }) => {
         )}
       />
     </Switch>
-    
   );
 };

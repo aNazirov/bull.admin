@@ -1,6 +1,6 @@
 import { XIcon } from "@heroicons/react/solid";
-import { AppContext } from "@utils/contexts";
 import { useContext } from "react";
+import { AppContext } from "utils/contexts";
 
 interface Props {
   title?: string;

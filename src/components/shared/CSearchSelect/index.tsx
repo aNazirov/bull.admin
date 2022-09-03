@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
 import { Combobox } from "@headlessui/react";
-import { classNames, meiliRange } from "@utils/index";
-import { Control, useController } from "react-hook-form";
-import { autoComplite, Toast } from "@services/index";
-import { SceletonForInput } from "../Sceleton";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { useEffect, useState } from "react";
+import { Control, useController } from "react-hook-form";
+import { autoComplite, Toast } from "services/index";
+import { classNames, meiliRange } from "utils/index";
+import { SceletonForInput } from "../Sceleton";
 
 interface Props {
   title: string;

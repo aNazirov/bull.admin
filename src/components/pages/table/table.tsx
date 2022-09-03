@@ -1,7 +1,5 @@
-import { PaginationComponent } from "@components/shared/Pagination";
-import { SceletonForTable } from "@components/shared/Sceleton";
-import { AppContext } from "@utils/contexts";
-import { SlideoverModes } from "@utils/enums";
+import { PaginationComponent } from "components/shared/Pagination";
+import { SceletonForTable } from "components/shared/Sceleton";
 import React, {
   JSXElementConstructor,
   useContext,
@@ -9,6 +7,8 @@ import React, {
   useState,
 } from "react";
 import { useLocation } from "react-router-dom";
+import { AppContext } from "utils/contexts";
+import { SlideoverModes } from "utils/enums";
 import { Thead } from "./thead";
 
 interface Props {
@@ -57,7 +57,7 @@ export const Table: React.FC<Props> = ({
 
     const _skip = take * (_page - 1);
     setPage(_page);
-    
+
     await getMore(_skip);
 
     setLoading(false);

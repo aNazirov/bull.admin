@@ -1,5 +1,5 @@
-import { IUser } from "@interfaces/interfaces";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IUser } from "interfaces/interfaces";
 
 interface IState {
   token: string | null;

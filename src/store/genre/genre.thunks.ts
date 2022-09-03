@@ -1,6 +1,6 @@
-import { IGenre } from "@interfaces/interfaces";
-import { getAllService, getOneService } from "@services/global";
-import { Toast } from "@utils/index";
+import { IGenre } from "interfaces/interfaces";
+import { getAllService, getOneService } from "services/global";
+import { Toast } from "utils/index";
 import { genresAction } from "./genre.slices";
 
 export const getAll =

@@ -1,9 +1,9 @@
 import { CInput, SlideoversFoot } from "components/shared";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { fileDelete, filesUpload, Toast, updateService } from "services/index";
-import { getAll } from "store/acter/acter.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { createService, filesUpload, Toast } from "services/index";
+import { getAll } from "store/producer/producer.thunks";
+import { useAppDispatch } from "store/hooks";
 import { formatData, imageUpload } from "utils/index";
 import { defaultAvatar } from "_data/datas";
 
@@ -11,51 +11,41 @@ interface Props {
   close: () => void;
 }
 
-export const EditActer: React.FC<Props> = ({ close }) => {
+export const CreateProducer: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { token } = useAppSelector((state) => state.global);
-  const { acter } = useAppSelector((state) => state.acters);
 
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [preview, setPreview] = useState(
-    acter?.avatar ? `${acter.avatar.url}/${token}` : defaultAvatar
-  );
-  const [loadingPhoto, setLoadingPhoto] = useState(false);
+  const [preview, setPreview] = useState(undefined);
 
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
+    Toast.info(`Создание продюсера`);
     let avatarId = undefined;
 
     if (avatar) {
       avatarId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
     }
 
-    return updateService(acter!.id, { ...data, avatarId }, "acter")
-      .then(({ name }) => {
-        Toast.success(`${name} обновлен`);
+    return createService(
+      {
+        ...data,
+        avatarId,
+      },
+      "producer"
+    )
+      .then(({ title }) => {
+        Toast.success(`${title} создан`);
         dispatch(getAll());
         close();
       })
       .catch((e) => {
         Toast.error(e);
       });
-  };
-
-  const imageDelete = (id: number) => {
-    setLoadingPhoto(true);
-    return fileDelete(id)
-      .then(() => {
-        Toast.success("Файл удален");
-        setLoadingPhoto(false);
-      })
-      .catch((e) => Toast.error(e));
   };
 
   return (
@@ -66,7 +56,10 @@ export const EditActer: React.FC<Props> = ({ close }) => {
     >
       <div className="mt-1 flex items-center">
         <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-          <img src={preview} className="h-full w-full object-cover" />
+          <img
+            src={preview || defaultAvatar}
+            className="h-full w-full object-cover"
+          />
         </span>
         <div>
           <label
@@ -79,11 +72,10 @@ export const EditActer: React.FC<Props> = ({ close }) => {
             type="button"
             className="ml-5 bg-red-600 py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             onClick={() => {
-              setPreview("");
+              setPreview(undefined);
               setAvatar(null);
-              acter?.avatar && imageDelete(acter?.avatar?.id);
             }}
-            disabled={loadingPhoto || !acter?.avatar?.id}
+            disabled={false}
           >
             Удалить
           </button>
@@ -96,13 +88,11 @@ export const EditActer: React.FC<Props> = ({ close }) => {
           />
         </div>
       </div>
-
       <div className="w-full">
         <CInput
           name="name"
           title="Имя"
           placeholder="Имя"
-          defaultValue={acter?.name}
           control={control}
           error={errors["name"]}
         />
@@ -114,7 +104,6 @@ export const EditActer: React.FC<Props> = ({ close }) => {
             name="slug"
             title="Slug"
             placeholder="Slug"
-            defaultValue={acter?.slug}
             control={control}
             error={errors["slug"]}
           />

@@ -40,3 +40,5 @@ export const sidebarNavigation = [
 export const GenreTableNames = ["Название", "Slug", THead.edit];
 
 export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
+export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
+

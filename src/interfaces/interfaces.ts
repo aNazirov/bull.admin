@@ -118,6 +118,7 @@ export interface IMovieFile {
 
 export interface IProducer {
   id: number;
+  avatar: IFile;
   name: string;
   slug: string;
   movie?: IMovie[];

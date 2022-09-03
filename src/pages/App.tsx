@@ -1,5 +1,5 @@
-import { Layout } from "@components/global/layout";
-import { Login } from "@components/pages/login";
+import { Layout } from "components/global/layout";
+import { Login } from "components/pages/login";
 import { useEffect, useState } from "react";
 import {
   Navigate,

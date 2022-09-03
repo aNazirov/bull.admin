@@ -1,6 +1,6 @@
-import { IActer } from "@interfaces/interfaces";
-import { getAllService, getOneService } from "@services/global";
-import { Toast } from "@utils/index";
+import { IActer } from "interfaces/interfaces";
+import { getAllService, getOneService } from "services/global";
+import { Toast } from "utils/index";
 import { actersAction } from "./acter.slices";
 
 export const getAll =

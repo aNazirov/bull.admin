@@ -2,7 +2,7 @@ import { CInput, SlideoversFoot } from "components/shared";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { fileDelete, filesUpload, Toast, updateService } from "services/index";
-import { getAll } from "store/acter/acter.thunks";
+import { getAll } from "store/producer/producer.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { formatData, imageUpload } from "utils/index";
 import { defaultAvatar } from "_data/datas";
@@ -11,18 +11,18 @@ interface Props {
   close: () => void;
 }
 
-export const EditActer: React.FC<Props> = ({ close }) => {
+export const EditProducer: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
   } = useForm();
   const { token } = useAppSelector((state) => state.global);
-  const { acter } = useAppSelector((state) => state.acters);
+  const { producer } = useAppSelector((state) => state.producers);
 
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
-    acter?.avatar ? `${acter.avatar.url}/${token}` : defaultAvatar
+    producer?.avatar ? `${producer.avatar.url}/${token}` : defaultAvatar
   );
   const [loadingPhoto, setLoadingPhoto] = useState(false);
 
@@ -37,7 +37,7 @@ export const EditActer: React.FC<Props> = ({ close }) => {
       avatarId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
     }
 
-    return updateService(acter!.id, { ...data, avatarId }, "acter")
+    return updateService(producer!.id, { ...data, avatarId }, "producer")
       .then(({ name }) => {
         Toast.success(`${name} обновлен`);
         dispatch(getAll());
@@ -81,9 +81,9 @@ export const EditActer: React.FC<Props> = ({ close }) => {
             onClick={() => {
               setPreview("");
               setAvatar(null);
-              acter?.avatar && imageDelete(acter?.avatar?.id);
+              producer?.avatar && imageDelete(producer?.avatar?.id);
             }}
-            disabled={loadingPhoto || !acter?.avatar?.id}
+            disabled={loadingPhoto || !producer?.avatar?.id}
           >
             Удалить
           </button>
@@ -102,7 +102,7 @@ export const EditActer: React.FC<Props> = ({ close }) => {
           name="name"
           title="Имя"
           placeholder="Имя"
-          defaultValue={acter?.name}
+          defaultValue={producer?.name}
           control={control}
           error={errors["name"]}
         />
@@ -114,7 +114,7 @@ export const EditActer: React.FC<Props> = ({ close }) => {
             name="slug"
             title="Slug"
             placeholder="Slug"
-            defaultValue={acter?.slug}
+            defaultValue={producer?.slug}
             control={control}
             error={errors["slug"]}
           />

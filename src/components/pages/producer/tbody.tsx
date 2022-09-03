@@ -1,13 +1,13 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "components/shared";
 import { MDelete } from "components/shared/MDelete";
-import { CreateActer } from "pages/acter/create";
-import { EditActer } from "pages/acter/edit";
+import { CreateProducer } from "pages/producer/create";
+import { EditProducer } from "pages/producer/edit";
 import { useContext, useState } from "react";
 import { removeService, Toast } from "services/global";
-import { setActer } from "store/acter/acter.thunks";
 import { getAll } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { setProducer } from "store/producer/producer.thunks";
 import { AppContext } from "utils/contexts";
 import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames } from "utils/index";
@@ -17,9 +17,9 @@ interface Props {
   path: string[];
 }
 
-export const ActerTbody: React.FC<Props> = ({ path }) => {
+export const ProducerTbody: React.FC<Props> = ({ path }) => {
   const { token } = useAppSelector((state) => state.global);
-  const { acter, acters } = useAppSelector((state) => state.acters);
+  const { producer, producers } = useAppSelector((state) => state.producers);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -29,11 +29,11 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(acter!.id, "acter")
+    removeService(producer!.id, "producer")
       .then(() => {
-        Toast.success("Acter deleted");
+        Toast.success("producer deleted");
         dispatch(getAll());
-        dispatch(setActer());
+        dispatch(setProducer());
       })
       .catch((e) => {
         Toast.error(e);
@@ -43,13 +43,13 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setActer());
+    dispatch(setProducer());
   };
 
   return (
     <>
       <tbody>
-        {acters.map((x, idx) => (
+        {producers.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
@@ -81,7 +81,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setActer(x));
+                          dispatch(setProducer(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -94,7 +94,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setActer(x));
+                          dispatch(setProducer(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -110,12 +110,12 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {acter && (
+        {producer && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: acter.id, name: acter.name }}
+            data={{ id: producer.id, name: producer.name }}
           />
         )}
       </PrivateComponent>
@@ -123,10 +123,10 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={acter?.name || "Актер"}
+            title={producer?.name || "Актер"}
             close={close}
-            Edit={EditActer}
-            Create={CreateActer}
+            Edit={EditProducer}
+            Create={CreateProducer}
           />
         )}
       </PrivateComponent>
