@@ -66,7 +66,11 @@ export const EditActer: React.FC<Props> = ({ close }) => {
     >
       <div className="mt-1 flex items-center">
         <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-          <img src={preview} className="h-full w-full object-cover" />
+          <img
+            src={preview}
+            alt="preview"
+            className="h-full w-full object-cover"
+          />
         </span>
         <div>
           <label

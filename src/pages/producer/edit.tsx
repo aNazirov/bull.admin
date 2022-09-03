@@ -2,8 +2,8 @@ import { CInput, SlideoversFoot } from "components/shared";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { fileDelete, filesUpload, Toast, updateService } from "services/index";
-import { getAll } from "store/producer/producer.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
+import { getAll } from "store/producer/producer.thunks";
 import { formatData, imageUpload } from "utils/index";
 import { defaultAvatar } from "_data/datas";
 
@@ -66,7 +66,11 @@ export const EditProducer: React.FC<Props> = ({ close }) => {
     >
       <div className="mt-1 flex items-center">
         <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
-          <img src={preview} className="h-full w-full object-cover" />
+          <img
+            src={preview}
+            alt="preview"
+            className="h-full w-full object-cover"
+          />
         </span>
         <div>
           <label

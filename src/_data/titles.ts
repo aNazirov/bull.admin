@@ -35,10 +35,33 @@ export const sidebarNavigation = [
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
+  {
+    name: "Продюсеры",
+    href: "/producers",
+    icon: UserIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
+  {
+    name: "Категории",
+    href: "/categories",
+    icon: UserIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
+  {
+    name: "Пользователи",
+    href: "/users",
+    icon: UserIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
 ];
 
 export const GenreTableNames = ["Название", "Slug", THead.edit];
+export const CategoryTableNames = ["Название", "Slug", THead.edit];
+
+export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
 
 export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
 export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
-

@@ -28,7 +28,7 @@ export const GenreTbody: React.FC<Props> = ({ path }) => {
   const handleDelete = () => {
     removeService(genre!.id, "genre")
       .then(() => {
-        Toast.success("genre deleted");
+        Toast.success("Жанр удален");
         dispatch(getAll());
         dispatch(setGenre());
       })
@@ -109,7 +109,7 @@ export const GenreTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={genre?.title || "genre"}
+            title={genre?.title || "Жанр"}
             close={close}
             Edit={EditGenre}
             Create={CreateGenre}

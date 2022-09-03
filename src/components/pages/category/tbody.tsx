@@ -1,25 +1,22 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "components/shared";
 import { MDelete } from "components/shared/MDelete";
-import { CreateActer } from "pages/acter/create";
-import { EditActer } from "pages/acter/edit";
+import { CreateCategory } from "pages/category/create";
+import { EditCategory } from "pages/category/edit";
 import { useContext, useState } from "react";
 import { removeService, Toast } from "services/global";
-import { setActer } from "store/acter/acter.thunks";
-import { getAll } from "store/genre/genre.thunks";
+import { getAll, setCategory } from "store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AppContext } from "utils/contexts";
 import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames } from "utils/index";
-import { defaultAvatar } from "_data/datas";
 
 interface Props {
   path: string[];
 }
 
-export const ActerTbody: React.FC<Props> = ({ path }) => {
-  const { token } = useAppSelector((state) => state.global);
-  const { acter, acters } = useAppSelector((state) => state.acters);
+export const CategoryTbody: React.FC<Props> = ({ path }) => {
+  const { category, categories } = useAppSelector((state) => state.categories);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -29,11 +26,11 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(acter!.id, "acter")
+    removeService(category!.id, "category")
       .then(() => {
-        Toast.success("Актер удален");
+        Toast.success("category deleted");
         dispatch(getAll());
-        dispatch(setActer());
+        dispatch(setCategory());
       })
       .catch((e) => {
         Toast.error(e);
@@ -43,30 +40,19 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setActer());
+    dispatch(setCategory());
   };
 
   return (
     <>
       <tbody>
-        {acters.map((x, idx) => (
+        {categories.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              <div className="flex-shrink-0">
-                <img
-                  className="h-10 w-10 rounded-full object-cover"
-                  src={
-                    x.avatar?.url ? `${x.avatar?.url}/${token}` : defaultAvatar
-                  }
-                  alt={x.avatar?.name}
-                />
-              </div>
-            </td>
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.name}
+              {x.title}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
               {x.slug}
@@ -81,7 +67,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setActer(x));
+                          dispatch(setCategory(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -94,7 +80,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setActer(x));
+                          dispatch(setCategory(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -110,12 +96,12 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {acter && (
+        {category && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: acter.id, name: acter.name }}
+            data={{ id: category.id, name: category.title }}
           />
         )}
       </PrivateComponent>
@@ -123,10 +109,10 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={acter?.name || "Актер"}
+            title={category?.title || "Категория"}
             close={close}
-            Edit={EditActer}
-            Create={CreateActer}
+            Edit={EditCategory}
+            Create={CreateCategory}
           />
         )}
       </PrivateComponent>

@@ -31,7 +31,7 @@ export const ProducerTbody: React.FC<Props> = ({ path }) => {
   const handleDelete = () => {
     removeService(producer!.id, "producer")
       .then(() => {
-        Toast.success("producer deleted");
+        Toast.success("Продюсер удален");
         dispatch(getAll());
         dispatch(setProducer());
       })
@@ -123,7 +123,7 @@ export const ProducerTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={producer?.name || "Актер"}
+            title={producer?.name || "Продюсер"}
             close={close}
             Edit={EditProducer}
             Create={CreateProducer}

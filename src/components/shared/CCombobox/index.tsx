@@ -11,7 +11,7 @@ interface Props {
   defaultValue?: number;
   name: string;
   error?: {
-    message: string;
+    message?: string;
   };
   control: Control<any>;
   loading?: boolean;

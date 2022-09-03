@@ -58,6 +58,7 @@ export const CreateActer: React.FC<Props> = ({ close }) => {
         <span className="h-12 w-12 rounded-full overflow-hidden bg-gray-100">
           <img
             src={preview || defaultAvatar}
+            alt="preview"
             className="h-full w-full object-cover"
           />
         </span>

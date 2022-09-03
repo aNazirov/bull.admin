@@ -1,6 +1,4 @@
 import { XIcon } from "@heroicons/react/solid";
-import { useContext } from "react";
-import { AppContext } from "utils/contexts";
 
 interface Props {
   title?: string;
@@ -8,8 +6,6 @@ interface Props {
 }
 
 export const SlideoversHead: React.FC<Props> = ({ title, close }) => {
-  const { mode } = useContext(AppContext);
-
   return (
     <div className="pb-6">
       <div className="flex items-start justify-between">

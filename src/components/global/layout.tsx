@@ -2,7 +2,10 @@ import Header from "components/global/header";
 import Sidebar from "components/global/sidebar";
 import { PrivateRoute } from "components/shared";
 import { Acters } from "pages/acter";
+import { Categories } from "pages/category";
 import { Genres } from "pages/genre";
+import { Producers } from "pages/producer";
+import { Users } from "pages/user";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AppContext } from "utils/contexts";
@@ -48,6 +51,39 @@ export const Layout: React.FC = () => {
                         operation={[RoleType.Admin, RoleType.Moderator]}
                       >
                         <Acters />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/producers"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Producers />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/categories"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Categories />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/users"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Users />
                       </PrivateRoute>
                     }
                   />

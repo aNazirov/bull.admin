@@ -116,6 +116,12 @@ export const pageSwitch = (path: string[]) => {
   switch (page) {
     case "genres":
       return "Жанры";
+    case "acters":
+      return "Актеры";
+    case "categories":
+      return "Категории";
+    case "producers":
+      return "Продюсеры";
     case "profile":
       return "Profile";
 

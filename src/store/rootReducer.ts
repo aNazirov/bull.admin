@@ -6,9 +6,11 @@ import {
   StateFromReducersMapObject,
 } from "@reduxjs/toolkit";
 import { actersReducer } from "./acter/acter.slices";
+import { categoriesReducer } from "./category/category.slices";
 import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
 import { producersReducer } from "./producer/producer.slices";
+import { usersReducer } from "./user/user.slices";
 
 // export type RootState = ReturnType<typeof combinedReducer>;
 
@@ -17,6 +19,8 @@ const State = {
   genres: genresReducer,
   acters: actersReducer,
   producers: producersReducer,
+  categories: categoriesReducer,
+  users: usersReducer,
 };
 
 export const appReducer = combineReducers(State);
