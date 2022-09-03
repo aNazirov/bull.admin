@@ -1,9 +1,15 @@
 import { Layout } from "@components/global/layout";
 import { Login } from "@components/pages/login";
-import { autoLogIn } from "@store/global/global.thunks";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
 import { useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { autoLogIn } from "store/global/global.thunks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
 import "./App.scss";
 
 function App() {

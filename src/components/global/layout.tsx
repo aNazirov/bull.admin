@@ -1,9 +1,12 @@
 import Header from "@components/global/header";
 import Sidebar from "@components/global/sidebar";
+import { PrivateRoute } from "@components/shared";
+import { Acters } from "@pages/acter";
+import { Genres } from "@pages/genre";
 import { AppContext } from "@utils/contexts";
-import { SlideoverModes } from "@utils/enums";
+import { RoleType, SlideoverModes } from "@utils/enums";
 import React, { useState } from "react";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 export const Layout: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -26,7 +29,29 @@ export const Layout: React.FC = () => {
                 aria-labelledby="primary-heading"
                 className="min-w-0 flex-1 h-full flex flex-col overflow-y-auto lg:order-last"
               >
-                <Routes>{}</Routes>
+                <Routes>
+                  <Route
+                    path="/genres"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Genres />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/acters"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Acters />
+                      </PrivateRoute>
+                    }
+                  />
+                </Routes>
               </section>
             </main>
           </div>

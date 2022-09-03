@@ -1,5 +1,5 @@
-import { SwitchHorizontalIcon } from "@heroicons/react/solid";
-import { RoleType, THead } from "@utils/enums";
+import { SwitchHorizontalIcon, UserIcon } from "@heroicons/react/solid";
+import { RoleType, THead } from "utils/enums";
 
 export const navigation = [
   {
@@ -22,101 +22,21 @@ export const userNavigation = [
 
 export const sidebarNavigation = [
   {
-    name: "Jobs",
-    href: "/jobs",
+    name: "Жанры",
+    href: "/genres",
     icon: SwitchHorizontalIcon,
-    permissions: [
-      RoleType.Admin,
-    ],
+    permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
   {
-    name: "Transact",
-    href: "/transactions",
-    icon: SwitchHorizontalIcon,
-    permissions: [
-      RoleType.Admin,
-    ],
+    name: "Актеры",
+    href: "/acters",
+    icon: UserIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
 ];
 
-export const AgencyTableNames = [
-  "Title",
-  "License",
-  "Bank Account",
-  "Email",
-  THead.edit,
-];
+export const GenreTableNames = ["Название", "Slug", THead.edit];
 
-export const PaymentTableNames = ["Payments", "Amount", "Type", "Date"];
-
-export const ClientTableNames = [
-  "Name",
-  "Transactions",
-  "Email",
-  THead.edit,
-];
-
-export const TransactionTableNames = [
-  "Agent",
-  "Client",
-  "Unit",
-  "Status",
-  "Next job",
-  "Payment",
-  THead.edit,
-];
-
-export const JobTableNames = [
-  "Title",
-  "Type",
-  "Created date",
-  "Deadline",
-  "Completed",
-  THead.edit,
-];
-
-export const JobsTableNames = [
-  "Transaction Title",
-  "Name",
-  "Access Roles",
-  "DeadLine",
-];
-
-export const DeveloperTableNames = ["Name", THead.edit];
-
-export const AgentTableNames = [
-  "Name",
-  "Email",
-  "Agency",
-  THead.edit,
-];
-
-export const ProjectTableNames = [
-  "Title",
-  "Developer",
-  "Completeness",
-  "Email",
-  "Levels",
-  "Units",
-  THead.edit,
-];
-
-export const UnitTableNames = [
-  "Title",
-  "Project",
-  "Transactions",
-  "Status",
-  "Type",
-  "Price",
-  THead.edit,
-];
-
-export const UserTableNames = [
-  "Name",
-  "Role",
-  "Transactions",
-  "Email",
-  THead.edit,
-];
+export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];

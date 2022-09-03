@@ -1,9 +1,9 @@
 import { CInput } from "@components/shared/CInput";
 import { ILogin } from "@interfaces/interfaces";
-import { loginByPassword } from "@store/global/global.thunks";
-import { useAppDispatch } from "@store/hooks";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { loginByPassword } from "store/global/global.thunks";
+import { useAppDispatch } from "store/hooks";
 
 export const Login: React.FC = () => {
   const {
@@ -37,12 +37,11 @@ export const Login: React.FC = () => {
             <form onSubmit={handleSubmit(submit)} className="space-y-6">
               <div className="mt-1">
                 <CInput
-                  name="phone"
-                  type="tel"
-                  title="Phone number"
+                  name="email"
+                  type="mail"
+                  title="Email"
                   control={control}
-                  error={errors["phone"]}
-                  id="phone"
+                  error={errors["email"]}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -54,7 +53,6 @@ export const Login: React.FC = () => {
                   name="password"
                   control={control}
                   error={errors["password"]}
-                  id="password"
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>

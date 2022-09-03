@@ -1,6 +1,6 @@
 import { CLink, PrivateRoute } from "@components/shared";
-import { sidebarNavigation } from "@_data/titles";
 import React from "react";
+import { sidebarNavigation } from "_data/titles";
 
 const Sidebar: React.FC = () => {
   return (

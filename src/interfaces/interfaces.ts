@@ -35,10 +35,6 @@ export interface IUser {
   name: string;
   phone?: string;
   role?: IRole;
-  orders?: IOrder[];
-  bonuses?: number;
-  cashback?: number;
-  password?: string;
 }
 
 export interface IRole {
@@ -46,23 +42,121 @@ export interface IRole {
   title: string;
 }
 
-export interface IOrder {
+export interface IActer {
   id: number;
-  status: IOrderStatus;
-  user?: IUser;
-  items?: IItem[];
-  summa?: number;
-  createdAt?: Date;
+  avatar: IFile;
+  name: string;
+  slug: string;
+  movies?: IMovie[];
+  createdAt: string;
 }
 
-export interface IOrderStatus {
+export interface ICategory {
   id: number;
   title: string;
+  slug: string;
+  movies?: IMovie[];
+  createdAt: string;
 }
 
-export interface IItem {
+export interface IComment {
+  id: number;
+  user: any;
+  movie?: IMovie;
+  text: string;
+  createdAt: string;
+}
+
+export interface ICountry {
   id: number;
   title: string;
-  price?: number;
-  byBonus?: boolean;
+  slug: string;
+  movie?: IMovie[];
+  createdAt: string;
+}
+
+export interface IGenre {
+  id: number;
+  title: string;
+  slug: string;
+  movie?: IMovie[];
+  createdAt: string;
+}
+
+export interface IMovie {
+  id: number;
+  title: string;
+  slug: string;
+  description?: string;
+  isNew: boolean;
+  isSerial: boolean;
+  bySubscription: boolean;
+  imdb?: number;
+  rating?: number;
+  ageRemark: number;
+  year: number;
+  genres?: IGenre[];
+  countries?: ICountry[];
+  acters?: IActer[];
+  comments?: IComment[];
+  categories?: ICategory[];
+  producers?: IProducer[];
+  seasons?: ISeason[];
+  treiler?: IFile;
+  file?: IMovieFile;
+}
+
+export interface IMovieFile {
+  id: number;
+  movie?: IMovie;
+  cd?: IFile;
+  hd?: IFile;
+  fullHD?: IFile;
+  uHD?: IFile;
+  createdAt: string;
+}
+
+export interface IProducer {
+  id: number;
+  name: string;
+  slug: string;
+  movie?: IMovie[];
+  createdAt: string;
+}
+
+export interface ISeason {
+  id: number;
+  season: number;
+  movie?: IMovie;
+  episodes: IEpisode[];
+  createdAt: string;
+}
+
+export interface IEpisode {
+  id: number;
+  episode: number;
+  season?: ISeason;
+  file: IFile;
+  createdAt: string;
+}
+
+export interface IUser {
+  id: number;
+  name: string;
+  parent?: IUser;
+  subUsers?: IUser[];
+  contact?: IContact;
+  role?: IRole;
+  balance?: number;
+  ageRemark?: number;
+}
+
+export interface IContact {
+  email: string;
+}
+
+export interface IFile {
+  id: number;
+  name: string;
+  url: string;
 }

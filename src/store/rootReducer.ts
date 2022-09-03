@@ -5,12 +5,16 @@ import {
   Reducer,
   StateFromReducersMapObject,
 } from "@reduxjs/toolkit";
+import { actersReducer } from "./acter/acter.slices";
+import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
 
 // export type RootState = ReturnType<typeof combinedReducer>;
 
 const State = {
   global: globalReducer,
+  genres: genresReducer,
+  acters: actersReducer,
 };
 
 export const appReducer = combineReducers(State);

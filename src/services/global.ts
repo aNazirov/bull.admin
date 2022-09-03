@@ -44,6 +44,43 @@ export const autoComplite = (params: IAutoComplete) => {
     .then((res) => res.data);
 };
 
+export const createService = (params: any, name: string) => {
+  return api.post(`/${name}`, params).then((res) => res.data);
+};
+
+export const updateService = (id: number, params: any, name: string) => {
+  return api.patch(`/${name}/${id}`, params).then((res) => res.data);
+};
+
+export const removeService = (id: number, name: string) => {
+  return api.delete(`/${name}/${id}`).then((res) => res.data);
+};
+
 export const getOneService = (id: number, name: string) => {
   return api.get(`/${name}/${id}`).then((res) => res.data);
+};
+
+export const getAllService = (skip: number, params: any, name: string) => {
+  return api
+    .get(`/${name}`, {
+      params: {
+        skip,
+        params,
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const filesUpload = (formData: any) => {
+  return api
+    .post("/file/upload-many", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data; boundary=something",
+      },
+    })
+    .then((res) => res.data);
+};
+
+export const fileDelete = (id: number) => {
+  return api.delete(`/file/${id}`).then((res) => res.data);
 };

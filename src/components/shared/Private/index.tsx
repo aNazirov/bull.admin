@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { useSelector } from "react-redux";
-import { State } from "@store/index";
+import { State } from "store/index";
 
 interface Props {
   operation: number[];

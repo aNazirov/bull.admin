@@ -1,5 +1,7 @@
 export enum RoleType {
   Admin = 1,
+  Moderator,
+  User,
 }
 
 export enum SlideoverModes {
@@ -10,5 +12,6 @@ export enum SlideoverModes {
 }
 
 export enum THead {
+  avatar = "Avatar",
   edit = "Edit",
 }

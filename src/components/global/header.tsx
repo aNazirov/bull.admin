@@ -1,16 +1,16 @@
-import { FilterIcon, PlusCircleIcon } from "@heroicons/react/solid";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Dialog, Menu, Transition } from "@headlessui/react";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import { PlusCircleIcon } from "@heroicons/react/solid";
+import { CLink, PrivateComponent } from "components/shared";
 import React, { Fragment, useContext, useState } from "react";
-import { sidebarNavigation, userNavigation } from "@_data/titles";
-import { pageSwitch, classNames } from "@utils/index";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CLink, PrivateComponent } from "@components/shared";
-import { AppContext } from "@utils/contexts";
-import { RoleType, SlideoverModes } from "@utils/enums";
-import { useAppDispatch, useAppSelector } from "@store/hooks";
-import { userLogout } from "@store/global/global.thunks";
-import { defaultAvatar } from "@_data/datas";
+import { userLogout } from "store/global/global.thunks";
+import { useAppDispatch, useAppSelector } from "store/hooks";
+import { AppContext } from "utils/contexts";
+import { RoleType, SlideoverModes } from "utils/enums";
+import { classNames, pageSwitch } from "utils/index";
+import { defaultAvatar } from "_data/datas";
+import { sidebarNavigation, userNavigation } from "_data/titles";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

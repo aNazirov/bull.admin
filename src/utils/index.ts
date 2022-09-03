@@ -114,8 +114,8 @@ export const pageSwitch = (path: string[]) => {
   const page = path[0];
 
   switch (page) {
-    case "jobs":
-      return "Job";
+    case "genres":
+      return "Жанры";
     case "profile":
       return "Profile";
 
