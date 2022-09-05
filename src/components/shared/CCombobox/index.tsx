@@ -68,15 +68,15 @@ export const Combox: React.FC<Props> = ({
     query === ""
       ? items
       : items.filter((item) => {
-          if (item.name) {
+          if (item?.name) {
             return item.name.toLowerCase().includes(query.toLowerCase());
           }
 
-          if (item.displayName) {
+          if (item?.displayName) {
             return item.displayName.toLowerCase().includes(query.toLowerCase());
           }
 
-          if (item.part) {
+          if (item?.part) {
             return item.part.toLowerCase().includes(query.toLowerCase());
           }
 
@@ -106,7 +106,7 @@ export const Combox: React.FC<Props> = ({
             )}
             onChange={(event) => setQuery(event.target.value)}
             displayValue={(item: any) =>
-              item?.name || item.displayName || item.title || ""
+              item?.name || item?.displayName || item?.title || ""
             }
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
@@ -130,45 +130,47 @@ export const Combox: React.FC<Props> = ({
                 <span className="block truncate h-5">Cancel</span>
               </Combobox.Option>
 
-              {filteredItems.map((item) => (
-                <Combobox.Option
-                  key={item.id}
-                  value={item}
-                  className={({ active }) =>
-                    classNames(
-                      "relative cursor-default select-none py-2 pl-3 pr-9",
-                      active ? "bg-blue-600 text-white" : "text-gray-900"
-                    )
-                  }
-                >
-                  {({ active, selected }) => (
-                    <>
-                      <span
-                        className={classNames(
-                          "block truncate",
-                          selected && "font-semibold"
-                        )}
-                      >
-                        {item?.name ||
-                          item.displayName ||
-                          item.title ||
-                          item.part}
-                      </span>
+              {filteredItems.map((item) => {
+                const label =
+                  item?.name || item?.displayName || item?.title || item?.part;
 
-                      {selected && (
+                return (
+                  <Combobox.Option
+                    key={item.id}
+                    value={item}
+                    className={({ active }) =>
+                      classNames(
+                        "relative cursor-default select-none py-2 pl-3 pr-9",
+                        active ? "bg-blue-600 text-white" : "text-gray-900"
+                      )
+                    }
+                  >
+                    {({ active, selected }) => (
+                      <>
                         <span
                           className={classNames(
-                            "absolute inset-y-0 right-0 flex items-center pr-4",
-                            active ? "text-white" : "text-blue-600"
+                            "block truncate",
+                            selected && "font-semibold"
                           )}
                         >
-                          <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          {label}
                         </span>
-                      )}
-                    </>
-                  )}
-                </Combobox.Option>
-              ))}
+
+                        {selected && (
+                          <span
+                            className={classNames(
+                              "absolute inset-y-0 right-0 flex items-center pr-4",
+                              active ? "text-white" : "text-blue-600"
+                            )}
+                          >
+                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                          </span>
+                        )}
+                      </>
+                    )}
+                  </Combobox.Option>
+                );
+              })}
             </Combobox.Options>
           )}
         </div>

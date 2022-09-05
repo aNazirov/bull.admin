@@ -9,6 +9,7 @@ import { actersReducer } from "./acter/acter.slices";
 import { categoriesReducer } from "./category/category.slices";
 import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
+import { moviesReducer } from "./movie/movie.slices";
 import { producersReducer } from "./producer/producer.slices";
 import { usersReducer } from "./user/user.slices";
 
@@ -21,6 +22,7 @@ const State = {
   producers: producersReducer,
   categories: categoriesReducer,
   users: usersReducer,
+  movies: moviesReducer,
 };
 
 export const appReducer = combineReducers(State);

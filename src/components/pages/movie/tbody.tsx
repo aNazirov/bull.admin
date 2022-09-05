@@ -1,12 +1,11 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { CLink, PrivateComponent, SlideOvers } from "components/shared";
 import { MDelete } from "components/shared/MDelete";
-import { CreateUser } from "pages/user/create";
-import { EditUser } from "pages/user/edit";
+import { CreateMovie } from "pages/movie/create";
 import { useContext, useState } from "react";
 import { removeService, Toast } from "services/global";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll, setUser } from "store/user/user.thunks";
+import { getAll, setMovie } from "store/movie/movie.thunks";
 import { AppContext } from "utils/contexts";
 import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames } from "utils/index";
@@ -15,8 +14,8 @@ interface Props {
   path: string[];
 }
 
-export const UserTbody: React.FC<Props> = ({ path }) => {
-  const { user, users } = useAppSelector((state) => state.users);
+export const MovieTbody: React.FC<Props> = ({ path }) => {
+  const { movie, movies } = useAppSelector((state) => state.movies);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -26,11 +25,11 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(user!.id, "user")
+    removeService(movie!.id, "movie")
       .then(() => {
-        Toast.success("Жанр удален");
+        Toast.success("Фильм удален");
         dispatch(getAll());
-        dispatch(setUser());
+        dispatch(setMovie());
       })
       .catch((e) => {
         Toast.error(e);
@@ -40,30 +39,33 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setUser());
+    dispatch(setMovie());
   };
 
   return (
     <>
       <tbody>
-        {users.map((x, idx) => (
+        {movies.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="relative px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               <CLink
-                to={`/users/show/${x.id}`}
+                to={`/movies/show/${x.id}`}
                 className="absolute top-0 w-full h-full cursor-pointer"
                 state={{}}
               />
-              {x.name}
+              {x.title}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.contact?.email}
+              {x.genres?.join(", ")}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.role?.title}
+              {x.categories?.join(", ")}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+              {x.countries?.join(", ")}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -75,7 +77,7 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setUser(x));
+                          dispatch(setMovie(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -88,7 +90,7 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setUser(x));
+                          dispatch(setMovie(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -104,12 +106,12 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {user && (
+        {movie && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: user.id, name: user.name }}
+            data={{ id: movie.id, name: movie.title }}
           />
         )}
       </PrivateComponent>
@@ -117,10 +119,10 @@ export const UserTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={user?.name || "Пользователь"}
+            title={movie?.title || "Фильм"}
             close={close}
-            Edit={EditUser}
-            Create={CreateUser}
+            // Edit={EditMovie}
+            Create={CreateMovie}
           />
         )}
       </PrivateComponent>

@@ -28,6 +28,17 @@ export function meiliRange(item: any, query: string) {
   return item;
 }
 
+export const formatNumber = (
+  number: number = 0,
+  currency: string,
+  fixed: number = 2
+) => {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: currency,
+  }).format(Number(typeof number === "number" ? number?.toFixed(fixed) : 0));
+};
+
 export function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
@@ -122,8 +133,10 @@ export const pageSwitch = (path: string[]) => {
       return "Категории";
     case "producers":
       return "Продюсеры";
-    case "profile":
-      return "Profile";
+    case "users":
+      return "Пользователи";
+    case "movie":
+      return "Фильмы";
 
     default:
       return "";

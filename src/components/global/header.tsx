@@ -106,7 +106,7 @@ const DesktopMenu: React.FC = () => {
                 className="-mx-1 bg-white p-1 flex gap-2 cursor-pointer items-center rounded-full text-gray-400 hover:text-gray-500"
                 onClick={create}
               >
-                <span className="text-sm">Add {page}</span>
+                <span className="text-sm">Добавить {page}</span>
                 <PlusCircleIcon className="h-6 w-6" aria-hidden="true" />
               </span>
             </PrivateComponent>
@@ -129,7 +129,7 @@ const DesktopMenu: React.FC = () => {
             >
               <Menu.Items className="origin-top-right absolute z-30 right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-1">
-                  <Menu.Item>
+                  {/* <Menu.Item>
                     {({ active }) => (
                       <CLink
                         to={`/profile`}
@@ -142,7 +142,7 @@ const DesktopMenu: React.FC = () => {
                         Your Profile
                       </CLink>
                     )}
-                  </Menu.Item>
+                  </Menu.Item> */}
                   <Menu.Item>
                     {({ active }) => (
                       <span

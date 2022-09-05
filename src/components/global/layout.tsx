@@ -4,8 +4,10 @@ import { PrivateRoute } from "components/shared";
 import { Acters } from "pages/acter";
 import { Categories } from "pages/category";
 import { Genres } from "pages/genre";
+import { Movies } from "pages/movie";
 import { Producers } from "pages/producer";
 import { Users } from "pages/user";
+import { ShowUser } from "pages/user/show";
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AppContext } from "utils/contexts";
@@ -84,6 +86,28 @@ export const Layout: React.FC = () => {
                         operation={[RoleType.Admin, RoleType.Moderator]}
                       >
                         <Users />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/movies"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Movies />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/users/show/:id"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <ShowUser />
                       </PrivateRoute>
                     }
                   />

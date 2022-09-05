@@ -56,12 +56,26 @@ export const sidebarNavigation = [
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
+  {
+    name: "Фильмы",
+    href: "/movies",
+    icon: UserIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
 ];
 
 export const GenreTableNames = ["Название", "Slug", THead.edit];
 export const CategoryTableNames = ["Название", "Slug", THead.edit];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
+export const MovieTableNames = [
+  "Название",
+  "Жанры",
+  "Категории",
+  "Страны",
+  THead.edit,
+];
 
 export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
 export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
