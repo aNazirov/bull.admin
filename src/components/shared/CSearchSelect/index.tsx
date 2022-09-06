@@ -13,8 +13,8 @@ interface Props {
   meta?: string;
   filter?: string[];
   name: string;
-  error: {
-    message: true;
+  error?: {
+    message?: string;
   };
   control: Control;
   index: string;
@@ -30,7 +30,7 @@ export const CSearchSelect: React.FC<Props> = ({
   return <>{loading ? <SceletonForInput /> : <SearchSelect {...props} />}</>;
 };
 
-export const SearchSelect: React.FC<Props> = ({
+const SearchSelect: React.FC<Props> = ({
   title,
   error,
   search = "",
@@ -117,21 +117,17 @@ export const SearchSelect: React.FC<Props> = ({
     query === ""
       ? items
       : items.filter((item) => {
-          if (item.name) {
+          if (item?.name) {
             return item.name.toLowerCase().includes(query.toLowerCase());
-          }
-
-          if (item.displayName) {
-            return item.displayName.toLowerCase().includes(query.toLowerCase());
           }
 
           return item.title.toLowerCase().includes(query.toLowerCase());
         });
 
   const displayValue = (item: any) => {
-    let title = item?.name || item?.displayName || item?.title || "";
+    let title = item?.name || item?.title || "";
 
-    if (item.meta) {
+    if (item?.meta) {
       title = title + ` (${item.meta})`;
     }
 
@@ -200,7 +196,7 @@ export const SearchSelect: React.FC<Props> = ({
                       )}
                       dangerouslySetInnerHTML={{
                         __html: selected
-                          ? item?.name || item?.displayName || item?.title
+                          ? item?.name || item?.title
                           : item.meili,
                       }}
                     />

@@ -7,18 +7,24 @@ import { meiliRange, Toast } from "utils";
 import { useDebounce } from "../CSearchSelect";
 import { SceletonForInput } from "../Sceleton";
 
+interface Item {
+  value: number;
+  label: string;
+}
+
 interface Props {
   title: string;
-  defaultValue?: number;
+  defaultValue?: Item[];
   search?: string;
   meta?: string;
   filter?: string[];
   name: string;
-  error: {
-    message: true;
+  error?: {
+    message?: string;
   };
   control: Control;
   index: string;
+  placeholder?: string;
   loading?: boolean;
   required?: boolean;
   disabled?: boolean;
@@ -26,20 +32,21 @@ interface Props {
 
 const animatedComponents = makeAnimated();
 
-export const CSearchSelect: React.FC<Props> = ({
+export const CSearchSelectMulti: React.FC<Props> = ({
   loading = false,
   ...props
 }) => {
   return <>{loading ? <SceletonForInput /> : <SearchSelect {...props} />}</>;
 };
 
-export const SearchSelect: React.FC<Props> = ({
+const SearchSelect: React.FC<Props> = ({
   title,
   error,
   search = "",
   index,
   filter,
-  defaultValue,
+  placeholder,
+  defaultValue = [],
   name,
   control,
   required = true,
@@ -54,8 +61,8 @@ export const SearchSelect: React.FC<Props> = ({
   });
 
   const [items, setItems] = useState<any[]>([]);
-  const [query, setQuery] = useState("");
-  const [selectedItems, setSelectedItems] = useState<any>(undefined);
+  const [query, setQuery] = useState(search);
+  const [selectedItems, setSelectedItems] = useState<any>(field.value);
 
   const debouncedValue = useDebounce({ value: query, delay: 500 });
 
@@ -64,45 +71,53 @@ export const SearchSelect: React.FC<Props> = ({
       autoComplite({ index, search: query, filter })
         .then(({ hits, query }) => {
           hits = hits.map((hit: any) => meiliRange(hit, query));
-          setItems(hits);
+          setItems(
+            hits
+              .filter((item: any) => {
+                if (item?.name) {
+                  return {
+                    value: item.id,
+                    label: item.name
+                      .toLowerCase()
+                      .includes(query.toLowerCase()),
+                  };
+                }
+
+                return {
+                  value: item.id,
+                  label: item.title.toLowerCase().includes(query.toLowerCase()),
+                };
+              })
+              .map((item: any) => {
+                if (item?.name) {
+                  return {
+                    value: item.id,
+                    label: item.name,
+                  };
+                }
+
+                return {
+                  value: item.id,
+                  label: item.title,
+                };
+              })
+          );
         })
         .catch((e) => Toast.error(e));
     }
   }, [debouncedValue]);
-
-  const filteredItems =
-    query === ""
-      ? items
-      : items.filter((item) => {
-          if (item?.name) {
-            return {
-              value: item.id,
-              label: item.name.toLowerCase().includes(query.toLowerCase()),
-            };
-          }
-
-          if (item?.displayName) {
-            return {
-              value: item.id,
-              label: item.displayName
-                .toLowerCase()
-                .includes(query.toLowerCase()),
-            };
-          }
-
-          return {
-            value: item.id,
-            label: item.title.toLowerCase().includes(query.toLowerCase()),
-          };
-        });
 
   const changeInput = (val: string) => {
     setQuery(val);
   };
 
   const selectInput = (val: any) => {
-    setSelectedItems(val.map((item: any) => item.value || item.id));
+    setSelectedItems(val);
   };
+
+  useEffect(() => {
+    field.onChange(selectedItems.map((item: any) => item.value || item.id));
+  }, [selectedItems]);
 
   return (
     <>
@@ -123,7 +138,8 @@ export const SearchSelect: React.FC<Props> = ({
         onChange={selectInput}
         closeMenuOnSelect={false}
         onInputChange={changeInput}
-        options={filteredItems}
+        options={items}
+        placeholder={placeholder || "Поиск"}
         components={animatedComponents}
         className="basic-multi-select"
         classNamePrefix="select"

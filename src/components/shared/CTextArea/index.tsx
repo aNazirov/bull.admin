@@ -3,8 +3,8 @@ import { SceletonForTextarea } from "../Sceleton";
 
 interface Props extends React.HTMLProps<HTMLTextAreaElement> {
   name: string;
-  error: {
-    message: true;
+  error?: {
+    message?: string;
   };
   className?: string;
   control: Control;
@@ -17,6 +17,7 @@ export const CTextarea: React.FC<Props> = ({ loading = false, ...props }) => {
 };
 
 const TextArea: React.FC<Props> = ({
+  title,
   name,
   defaultValue,
   control,
@@ -37,6 +38,14 @@ const TextArea: React.FC<Props> = ({
 
   return (
     <>
+      {title && (
+        <label
+          htmlFor={name}
+          className="block text-sm font-medium text-gray-700"
+        >
+          {title}
+        </label>
+      )}
       <textarea
         onBlur={field.onBlur}
         onChange={field.onChange}

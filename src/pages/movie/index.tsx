@@ -1,7 +1,7 @@
 import { FilterIcon } from "@heroicons/react/solid";
 import { MovieTbody } from "components/pages/movie";
 import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { CInput, CSearchSelect } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -69,6 +69,50 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
     });
   };
 
+  // @IsOptional()
+  // @IsNumber()
+  // @Min(0)
+  // @Max(10)
+  // imdb?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // @Min(0)
+  // @Max(10)
+  // rating?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // @Min(0)
+  // @Max(100)
+  // ageRemark?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // @Min(1900)
+  // @Max(2030)
+  // year?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // genreId?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // countryId?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // acterId?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // categoryId?: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // producerId?: number[];
+
   return (
     <>
       {filterOpen ? (
@@ -87,15 +131,122 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
               />
             </div>
 
-            {/* <div className="w-full sm:w-2/12">
+            <div className="w-full sm:w-2/12">
               <CInput
-                name="email"
+                name="slug"
                 required={false}
                 control={control}
-                title="Email"
-                error={errors["email"]}
+                title="Slug"
+                error={errors["slug"]}
               />
-            </div> */}
+            </div>
+
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="genreId"
+                required={false}
+                control={control}
+                title="Жанр"
+                index="genres"
+                error={errors["genreId"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-1/12">
+              <CSearchSelect
+                name="countryId"
+                required={false}
+                control={control}
+                title="Страна"
+                index="countries"
+                error={errors["countryId"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-1/12">
+              <CInput
+                name="imdb"
+                required={false}
+                control={control}
+                title="Imdb"
+                type="number"
+                min={0}
+                max={10}
+                error={errors["imdb"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-1/12">
+              <CInput
+                name="rating"
+                required={false}
+                control={control}
+                title="Рейтинг"
+                min={0}
+                max={10}
+                error={errors["rating"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-1/12">
+              <CInput
+                name="ageRemark"
+                required={false}
+                control={control}
+                title="Воз-ое огран."
+                min={0}
+                max={100}
+                error={errors["ageRemark"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-1/12">
+              <CInput
+                name="year"
+                required={false}
+                control={control}
+                title="Год"
+                min={1900}
+                max={2030}
+                defaultValue={2022}
+                error={errors["year"]}
+              />
+            </div>
+          </div>
+
+          <div className="col-span-full flex flex-col sm:flex-row gap-3">
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="acterId"
+                required={false}
+                control={control}
+                title="Актер"
+                index="acters"
+                error={errors["acterId"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="categoryId"
+                required={false}
+                control={control}
+                title="Категория"
+                index="categories"
+                error={errors["categoryId"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="producerId"
+                required={false}
+                control={control}
+                title="Продюсер"
+                index="producers"
+                error={errors["producerId"]}
+              />
+            </div>
           </div>
 
           <div className="col-span-full mt-2 flex justify-end">

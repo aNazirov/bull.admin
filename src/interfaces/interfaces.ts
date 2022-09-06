@@ -87,6 +87,7 @@ export interface IMovie {
   id: number;
   title: string;
   slug: string;
+  poster: IFile;
   description?: string;
   isNew: boolean;
   isSerial: boolean;

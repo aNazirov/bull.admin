@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getOne, setUser } from "store/user/user.thunks";
 import { classNames, formatNumber } from "utils";
 import { RoleType } from "utils/enums";
-import { EditUser } from "./edit";
+import { EditMovie } from "./edit";
 
 interface Props {}
 
@@ -45,7 +45,7 @@ export const ShowUser: React.FC<Props> = () => {
           title={user?.name}
           description={user?.role?.title}
           operation={accessRoles}
-          Edit={EditUser}
+          Edit={EditMovie}
         />
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">

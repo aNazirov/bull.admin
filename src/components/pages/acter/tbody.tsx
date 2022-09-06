@@ -55,7 +55,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              <div className="flex-shrink-0">
+              <span className="flex-shrink-0">
                 <img
                   className="h-10 w-10 rounded-full object-cover"
                   src={
@@ -63,7 +63,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                   }
                   alt={x.avatar?.name}
                 />
-              </div>
+              </span>
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.name}

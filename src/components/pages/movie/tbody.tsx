@@ -2,6 +2,7 @@ import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { CLink, PrivateComponent, SlideOvers } from "components/shared";
 import { MDelete } from "components/shared/MDelete";
 import { CreateMovie } from "pages/movie/create";
+import { EditMovie } from "pages/movie/edit";
 import { useContext, useState } from "react";
 import { removeService, Toast } from "services/global";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -59,13 +60,13 @@ export const MovieTbody: React.FC<Props> = ({ path }) => {
               {x.title}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.genres?.join(", ")}
+              {x.genres?.map((x) => x.title).join(", ")}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.categories?.join(", ")}
+              {x.categories?.map((x) => x.title).join(", ")}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.countries?.join(", ")}
+              {x.countries?.map((x) => x.title).join(", ")}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -121,7 +122,7 @@ export const MovieTbody: React.FC<Props> = ({ path }) => {
           <SlideOvers
             title={movie?.title || "Фильм"}
             close={close}
-            // Edit={EditMovie}
+            Edit={EditMovie}
             Create={CreateMovie}
           />
         )}

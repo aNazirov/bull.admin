@@ -1,37 +1,53 @@
-import { CCombobox, CInput, SlideoversFoot } from "components/shared";
+import { CInput, CTextarea, SlideoversFoot } from "components/shared";
+import { CSearchSelectMulti } from "components/shared/CSearchSelectMulti";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Toast, updateService } from "services/index";
+import { fileDelete, filesUpload, Toast, updateService } from "services/index";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll } from "store/user/user.thunks";
-import { RoleType } from "utils/enums";
+import { getAll } from "store/movie/movie.thunks";
+import { formatData, imageUpload } from "utils";
+import { defaultImage } from "_data/datas";
 
 interface Props {
   close: () => void;
 }
 
-export const EditUser: React.FC<Props> = ({ close }) => {
+export const EditMovie: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { user: MainUser } = useAppSelector((state) => state.global);
-  const { user } = useAppSelector((state) => state.users);
+  const { movie } = useAppSelector((state) => state.movies);
+
+  const [avatar, setAvatar] = useState<File | null>(null);
+  const [preview, setPreview] = useState(undefined);
+  const [loadingPhoto, setLoadingPhoto] = useState(false);
 
   const dispatch = useAppDispatch();
-  const roles = [
-    MainUser?.role?.id === RoleType.Admin
-      ? { id: RoleType.Moderator, title: "Модератор" }
-      : {},
-    { id: RoleType.User, title: "Пользователь" },
-  ];
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
+    Toast.info(`Обновление фильма`);
 
-    return updateService(user!.id, { ...data }, "user")
-      .then(({ name }) => {
-        Toast.success(`${name} обновлен`);
+    let posterId = undefined;
+
+    if (avatar) {
+      posterId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
+    }
+
+    return updateService(
+      movie!.id,
+      {
+        ...data,
+        posterId,
+        isNew: data["isNew"] || false,
+        isSerial: data["isSerial"] || false,
+        bySubscription: data["bySubscription"] || false,
+      },
+      "movie"
+    )
+      .then(({ title }) => {
+        Toast.success(`${title} обновлен`);
         dispatch(getAll());
         close();
       })
@@ -40,55 +56,210 @@ export const EditUser: React.FC<Props> = ({ close }) => {
       });
   };
 
+  const imageDelete = (id: number) => {
+    setLoadingPhoto(true);
+    return fileDelete(id)
+      .then(() => {
+        Toast.success("Файл удален");
+        setLoadingPhoto(false);
+      })
+      .catch((e) => Toast.error(e));
+  };
+
   return (
     <form
       onSubmit={handleSubmit(submit)}
       className="h-full flex flex-col"
       autoComplete="off"
     >
-      <div className="w-full">
+      <div className="mt-1">
+        <div className="h-36 object-cover w-full rounded-sm overflow-hidden bg-gray-100">
+          <img
+            src={preview || defaultImage}
+            alt="preview"
+            className="h-full w-full object-cover"
+          />
+        </div>
+        <div className="flex gap-3 mt-1">
+          <label
+            htmlFor="upload-image"
+            className=" bg-white py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Загрузить
+          </label>
+          <button
+            type="button"
+            className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            onClick={() => {
+              setPreview(undefined);
+              setAvatar(null);
+              movie?.poster && imageDelete(movie?.poster?.id);
+            }}
+            disabled={false}
+          >
+            Удалить
+          </button>
+          <input
+            id="upload-image"
+            type="file"
+            accept="image/*"
+            className="w-0"
+            onChange={imageUpload(setPreview, setAvatar)}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 w-full">
         <CInput
-          name="name"
-          title="Имя"
-          placeholder="Имя"
-          defaultValue={user?.name}
+          name="title"
+          title="Название"
+          placeholder="Название"
           control={control}
-          error={errors["name"]}
+          error={errors["title"]}
+        />
+      </div>
+      <div className="mt-3 w-full">
+        <CInput
+          name="slug"
+          title="Slug"
+          placeholder="Slug"
+          control={control}
+          error={errors["slug"]}
         />
       </div>
 
       <div className="mt-3 w-full">
-        <CCombobox
-          name="roleId"
-          title="Роль"
-          items={roles}
-          defaultValue={user?.role?.id}
+        <CTextarea
+          name="description"
+          required={false}
+          title="Описание"
+          placeholder="Описание"
           control={control}
-          error={errors["roleId"]}
+          error={errors["description"]}
         />
       </div>
 
-      <div className="mt-3 flex items-center gap-3">
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
         <div className="w-full">
           <CInput
-            name="balance"
-            title="Баланс"
-            placeholder="Баланс"
-            defaultValue={user?.contact?.email}
-            type="number"
+            name="imdb"
+            required={false}
             control={control}
-            error={errors["balance"]}
+            title="Imdb"
+            type="number"
+            min={0}
+            max={10}
+            error={errors["imdb"]}
           />
         </div>
+
+        <div className="w-full">
+          <CInput
+            name="rating"
+            required={false}
+            control={control}
+            title="Рейтинг"
+            type="number"
+            min={0}
+            max={10}
+            error={errors["rating"]}
+          />
+        </div>
+
         <div className="w-full">
           <CInput
             name="ageRemark"
-            title="Возрастное ограничение"
             required={false}
-            defaultValue={user?.ageRemark}
-            type="number"
             control={control}
+            title="Воз-ое огран."
+            type="number"
+            min={0}
+            max={100}
             error={errors["ageRemark"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
+            name="year"
+            required={false}
+            control={control}
+            title="Год"
+            type="number"
+            min={1900}
+            max={2030}
+            defaultValue={2022}
+            error={errors["year"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="categories"
+            required={false}
+            title="Категории"
+            placeholder="Категории"
+            index="categories"
+            defaultValue={[]}
+            control={control}
+            error={errors["categories"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="acters"
+            required={false}
+            title="Актеры"
+            placeholder="Актеры"
+            index="acters"
+            defaultValue={[]}
+            control={control}
+            error={errors["acters"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="countries"
+            required={false}
+            title="Страны"
+            placeholder="Страны"
+            index="countries"
+            defaultValue={[]}
+            control={control}
+            error={errors["countries"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="genres"
+            required={false}
+            title="Жанры"
+            placeholder="Жанры"
+            index="genres"
+            defaultValue={[]}
+            control={control}
+            error={errors["genres"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="producers"
+            required={false}
+            title="Продюсеры"
+            placeholder="Продюсеры"
+            index="producers"
+            control={control}
+            error={errors["producers"]}
           />
         </div>
       </div>
@@ -96,22 +267,37 @@ export const EditUser: React.FC<Props> = ({ close }) => {
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            name="email"
-            title="Email"
-            placeholder="Email"
-            defaultValue={user?.contact?.email}
-            control={control}
-            error={errors["email"]}
-          />
-        </div>
-        <div className="w-full">
-          <CInput
-            name="password"
-            title="Пароль"
-            type="password"
+            name="isNew"
             required={false}
             control={control}
-            error={errors["password"]}
+            title="Новинка"
+            type="checkbox"
+            className=" "
+            error={errors["isNew"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
+            name="isSerial"
+            required={false}
+            control={control}
+            title="Сериал"
+            type="checkbox"
+            className=" "
+            error={errors["isSerial"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
+            name="bySubscription"
+            required={false}
+            control={control}
+            title="По подписке"
+            type="checkbox"
+            className=" "
+            error={errors["bySubscription"]}
           />
         </div>
       </div>

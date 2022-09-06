@@ -8,14 +8,14 @@ export const getAll =
   (dispatch: any) => {
     return getAllService(skip, params, "category")
       .then((res) => {
-        dispatch(setcategories(res.count, res.data));
+        dispatch(setCategories(res.count, res.data));
       })
       .catch((e) => {
         Toast.error(e);
       });
   };
 
-export const setcategories =
+export const setCategories =
   (count: number = 0, categories: ICategory[] = []) =>
   (dispatch: any) => {
     return dispatch(
