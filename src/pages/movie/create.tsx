@@ -22,6 +22,9 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(undefined);
 
+  const [treiler, setTreiler] = useState<File | null>(null);
+  const [treilerPreview, setTreilerPreview] = useState(undefined);
+
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
@@ -33,10 +36,17 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
       posterId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
     }
 
+    let treilerId = undefined;
+
+    if (avatar) {
+      treilerId = (await filesUpload(formatData({ files: [treiler] })))[0].id;
+    }
+
     return createService(
       {
         ...data,
         posterId,
+        treilerId,
         isNew: data["isNew"] || false,
         isSerial: data["isSerial"] || false,
         bySubscription: data["bySubscription"] || false,
@@ -246,6 +256,47 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             index="producers"
             control={control}
             error={errors["producers"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3">
+        {treilerPreview ? (
+          <div className="h-42 object-cover w-full rounded-sm overflow-hidden bg-gray-100">
+            <video
+              src={treilerPreview}
+              className="h-full w-full object-cover"
+              controls
+            />
+          </div>
+        ) : (
+          <div className="block text-sm font-medium text-gray-700">Трейлер</div>
+        )}
+
+        <div className="flex gap-3 mt-3">
+          <label
+            htmlFor="upload-treiler"
+            className=" bg-white py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Загрузить
+          </label>
+          <button
+            type="button"
+            className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            onClick={() => {
+              setTreilerPreview(undefined);
+              setTreiler(null);
+            }}
+          >
+            Удалить
+          </button>
+          <input
+            id="upload-treiler"
+            type="file"
+            accept="video/*"
+            className="w-0"
+            disabled={!!treilerPreview}
+            onChange={imageUpload(setTreilerPreview, setTreiler)}
           />
         </div>
       </div>

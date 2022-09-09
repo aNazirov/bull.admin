@@ -59,7 +59,9 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                 <img
                   className="h-10 w-10 rounded-full object-cover"
                   src={
-                    x.avatar?.url ? `${x.avatar?.url}/${token}` : defaultAvatar
+                    x.avatar
+                      ? `/file/${token}/${x.avatar?.name}`
+                      : defaultAvatar
                   }
                   alt={x.avatar?.name}
                 />

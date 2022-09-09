@@ -1,4 +1,10 @@
-import { SwitchHorizontalIcon, UserIcon } from "@heroicons/react/solid";
+import {
+  ColorSwatchIcon,
+  FilmIcon,
+  SwitchHorizontalIcon,
+  UserCircleIcon,
+  UserIcon,
+} from "@heroicons/react/solid";
 import { RoleType, THead } from "utils/enums";
 
 export const navigation = [
@@ -22,6 +28,13 @@ export const userNavigation = [
 
 export const sidebarNavigation = [
   {
+    name: "Фильмы",
+    href: "/movies",
+    icon: FilmIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
+  {
     name: "Жанры",
     href: "/genres",
     icon: SwitchHorizontalIcon,
@@ -38,27 +51,20 @@ export const sidebarNavigation = [
   {
     name: "Продюсеры",
     href: "/producers",
-    icon: UserIcon,
+    icon: UserCircleIcon,
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
   {
     name: "Категории",
     href: "/categories",
-    icon: UserIcon,
+    icon: ColorSwatchIcon,
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
   {
     name: "Пользователи",
     href: "/users",
-    icon: UserIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Фильмы",
-    href: "/movies",
     icon: UserIcon,
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,

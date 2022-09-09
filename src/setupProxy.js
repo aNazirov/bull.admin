@@ -1,7 +1,7 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 const pathRewrite = function (path, req) {
-  const [__, root, fileName, token] = path.split("/");
+  const [__, root, token, fileName] = path.split("/");
 
   req.headers.Authorization = `Bearer ${token}`;
 

@@ -5,11 +5,12 @@ import { Acters } from "pages/acter";
 import { Categories } from "pages/category";
 import { Genres } from "pages/genre";
 import { Movies } from "pages/movie";
+import { ShowMovie } from "pages/movie/show";
 import { Producers } from "pages/producer";
 import { Users } from "pages/user";
 import { ShowUser } from "pages/user/show";
 import React, { useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { AppContext } from "utils/contexts";
 import { RoleType, SlideoverModes } from "utils/enums";
 
@@ -91,6 +92,17 @@ export const Layout: React.FC = () => {
                   />
 
                   <Route
+                    path="/users/show/:id"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <ShowUser />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
                     path="/movies"
                     element={
                       <PrivateRoute
@@ -102,15 +114,17 @@ export const Layout: React.FC = () => {
                   />
 
                   <Route
-                    path="/users/show/:id"
+                    path="/movies/show/:id"
                     element={
                       <PrivateRoute
                         operation={[RoleType.Admin, RoleType.Moderator]}
                       >
-                        <ShowUser />
+                        <ShowMovie />
                       </PrivateRoute>
                     }
                   />
+
+                  <Route path="/*" element={<Navigate to="/movies" />} />
                 </Routes>
               </section>
             </main>

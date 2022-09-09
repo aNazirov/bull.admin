@@ -56,13 +56,13 @@ const SearchSelect: React.FC<Props> = ({
       required: required && "Should not be empty",
     },
     control,
-    defaultValue,
+    defaultValue: defaultValue.map((x) => x.value),
     name,
   });
 
   const [items, setItems] = useState<any[]>([]);
   const [query, setQuery] = useState(search);
-  const [selectedItems, setSelectedItems] = useState<any>(field.value);
+  const [selectedItems, setSelectedItems] = useState<any>(defaultValue);
 
   const debouncedValue = useDebounce({ value: query, delay: 500 });
 
@@ -131,7 +131,6 @@ const SearchSelect: React.FC<Props> = ({
       )}
 
       <Select
-        defaultValue={field.value}
         isMulti
         name="items"
         value={selectedItems}
