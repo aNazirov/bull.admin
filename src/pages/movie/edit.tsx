@@ -315,6 +315,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             <video
               src={treilerPreview}
               className="h-full w-full object-cover"
+              preload="metadata"
               controls
             />
           </div>
