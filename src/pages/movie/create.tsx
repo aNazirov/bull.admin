@@ -142,6 +142,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             title="Imdb"
+            step={0.1}
             type="number"
             min={0}
             max={10}
@@ -158,6 +159,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             type="number"
             min={0}
             max={10}
+            step={0.1}
             error={errors["rating"]}
           />
         </div>

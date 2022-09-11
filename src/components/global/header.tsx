@@ -11,6 +11,7 @@ import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames, pageSwitch } from "utils/index";
 import { defaultAvatar } from "_data/datas";
 import { sidebarNavigation, userNavigation } from "_data/titles";
+import logo from "../../../public/favicon-32x32.png";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -23,11 +24,7 @@ const Header: React.FC = () => {
           to="/"
           className="flex items-center justify-center h-16 w-16 bg-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600 md:w-20"
         >
-          <img
-            className="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark.svg?color=white"
-            alt="Workflow"
-          />
+          <img className="h-8 w-auto" src={logo} alt="Workflow" />
         </CLink>
       </div>
       {/* Picker area */}
@@ -61,7 +58,6 @@ const Header: React.FC = () => {
 const DesktopMenu: React.FC = () => {
   const { setOpen, setMode } = useContext(AppContext);
   const { pathname } = useLocation();
-  const { user } = useAppSelector((state) => state.global);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
