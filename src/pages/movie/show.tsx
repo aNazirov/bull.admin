@@ -187,7 +187,7 @@ export const ShowMovie: React.FC<Props> = () => {
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
                     {movie.treiler ? (
-                      <a href={`/file/${token}/${movie.treiler.name}`} download>
+                      <a href={`/file/${movie.treiler.name}`} download>
                         Скачать
                       </a>
                     ) : (

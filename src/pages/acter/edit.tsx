@@ -22,7 +22,7 @@ export const EditActer: React.FC<Props> = ({ close }) => {
 
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
-    acter?.avatar ? `/file/${token}/${acter.avatar.name}` : defaultAvatar
+    acter?.avatar ? `/file/${acter.avatar.name}` : defaultAvatar
   );
   const [loadingPhoto, setLoadingPhoto] = useState(false);
 

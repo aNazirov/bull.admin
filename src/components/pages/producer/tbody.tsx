@@ -58,11 +58,7 @@ export const ProducerTbody: React.FC<Props> = ({ path }) => {
               <div className="flex-shrink-0">
                 <img
                   className="h-10 w-10 rounded-full object-cover"
-                  src={
-                    x.avatar
-                      ? `/file/${token}/${x.avatar?.name}`
-                      : defaultAvatar
-                  }
+                  src={x.avatar ? `/file/${x.avatar?.name}` : defaultAvatar}
                   alt={x.avatar?.name}
                 />
               </div>

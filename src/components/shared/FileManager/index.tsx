@@ -126,7 +126,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
 
       <div className={`mt-5 grid grid-cols-${cols} justify-between gap-4`}>
         {episodes.map((episode) => {
-          const filePath = `//file/${token}/${episode.file.name}`;
+          const filePath = `//file/${episode.file.name}`;
 
           return (
             <div
@@ -236,7 +236,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.cd ? `/file/${token}/${movie.file.cd.name}` : ""}
+            src={movie?.file?.cd ? `/file/${movie.file.cd.name}` : ""}
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -276,7 +276,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.hd ? `/file/${token}/${movie.file.hd.name}` : ""}
+            src={movie?.file?.hd ? `/file/${movie.file.hd.name}` : ""}
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -316,11 +316,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={
-              movie?.file?.fullHD
-                ? `/file/${token}/${movie.file.fullHD.name}`
-                : ""
-            }
+            src={movie?.file?.fullHD ? `/file/${movie.file.fullHD.name}` : ""}
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -360,9 +356,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={
-              movie?.file?.uHD ? `/file/${token}/${movie.file.uHD.name}` : ""
-            }
+            src={movie?.file?.uHD ? `/file/${movie.file.uHD.name}` : ""}
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
