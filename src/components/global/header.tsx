@@ -11,7 +11,7 @@ import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames, pageSwitch } from "utils/index";
 import { defaultAvatar } from "_data/datas";
 import { sidebarNavigation, userNavigation } from "_data/titles";
-import logo from "../../../public/favicon-32x32.png";
+import logo from "./logo.png";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

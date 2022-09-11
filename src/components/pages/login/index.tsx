@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { loginByPassword } from "store/global/global.thunks";
 import { useAppDispatch } from "store/hooks";
-import logo from "../../../../public/favicon-32x32.png";
+import logo from "../../global/logo.png";
 
 export const Login: React.FC = () => {
   const {
