@@ -19,7 +19,6 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { token } = useAppSelector((state) => state.global);
   const { movie } = useAppSelector((state) => state.movies);
   const { pathname } = useLocation();
 
@@ -130,7 +129,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             type="file"
             accept="image/*"
             className="w-0"
-            disabled={!!preview || loading}
+            disabled={loading}
             onChange={imageUpload(setPreview, setAvatar)}
           />
         </div>
