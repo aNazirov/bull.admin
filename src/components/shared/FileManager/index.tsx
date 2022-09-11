@@ -126,7 +126,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
 
       <div className={`mt-5 grid grid-cols-${cols} justify-between gap-4`}>
         {episodes.map((episode) => {
-          const filePath = `//file/${episode.file.name}`;
+          const filePath = `${process.env.REACT_APP_API_HOST}/${episode.file.url}`;
 
           return (
             <div
@@ -236,7 +236,11 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.cd ? `/file/${movie.file.cd.name}` : ""}
+            src={
+              movie?.file?.cd
+                ? `${process.env.REACT_APP_API_HOST}/${movie.file.cd?.url}`
+                : ""
+            }
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -276,7 +280,11 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.hd ? `/file/${movie.file.hd.name}` : ""}
+            src={
+              movie?.file?.hd
+                ? `${process.env.REACT_APP_API_HOST}/${movie.file.hd?.url}`
+                : ""
+            }
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -316,7 +324,11 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.fullHD ? `/file/${movie.file.fullHD.name}` : ""}
+            src={
+              movie?.file?.fullHD
+                ? `${process.env.REACT_APP_API_HOST}/${movie.file.fullHD?.url}`
+                : ""
+            }
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
@@ -356,7 +368,11 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
       >
         <div className="col-span-1 flex justify-between flex-col gap-2">
           <video
-            src={movie?.file?.uHD ? `/file/${movie.file.uHD.name}` : ""}
+            src={
+              movie?.file?.uHD
+                ? `${process.env.REACT_APP_API_HOST}/${movie.file.uHD?.url}`
+                : ""
+            }
             preload="metadata"
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls

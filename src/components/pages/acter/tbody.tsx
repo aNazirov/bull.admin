@@ -58,7 +58,11 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
               <span className="flex-shrink-0">
                 <img
                   className="h-10 w-10 rounded-full object-cover"
-                  src={x.avatar ? `/file/${x.avatar?.name}` : defaultAvatar}
+                  src={
+                    x.avatar
+                      ? `${process.env.REACT_APP_API_HOST}/${x.avatar?.url}`
+                      : defaultAvatar
+                  }
                   alt={x.avatar?.name}
                 />
               </span>
