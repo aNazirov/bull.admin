@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  admin:
+    container_name: crm_admin
+    image: crm_admin
+    build: .
+    ports:
+      - 3003:90
