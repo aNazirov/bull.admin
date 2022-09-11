@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AppContext } from "utils/contexts";
 import { SlideoverModes } from "utils/enums";
+import { Spinner } from "../Loader";
 
 interface Props {
   close: () => void;
@@ -32,6 +33,7 @@ export const SlideoversFoot: React.FC<Props> = ({ close, disabled }) => {
       >
         {buttonTitle}
       </button>
+      {disabled && <Spinner size={8} />}
     </div>
   );
 };

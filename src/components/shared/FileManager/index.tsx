@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getOne } from "store/movie/movie.thunks";
 import { classNames, formatData, Toast } from "utils";
 import { CDropzone } from "../CDropzone";
+import { Spinner } from "../Loader";
 
 interface Props {
   cols?: number;
@@ -241,12 +242,16 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
             controls
           />
 
-          <label
-            htmlFor={`upload-cd`}
-            className="block text-sm font-medium text-gray-700 cursor-pointer"
-          >
-            {!movie?.file?.cd ? "Загрузить" : "Перезагрузить"}
-          </label>
+          <div className="flex justify-between items-center">
+            <label
+              htmlFor={`upload-cd`}
+              className="block text-sm font-medium text-gray-700 cursor-pointer"
+            >
+              {!movie?.file?.cd ? "Загрузить" : "Перезагрузить"}
+            </label>
+
+            {loading && <Spinner size={8} />}
+          </div>
 
           <div className="flex gap-3">
             <input
@@ -277,12 +282,16 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
             controls
           />
 
-          <label
-            htmlFor={`upload-hd`}
-            className="block text-sm font-medium text-gray-700 cursor-pointer"
-          >
-            {!movie?.file?.hd ? "Загрузить" : "Перезагрузить"}
-          </label>
+          <div className="flex justify-between items-center">
+            <label
+              htmlFor={`upload-hd`}
+              className="block text-sm font-medium text-gray-700 cursor-pointer"
+            >
+              {!movie?.file?.hd ? "Загрузить" : "Перезагрузить"}
+            </label>
+
+            {loading && <Spinner size={8} />}
+          </div>
 
           <div className="flex gap-3">
             <input
@@ -317,12 +326,16 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
             controls
           />
 
-          <label
-            htmlFor={`upload-fullHD`}
-            className="block text-sm font-medium text-gray-700 cursor-pointer"
-          >
-            {!movie?.file?.fullHD ? "Загрузить" : "Перезагрузить"}
-          </label>
+          <div className="flex justify-between items-center">
+            <label
+              htmlFor={`upload-fullHD`}
+              className="block text-sm font-medium text-gray-700 cursor-pointer"
+            >
+              {!movie?.file?.fullHD ? "Загрузить" : "Перезагрузить"}
+            </label>
+
+            {loading && <Spinner size={8} />}
+          </div>
 
           <div className="flex gap-3">
             <input
@@ -355,12 +368,16 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
             controls
           />
 
-          <label
-            htmlFor={`upload-uHD`}
-            className="block text-sm font-medium text-gray-700 cursor-pointer"
-          >
-            {!movie?.file?.uHD ? "Загрузить" : "Перезагрузить"}
-          </label>
+          <div className="flex justify-between items-center">
+            <label
+              htmlFor={`upload-uHD`}
+              className="block text-sm font-medium text-gray-700 cursor-pointer"
+            >
+              {!movie?.file?.uHD ? "Загрузить" : "Перезагрузить"}
+            </label>
+
+            {loading && <Spinner size={8} />}
+          </div>
 
           <div className="flex gap-3">
             <input
