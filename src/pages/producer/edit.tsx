@@ -23,7 +23,7 @@ export const EditProducer: React.FC<Props> = ({ close }) => {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
     producer?.avatar
-      ? `${process.env.REACT_APP_API_HOST}/${producer.avatar?.url}`
+      ? `${process.env.REACT_APP_API_HOST}${producer.avatar?.url}`
       : defaultAvatar
   );
   const [loadingPhoto, setLoadingPhoto] = useState(false);

@@ -126,7 +126,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
 
       <div className={`mt-5 grid grid-cols-${cols} justify-between gap-4`}>
         {episodes.map((episode) => {
-          const filePath = `${process.env.REACT_APP_API_HOST}/${episode.file.url}`;
+          const filePath = `${process.env.REACT_APP_API_HOST}${episode.file.url}`;
 
           return (
             <div
@@ -238,7 +238,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={
               movie?.file?.cd
-                ? `${process.env.REACT_APP_API_HOST}/${movie.file.cd?.url}`
+                ? `${process.env.REACT_APP_API_HOST}${movie.file.cd?.url}`
                 : ""
             }
             preload="metadata"
@@ -282,7 +282,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={
               movie?.file?.hd
-                ? `${process.env.REACT_APP_API_HOST}/${movie.file.hd?.url}`
+                ? `${process.env.REACT_APP_API_HOST}${movie.file.hd?.url}`
                 : ""
             }
             preload="metadata"
@@ -326,7 +326,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={
               movie?.file?.fullHD
-                ? `${process.env.REACT_APP_API_HOST}/${movie.file.fullHD?.url}`
+                ? `${process.env.REACT_APP_API_HOST}${movie.file.fullHD?.url}`
                 : ""
             }
             preload="metadata"
@@ -370,7 +370,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={
               movie?.file?.uHD
-                ? `${process.env.REACT_APP_API_HOST}/${movie.file.uHD?.url}`
+                ? `${process.env.REACT_APP_API_HOST}${movie.file.uHD?.url}`
                 : ""
             }
             preload="metadata"
