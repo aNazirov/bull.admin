@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateUser } from "pages/user/create";
 import { EditUser } from "pages/user/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getAll, setUser } from "store/user/user.thunks";
 import { AppContext } from "utils/contexts";

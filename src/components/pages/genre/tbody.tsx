@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateGenre } from "pages/genre/create";
 import { EditGenre } from "pages/genre/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { getAll, setGenre } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AppContext } from "utils/contexts";

@@ -1,5 +1,5 @@
 import { IProducer } from "interfaces/interfaces";
-import { getAllService, getOneService } from "services/global";
+import { getAllService, getOneService } from "services/global.service";
 import { Toast } from "utils/index";
 import { producersAction } from "./producer.slices";
 

@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateProducer } from "pages/producer/create";
 import { EditProducer } from "pages/producer/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { getAll } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { setProducer } from "store/producer/producer.thunks";

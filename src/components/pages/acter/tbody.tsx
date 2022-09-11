@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateActer } from "pages/acter/create";
 import { EditActer } from "pages/acter/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { setActer } from "store/acter/acter.thunks";
 import { getAll } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";

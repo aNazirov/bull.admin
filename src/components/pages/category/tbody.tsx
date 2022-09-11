@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateCategory } from "pages/category/create";
 import { EditCategory } from "pages/category/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { getAll, setCategory } from "store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AppContext } from "utils/contexts";

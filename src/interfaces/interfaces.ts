@@ -102,7 +102,7 @@ export interface IMovie {
   comments?: IComment[];
   categories?: ICategory[];
   producers?: IProducer[];
-  seasons?: ISeason[];
+  seasons: ISeason[];
   treiler?: IFile;
   file?: IMovieFile;
 }
@@ -129,7 +129,7 @@ export interface IProducer {
 export interface ISeason {
   id: number;
   season: number;
-  movie?: IMovie;
+  movieId?: number;
   episodes: IEpisode[];
   createdAt: string;
 }
@@ -137,7 +137,7 @@ export interface ISeason {
 export interface IEpisode {
   id: number;
   episode: number;
-  season?: ISeason;
+  seasonId?: number;
   file: IFile;
   createdAt: string;
 }

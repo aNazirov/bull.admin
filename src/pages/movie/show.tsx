@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/solid";
 import { PageHead } from "components/pages/head";
 import { SceletonForPage } from "components/shared";
+import { FileManager, Seasons } from "components/shared/FileManager";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "store/hooks";
@@ -19,8 +20,10 @@ interface Props {}
 export const ShowMovie: React.FC<Props> = () => {
   const { id } = useParams();
   const { token } = useAppSelector((state) => state.global);
+  const { movie } = useAppSelector((state) => state.movies);
 
   const [showInfo, setShowInfo] = useState(true);
+  const [showSeasons, setShowSeasons] = useState(true);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -36,9 +39,7 @@ export const ShowMovie: React.FC<Props> = () => {
     return () => {
       dispatch(setMovie());
     };
-  }, [dispatch, id, navigate]);
-
-  const { movie } = useAppSelector((state) => state.movies);
+  }, [id]);
 
   if (!movie) {
     return <SceletonForPage />;
@@ -48,15 +49,15 @@ export const ShowMovie: React.FC<Props> = () => {
     <div className="flex flex-col">
       <div className="bg-white">
         <PageHead
-          title={movie?.title}
-          description={movie?.slug}
+          title={movie.title}
+          description={movie.slug}
           operation={accessRoles}
           Edit={EditMovie}
         />
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
           <div>
-            <div className="flex justify-between items-center text-lg font-medium text-black ">
+            <div className="flex justify-between items-center text-lg font-medium text-black">
               <div className="flex items-center gap-2 border-b-2 border-blue-600">
                 Основная информация{" "}
                 <span
@@ -205,6 +206,64 @@ export const ShowMovie: React.FC<Props> = () => {
                 </div>
               </div>
             </div>
+
+            {movie.isSerial && (
+              <>
+                <div className="mt-5 flex justify-between items-center text-lg font-medium text-black">
+                  <div className="flex items-center gap-2 border-b-2 border-blue-600">
+                    Сезоны{" "}
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => setShowSeasons(!showSeasons)}
+                    >
+                      {showSeasons ? (
+                        <ChevronUpIcon className="h-4 w-4" />
+                      ) : (
+                        <ChevronDownIcon className="h-4 w-4" />
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  className={classNames(
+                    showSeasons ? "block" : "hidden",
+                    "mt-3"
+                  )}
+                >
+                  <Seasons />
+                </div>
+              </>
+            )}
+
+            {!movie.isSerial && (
+              <>
+                <div className="mt-5 flex justify-between items-center text-lg font-medium text-black">
+                  <div className="flex items-center gap-2 border-b-2 border-blue-600">
+                    Файлы{" "}
+                    <span
+                      className="cursor-pointer"
+                      onClick={() => setShowSeasons(!showSeasons)}
+                    >
+                      {showSeasons ? (
+                        <ChevronUpIcon className="h-4 w-4" />
+                      ) : (
+                        <ChevronDownIcon className="h-4 w-4" />
+                      )}
+                    </span>
+                  </div>
+                </div>
+
+                <div
+                  className={classNames(
+                    showSeasons ? "block" : "hidden",
+                    "mt-3"
+                  )}
+                >
+                  <FileManager />
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>

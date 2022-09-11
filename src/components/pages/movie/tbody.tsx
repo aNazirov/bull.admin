@@ -4,7 +4,7 @@ import { MDelete } from "components/shared/MDelete";
 import { CreateMovie } from "pages/movie/create";
 import { EditMovie } from "pages/movie/edit";
 import { useContext, useState } from "react";
-import { removeService, Toast } from "services/global";
+import { removeService, Toast } from "services/global.service";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { getAll, setMovie } from "store/movie/movie.thunks";
 import { AppContext } from "utils/contexts";

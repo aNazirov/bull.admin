@@ -1,5 +1,5 @@
 import { IMovie } from "interfaces/interfaces";
-import { getAllService, getOneService } from "services/global";
+import { getAllService, getOneService } from "services/global.service";
 import { Toast } from "utils/index";
 import { moviesAction } from "./movie.slices";
 

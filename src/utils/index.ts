@@ -28,6 +28,33 @@ export function meiliRange(item: any, query: string) {
   return item;
 }
 
+export const sort = (
+  a: any,
+  b: any,
+  sortBy: string,
+  orderBy: "asc" | "desc" = "asc"
+) => {
+  console.log(a, b);
+
+  if (orderBy === "asc") {
+    if (a[sortBy] > b[sortBy]) {
+      return 1;
+    }
+    if (a[sortBy] < b[sortBy]) {
+      return -1;
+    }
+  } else {
+    if (a[sortBy] < b[sortBy]) {
+      return 1;
+    }
+    if (a[sortBy] > b[sortBy]) {
+      return -1;
+    }
+  }
+  // a должно быть равным b
+  return 0;
+};
+
 export const formatNumber = (
   number: number = 0,
   currency: string,
@@ -54,9 +81,9 @@ class ToastClass {
     toast.success(message, this.options);
   }
 
-  error(error: AxiosError) {
+  error(error: AxiosError<any>) {
     let message =
-      error.message || error.response?.statusText || "Server Side Error";
+      error.response?.data?.message || error.message || "Server Side Error";
 
     if (Array.isArray(message)) {
       message = message.join(", ");
@@ -135,7 +162,7 @@ export const pageSwitch = (path: string[]) => {
       return "Продюсеры";
     case "users":
       return "Пользователи";
-    case "movie":
+    case "movies":
       return "Фильмы";
 
     default:
