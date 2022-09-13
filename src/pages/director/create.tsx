@@ -24,7 +24,7 @@ export const CreateDirector: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание продюсера`);
+    Toast.info(`Создание режисера`);
     let avatarId = undefined;
 
     if (avatar) {
