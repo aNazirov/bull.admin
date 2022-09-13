@@ -208,14 +208,14 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
 
         <div className="w-full">
           <CSearchSelectMulti
-            name="acters"
+            name="genres"
             required={false}
-            title="Актеры"
-            placeholder="Актеры"
-            index="acters"
+            title="Жанры"
+            placeholder="Жанры"
+            index="genres"
             defaultValue={[]}
             control={control}
-            error={errors["acters"]}
+            error={errors["genres"]}
           />
         </div>
       </div>
@@ -236,14 +236,13 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
 
         <div className="w-full">
           <CSearchSelectMulti
-            name="genres"
+            name="directors"
             required={false}
-            title="Жанры"
-            placeholder="Жанры"
-            index="genres"
-            defaultValue={[]}
+            title="Режисеры"
+            placeholder="Режисеры"
+            index="directors"
             control={control}
-            error={errors["genres"]}
+            error={errors["directors"]}
           />
         </div>
       </div>
@@ -258,6 +257,21 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             index="producers"
             control={control}
             error={errors["producers"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="acters"
+            required={false}
+            title="Актеры"
+            placeholder="Актеры"
+            index="acters"
+            defaultValue={[]}
+            control={control}
+            error={errors["acters"]}
           />
         </div>
       </div>

@@ -69,50 +69,6 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
     });
   };
 
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(0)
-  // @Max(10)
-  // imdb?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(0)
-  // @Max(10)
-  // rating?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(0)
-  // @Max(100)
-  // ageRemark?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // @Min(1900)
-  // @Max(2030)
-  // year?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // genreId?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // countryId?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // acterId?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // categoryId?: number;
-
-  // @IsOptional()
-  // @IsNumber()
-  // producerId?: number[];
-
   return (
     <>
       {filterOpen ? (

@@ -4,7 +4,7 @@ import { Table } from "components/pages/table";
 import { CInput } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setCategory } from "store/category/category.thunks";
+import { getAll, setCategories, setCategory } from "store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { CategoryTableNames } from "_data/titles";
 
@@ -21,6 +21,7 @@ export const Categories: React.FC<Props> = () => {
 
     return () => {
       dispatch(setCategory());
+      dispatch(setCategories());
     };
   }, [dispatch]);
 

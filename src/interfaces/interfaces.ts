@@ -102,6 +102,7 @@ export interface IMovie {
   comments?: IComment[];
   categories?: ICategory[];
   producers?: IProducer[];
+  directors?: IDirector[];
   seasons: ISeason[];
   treiler?: IFile;
   file?: IMovieFile;
@@ -118,6 +119,15 @@ export interface IMovieFile {
 }
 
 export interface IProducer {
+  id: number;
+  avatar: IFile;
+  name: string;
+  slug: string;
+  movie?: IMovie[];
+  createdAt: string;
+}
+
+export interface IDirector {
   id: number;
   avatar: IFile;
   name: string;

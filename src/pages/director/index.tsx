@@ -1,16 +1,20 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { GenreTbody } from "components/pages/genre";
+import { DirectorTbody } from "components/pages/director";
 import { Table } from "components/pages/table";
 import { CInput } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setGenre, setGenres } from "store/genre/genre.thunks";
+import {
+  getAll,
+  setDirector,
+  setDirectors,
+} from "store/director/director.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { GenreTableNames } from "_data/titles";
+import { DirectorTableNames } from "_data/titles";
 
 interface Props {}
 
-export const Genres: React.FC<Props> = () => {
+export const Directors: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -20,12 +24,12 @@ export const Genres: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setGenre());
-      dispatch(setGenres());
+      dispatch(setDirector());
+      dispatch(setDirectors());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.genres);
+  const { count } = useAppSelector((state) => state.directors);
 
   const getMore = (skip: number) => {
     dispatch(getAll(skip, filter.current));
@@ -35,10 +39,10 @@ export const Genres: React.FC<Props> = () => {
     <>
       <Filter params={filter} setPage={setPage} />
       <Table
-        tableNames={GenreTableNames}
+        tableNames={DirectorTableNames}
         page={page}
         setPage={setPage}
-        tBody={GenreTbody}
+        tBody={DirectorTbody}
         getMore={getMore}
         count={count}
       />
@@ -80,11 +84,11 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
           <div className="col-span-full flex flex-col sm:flex-row gap-3">
             <div className="w-full sm:w-2/12">
               <CInput
-                name="title"
+                name="name"
                 required={false}
                 control={control}
-                title="Название"
-                error={errors["title"]}
+                title="Имя"
+                error={errors["name"]}
               />
             </div>
 

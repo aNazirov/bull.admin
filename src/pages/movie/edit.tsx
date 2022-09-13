@@ -245,17 +245,17 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
 
         <div className="w-full">
           <CSearchSelectMulti
-            name="acters"
+            name="genres"
             required={false}
-            title="Актеры"
-            placeholder="Актеры"
-            defaultValue={movie?.acters?.map((x) => ({
+            title="Жанры"
+            placeholder="Жанры"
+            defaultValue={movie?.genres?.map((x) => ({
               value: x.id,
-              label: x.name,
+              label: x.title,
             }))}
-            index="acters"
+            index="genres"
             control={control}
-            error={errors["acters"]}
+            error={errors["genres"]}
           />
         </div>
       </div>
@@ -279,17 +279,17 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
 
         <div className="w-full">
           <CSearchSelectMulti
-            name="genres"
+            name="directors"
             required={false}
-            title="Жанры"
-            placeholder="Жанры"
-            defaultValue={movie?.genres?.map((x) => ({
+            title="Режисеры"
+            placeholder="Режисеры"
+            defaultValue={movie?.directors?.map((x) => ({
               value: x.id,
-              label: x.title,
+              label: x.name,
             }))}
-            index="genres"
+            index="directors"
             control={control}
-            error={errors["genres"]}
+            error={errors["directors"]}
           />
         </div>
       </div>
@@ -308,6 +308,24 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             index="producers"
             control={control}
             error={errors["producers"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3 flex-col sm:flex-row">
+        <div className="w-full">
+          <CSearchSelectMulti
+            name="acters"
+            required={false}
+            title="Актеры"
+            placeholder="Актеры"
+            defaultValue={movie?.acters?.map((x) => ({
+              value: x.id,
+              label: x.name,
+            }))}
+            index="acters"
+            control={control}
+            error={errors["acters"]}
           />
         </div>
       </div>

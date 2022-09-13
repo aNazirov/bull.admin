@@ -8,14 +8,14 @@ export const getAll =
   (dispatch: any) => {
     return getAllService(skip, params, "producer")
       .then((res) => {
-        dispatch(setproducers(res.count, res.data));
+        dispatch(setProducers(res.count, res.data));
       })
       .catch((e) => {
         Toast.error(e);
       });
   };
 
-export const setproducers =
+export const setProducers =
   (count: number = 0, producers: IProducer[] = []) =>
   (dispatch: any) => {
     return dispatch(

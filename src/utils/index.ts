@@ -160,6 +160,8 @@ export const pageSwitch = (path: string[]) => {
       return "Категории";
     case "producers":
       return "Продюсеры";
+    case "directors":
+      return "Режисеры";
     case "users":
       return "Пользователи";
     case "movies":

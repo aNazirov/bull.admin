@@ -56,6 +56,13 @@ export const sidebarNavigation = [
     current: false,
   },
   {
+    name: "Режисеры",
+    href: "/directors",
+    icon: UserCircleIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
+  {
     name: "Категории",
     href: "/categories",
     icon: ColorSwatchIcon,
@@ -85,3 +92,5 @@ export const MovieTableNames = [
 
 export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
 export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
+export const DirectorTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
+

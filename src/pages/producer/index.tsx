@@ -5,7 +5,11 @@ import { CInput } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll, setProducer } from "store/producer/producer.thunks";
+import {
+  getAll,
+  setProducer,
+  setProducers,
+} from "store/producer/producer.thunks";
 import { ProducerTableNames } from "_data/titles";
 
 interface Props {}
@@ -21,6 +25,7 @@ export const Producers: React.FC<Props> = () => {
 
     return () => {
       dispatch(setProducer());
+      dispatch(setProducers());
     };
   }, [dispatch]);
 

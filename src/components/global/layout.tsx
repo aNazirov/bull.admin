@@ -3,6 +3,7 @@ import Sidebar from "components/global/sidebar";
 import { PrivateRoute } from "components/shared";
 import { Acters } from "pages/acter";
 import { Categories } from "pages/category";
+import { Directors } from "pages/director";
 import { Genres } from "pages/genre";
 import { Movies } from "pages/movie";
 import { ShowMovie } from "pages/movie/show";
@@ -65,6 +66,17 @@ export const Layout: React.FC = () => {
                         operation={[RoleType.Admin, RoleType.Moderator]}
                       >
                         <Producers />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/directors"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Directors />
                       </PrivateRoute>
                     }
                   />

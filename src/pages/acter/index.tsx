@@ -4,7 +4,7 @@ import { Table } from "components/pages/table";
 import { CInput } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setActer } from "store/acter/acter.thunks";
+import { getAll, setActer, setActers } from "store/acter/acter.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { ActerTableNames } from "_data/titles";
 
@@ -21,6 +21,7 @@ export const Acters: React.FC<Props> = () => {
 
     return () => {
       dispatch(setActer());
+      dispatch(setActers());
     };
   }, [dispatch]);
 
