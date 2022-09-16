@@ -7,6 +7,7 @@ import {
 } from "@reduxjs/toolkit";
 import { actersReducer } from "./acter/acter.slices";
 import { categoriesReducer } from "./category/category.slices";
+import { commentsReducer } from "./comment/comment.slices";
 import { directorsReducer } from "./director/director.slices";
 import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
@@ -25,6 +26,7 @@ const State = {
   categories: categoriesReducer,
   users: usersReducer,
   movies: moviesReducer,
+  comments: commentsReducer,
 };
 
 export const appReducer = combineReducers(State);

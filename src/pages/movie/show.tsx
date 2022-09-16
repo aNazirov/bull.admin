@@ -19,7 +19,6 @@ interface Props {}
 
 export const ShowMovie: React.FC<Props> = () => {
   const { id } = useParams();
-  const { token } = useAppSelector((state) => state.global);
   const { movie } = useAppSelector((state) => state.movies);
 
   const [showInfo, setShowInfo] = useState(true);

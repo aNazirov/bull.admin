@@ -1,16 +1,16 @@
 import { FilterIcon } from "@heroicons/react/solid";
+import { CommentTbody } from "components/pages/comment";
 import { Table } from "components/pages/table";
-import { UserTbody } from "components/pages/user";
-import { CInput } from "components/shared";
+import { CSearchSelect } from "components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { getAll, setComment, setComments } from "store/comment/comment.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll, setUsers } from "store/user/user.thunks";
-import { UserTableNames } from "_data/titles";
+import { CommentTableNames } from "_data/titles";
 
 interface Props {}
 
-export const Users: React.FC<Props> = () => {
+export const Comments: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -20,11 +20,12 @@ export const Users: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setUsers());
+      dispatch(setComment());
+      dispatch(setComments());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.acters);
+  const { count } = useAppSelector((state) => state.comments);
 
   const getMore = (skip: number) => {
     dispatch(getAll(skip, filter.current));
@@ -34,10 +35,10 @@ export const Users: React.FC<Props> = () => {
     <>
       <Filter params={filter} setPage={setPage} />
       <Table
-        tableNames={UserTableNames}
+        tableNames={CommentTableNames}
         page={page}
         setPage={setPage}
-        tBody={UserTbody}
+        tBody={CommentTbody}
         getMore={getMore}
         count={count}
       />
@@ -64,7 +65,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
   const filter = (data: any) => {
     params.current = { ...data };
 
-    dispatch(getAll(0, params.current)).then(() => {
+    dispatch(getAll(0, params)).then(() => {
       setPage(1);
     });
   };
@@ -78,22 +79,24 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
         >
           <div className="col-span-full flex flex-col sm:flex-row gap-3">
             <div className="w-full sm:w-2/12">
-              <CInput
-                name="name"
+              <CSearchSelect
+                name="userId"
+                index="users"
                 required={false}
                 control={control}
-                title="Имя"
-                error={errors["name"]}
+                title="Пользователь"
+                error={errors["userId"]}
               />
             </div>
 
             <div className="w-full sm:w-2/12">
-              <CInput
-                name="email"
+              <CSearchSelect
+                name="movieId"
+                index="movies"
                 required={false}
                 control={control}
-                title="Email"
-                error={errors["email"]}
+                title="Фильм"
+                error={errors["movieId"]}
               />
             </div>
           </div>

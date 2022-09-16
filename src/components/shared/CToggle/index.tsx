@@ -14,7 +14,7 @@ export const CToggle: React.FC<Props> = ({ disabled, checked, onToggle }) => {
       checked={checked}
       onChange={onToggle}
       className={classNames(
-        checked ? "bg-blue-600" : "bg-gray-200",
+        checked ? "bg-orange-500" : "bg-gray-200",
         "relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none"
       )}
     >

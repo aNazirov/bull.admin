@@ -23,13 +23,13 @@
 //       {![0, 1].includes(count) && (
 //         <div className="duration-200 opacity-100 flex absolute z-50 left-52 right-52 bottom-10 justify-center items-center gap-4 mt-2">
 //           <button
-//             className="px-4 bg-blue-600 text-white border rounded-md border-blue-500 cursor-pointer"
+//             className="px-4 bg-orange-500 text-white border rounded-md border-blue-500 cursor-pointer"
 //             onClick={() => swiper.slidePrev()}
 //           >
 //             Prev
 //           </button>
 //           <button
-//             className="px-4 bg-blue-600 text-white border rounded-md border-blue-500 cursor-pointer"
+//             className="px-4 bg-orange-500 text-white border rounded-md border-blue-500 cursor-pointer"
 //             onClick={() => swiper.slideNext()}
 //           >
 //             Next

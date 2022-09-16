@@ -61,7 +61,7 @@ export interface ICategory {
 
 export interface IComment {
   id: number;
-  user: any;
+  user: IUser;
   movie?: IMovie;
   text: string;
   createdAt: string;
@@ -86,16 +86,16 @@ export interface IGenre {
 export interface IMovie {
   id: number;
   title: string;
-  slug: string;
-  poster: IFile;
+  slug?: string;
+  poster?: IFile;
   description?: string;
-  isNew: boolean;
-  isSerial: boolean;
-  bySubscription: boolean;
+  isNew?: boolean;
+  isSerial?: boolean;
+  bySubscription?: boolean;
   imdb?: number;
   rating?: number;
-  ageRemark: number;
-  year: number;
+  ageRemark?: number;
+  year?: number;
   genres?: IGenre[];
   countries?: ICountry[];
   acters?: IActer[];
@@ -103,7 +103,7 @@ export interface IMovie {
   categories?: ICategory[];
   producers?: IProducer[];
   directors?: IDirector[];
-  seasons: ISeason[];
+  seasons?: ISeason[];
   treiler?: IFile;
   file?: IMovieFile;
 }

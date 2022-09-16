@@ -1,4 +1,5 @@
 import {
+  ChatAltIcon,
   ColorSwatchIcon,
   FilmIcon,
   SwitchHorizontalIcon,
@@ -31,6 +32,13 @@ export const sidebarNavigation = [
     name: "Фильмы",
     href: "/movies",
     icon: FilmIcon,
+    permissions: [RoleType.Admin, RoleType.Moderator],
+    current: false,
+  },
+  {
+    name: "Комментарии",
+    href: "/comments",
+    icon: ChatAltIcon,
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },
@@ -90,7 +98,13 @@ export const MovieTableNames = [
   THead.edit,
 ];
 
+export const CommentTableNames = [
+  "Пользователь",
+  "Фильм",
+  "Комментарий",
+  THead.edit,
+];
+
 export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
 export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
 export const DirectorTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
-

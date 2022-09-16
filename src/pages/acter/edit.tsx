@@ -17,7 +17,6 @@ export const EditActer: React.FC<Props> = ({ close }) => {
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { token } = useAppSelector((state) => state.global);
   const { acter } = useAppSelector((state) => state.acters);
 
   const [avatar, setAvatar] = useState<File | null>(null);

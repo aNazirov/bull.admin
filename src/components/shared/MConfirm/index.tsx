@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
 import { Dialog } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
+import React, { useRef } from "react";
 import { CModal } from "../CModal";
 
 interface Props {
@@ -50,7 +50,7 @@ export const MConfirm: React.FC<Props> = ({
         <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
           <button
             type="button"
-            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:col-start-2 sm:text-sm"
+            className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-orange-500 text-base font-medium text-white hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:col-start-2 sm:text-sm"
             onClick={confirmHandle}
             disabled={loading}
           >

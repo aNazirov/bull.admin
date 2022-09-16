@@ -20,7 +20,6 @@ interface Props {
 }
 
 export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
-  const { token } = useAppSelector((state) => state.global);
   const { movie } = useAppSelector((state) => state.movies);
 
   const [selectedSeason, setSelectedSeason] = useState<number | undefined>(
@@ -31,22 +30,22 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (movie?.seasons.length !== 0) {
-      setSelectedSeason(movie?.seasons.find((x) => x.season === 1)?.id);
+    if (movie?.seasons?.length !== 0) {
+      setSelectedSeason(movie?.seasons!.find((x) => x.season === 1)?.id);
     }
   }, [movie]);
 
   useEffect(() => {
     if (selectedSeason !== 0) {
       setEpisodes(
-        movie!.seasons.find((x) => x.id === selectedSeason)?.episodes || []
+        movie!.seasons!.find((x) => x.id === selectedSeason)?.episodes || []
       );
     }
   }, [selectedSeason]);
 
   const addSeason = () => {
     return createService(
-      { movieId: movie!.id, season: movie!.seasons.length + 1 },
+      { movieId: movie!.id, season: movie!.seasons!.length + 1 },
       "season"
     )
       .then(() => dispatch(getOne(movie!.id)))
@@ -91,7 +90,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
   return (
     <>
       <nav className="flex space-x-4" aria-label="Tabs">
-        {movie?.seasons.map((season) => (
+        {movie?.seasons?.map((season) => (
           <div
             key={season.id}
             className={classNames(
@@ -179,7 +178,6 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
 };
 
 export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
-  const { token } = useAppSelector((state) => state.global);
   const { movie } = useAppSelector((state) => state.movies);
 
   const [selectedQuality, setSelectedQuality] = useState("cd");

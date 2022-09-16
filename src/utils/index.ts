@@ -166,6 +166,8 @@ export const pageSwitch = (path: string[]) => {
       return "Пользователи";
     case "movies":
       return "Фильмы";
+    case "comments":
+      return "Комментарии";
 
     default:
       return "";

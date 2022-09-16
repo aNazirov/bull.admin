@@ -3,6 +3,7 @@ import Sidebar from "components/global/sidebar";
 import { PrivateRoute } from "components/shared";
 import { Acters } from "pages/acter";
 import { Categories } from "pages/category";
+import { Comments } from "pages/comment";
 import { Directors } from "pages/director";
 import { Genres } from "pages/genre";
 import { Movies } from "pages/movie";
@@ -132,6 +133,17 @@ export const Layout: React.FC = () => {
                         operation={[RoleType.Admin, RoleType.Moderator]}
                       >
                         <ShowMovie />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/comments"
+                    element={
+                      <PrivateRoute
+                        operation={[RoleType.Admin, RoleType.Moderator]}
+                      >
+                        <Comments />
                       </PrivateRoute>
                     }
                   />

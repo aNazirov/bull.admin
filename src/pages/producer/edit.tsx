@@ -17,7 +17,6 @@ export const EditProducer: React.FC<Props> = ({ close }) => {
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { token } = useAppSelector((state) => state.global);
   const { producer } = useAppSelector((state) => state.producers);
 
   const [avatar, setAvatar] = useState<File | null>(null);

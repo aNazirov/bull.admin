@@ -1,24 +1,23 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "components/shared";
 import { MDelete } from "components/shared/MDelete";
-import { CreateActer } from "pages/acter/create";
-import { EditActer } from "pages/acter/edit";
+import { CreateComment } from "pages/comment/create";
+import { EditComment } from "pages/comment/edit";
 import { useContext, useState } from "react";
 import { removeService, Toast } from "services/global.service";
-import { setActer } from "store/acter/acter.thunks";
+import { setComment } from "store/comment/comment.thunks";
 import { getAll } from "store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "store/hooks";
 import { AppContext } from "utils/contexts";
 import { RoleType, SlideoverModes } from "utils/enums";
 import { classNames } from "utils/index";
-import { defaultAvatar } from "_data/datas";
 
 interface Props {
   path: string[];
 }
 
-export const ActerTbody: React.FC<Props> = ({ path }) => {
-  const { acter, acters } = useAppSelector((state) => state.acters);
+export const CommentTbody: React.FC<Props> = ({ path }) => {
+  const { comment, comments } = useAppSelector((state) => state.comments);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -28,11 +27,11 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(acter!.id, "acter")
+    removeService(comment!.id, "comment")
       .then(() => {
-        Toast.success("Актер удален");
+        Toast.success("Режисер удален");
         dispatch(getAll());
-        dispatch(setActer());
+        dispatch(setComment());
       })
       .catch((e) => {
         Toast.error(e);
@@ -42,35 +41,25 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setActer());
+    dispatch(setComment());
   };
 
   return (
     <>
       <tbody>
-        {acters.map((x, idx) => (
+        {comments.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              <span className="flex-shrink-0">
-                <img
-                  className="h-10 w-10 rounded-full object-cover"
-                  src={
-                    x.avatar
-                      ? `${process.env.REACT_APP_API_HOST}${x.avatar?.url}`
-                      : defaultAvatar
-                  }
-                  alt={x.avatar?.name}
-                />
-              </span>
-            </td>
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.name}
-            </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.slug}
+              {x.user.name}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.movie?.title}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.text}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -82,7 +71,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setActer(x));
+                          dispatch(setComment(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -95,7 +84,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setActer(x));
+                          dispatch(setComment(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -111,12 +100,12 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {acter && (
+        {comment && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: acter.id, name: acter.name }}
+            data={{ id: comment.id, name: comment.text }}
           />
         )}
       </PrivateComponent>
@@ -124,10 +113,10 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={acter?.name || "Актер"}
+            title={comment?.user.name || "Комментарий"}
             close={close}
-            Edit={EditActer}
-            Create={CreateActer}
+            Edit={EditComment}
+            Create={CreateComment}
           />
         )}
       </PrivateComponent>

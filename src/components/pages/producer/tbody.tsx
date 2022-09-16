@@ -18,7 +18,6 @@ interface Props {
 }
 
 export const ProducerTbody: React.FC<Props> = ({ path }) => {
-  const { token } = useAppSelector((state) => state.global);
   const { producer, producers } = useAppSelector((state) => state.producers);
   const { setOpen, setMode } = useContext(AppContext);
 

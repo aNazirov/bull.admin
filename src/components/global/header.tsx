@@ -22,7 +22,7 @@ const Header: React.FC = () => {
       <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
         <CLink
           to="/"
-          className="flex items-center justify-center h-16 w-16 bg-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600 md:w-20"
+          className="flex items-center justify-center h-16 w-16 bg-orange-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-600 md:w-28"
         >
           <img className="h-8 w-auto" src={logo} alt="Workflow" />
         </CLink>
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
         {/* Mobile menu button */}
         <button
           type="button"
-          className="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+          className="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-600"
           onClick={() => setMobileMenuOpen(true)}
         >
           <span className="sr-only">Open main menu</span>
@@ -80,8 +80,6 @@ const DesktopMenu: React.FC = () => {
     dispatch(userLogout());
   };
 
-  const isTransaction = path.includes("transactions");
-  const filterShow = path.includes("transactions") || path.includes("units");
   const accessRoles = [RoleType.Admin];
 
   return (
@@ -109,9 +107,13 @@ const DesktopMenu: React.FC = () => {
           </span>
 
           <Menu as="div" className="relative inline-block text-left">
-            <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
+            <Menu.Button className="bg-white rounded-full flex text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-600">
               <span className="sr-only">Open user menu</span>
-              <img className="h-8 w-8 rounded-full" src={defaultAvatar} />
+              <img
+                className="h-8 w-8 rounded-full"
+                src={defaultAvatar}
+                alt="avatar"
+              />
             </Menu.Button>
 
             <Transition
@@ -180,7 +182,7 @@ const LinkSelect: React.FC = () => {
         <select
           id="inbox-select"
           onChange={(e) => navigate(e.target.value)}
-          className="rounded-md border-0 bg-none pl-3 pr-8 text-base font-medium text-gray-900 focus:ring-2 focus:ring-blue-600"
+          className="rounded-md border-0 bg-none pl-3 pr-8 text-base font-medium text-gray-900 focus:ring-2 focus:ring-orange-600"
           defaultValue={
             sidebarNavigation.find((item) => item.href === pathname)?.href
           }
@@ -249,7 +251,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
               </span>
               <button
                 type="button"
-                className="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-600"
+                className="-mr-2 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-600"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <span className="sr-only">Close main menu</span>

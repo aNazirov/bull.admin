@@ -123,7 +123,7 @@ export const Combox: React.FC<Props> = ({
                 className={({ active }) =>
                   classNames(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
-                    active ? "bg-blue-600 text-white" : "text-gray-900"
+                    active ? "bg-orange-500 text-white" : "text-gray-900"
                   )
                 }
               >
@@ -141,7 +141,7 @@ export const Combox: React.FC<Props> = ({
                     className={({ active }) =>
                       classNames(
                         "relative cursor-default select-none py-2 pl-3 pr-9",
-                        active ? "bg-blue-600 text-white" : "text-gray-900"
+                        active ? "bg-orange-500 text-white" : "text-gray-900"
                       )
                     }
                   >
