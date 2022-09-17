@@ -177,6 +177,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             defaultValue={movie?.imdb}
             title="Imdb"
             type="number"
+            step={0.1}
             min={0}
             max={10}
             error={errors["imdb"]}
@@ -190,6 +191,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             control={control}
             defaultValue={movie?.rating}
             title="Рейтинг"
+            step={0.1}
             type="number"
             min={0}
             max={10}
