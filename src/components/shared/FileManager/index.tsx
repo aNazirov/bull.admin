@@ -123,7 +123,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
         </button>
       </nav>
 
-      <div className={`mt-5 grid grid-cols-${cols} justify-between gap-4`}>
+      <div className={`mt-5 grid grid-cols-4 justify-between gap-4`}>
         {episodes.map((episode) => {
           const filePath = `${process.env.REACT_APP_API_HOST}${episode.file.url}`;
 
