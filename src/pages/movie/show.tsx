@@ -4,15 +4,15 @@ import {
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/solid";
-import { PageHead } from "components/pages/head";
-import { SceletonForPage } from "components/shared";
-import { FileManager, Seasons } from "components/shared/FileManager";
+import { PageHead } from "core/components/pages/head";
+import { SceletonForPage } from "core/components/shared";
+import { FileManager, Seasons } from "core/components/shared/FileManager";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getOne, setMovie } from "store/movie/movie.thunks";
-import { classNames } from "utils";
-import { RoleType } from "utils/enums";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getOne, setMovie } from "core/store/movie/movie.thunks";
+import { classNames } from "core/utils";
+import { RoleType } from "core/utils/enums";
 import { EditMovie } from "./edit";
 
 interface Props {}

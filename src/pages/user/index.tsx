@@ -1,12 +1,12 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { Table } from "components/pages/table";
-import { UserTbody } from "components/pages/user";
-import { CInput } from "components/shared";
+import { Table } from "core/components/pages/table";
+import { UserTbody } from "core/components/pages/user";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll, setUsers } from "store/user/user.thunks";
-import { UserTableNames } from "_data/titles";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getAll, setUsers } from "core/store/user/user.thunks";
+import { UserTableNames } from "core/_data/titles";
 
 interface Props {}
 

@@ -1,12 +1,12 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { MovieTbody } from "components/pages/movie";
-import { Table } from "components/pages/table";
-import { CInput, CSearchSelect } from "components/shared";
+import { MovieTbody } from "core/components/pages/movie";
+import { Table } from "core/components/pages/table";
+import { CInput, CSearchSelect } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getAll, setMovies } from "store/movie/movie.thunks";
-import { MovieTableNames } from "_data/titles";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getAll, setMovies } from "core/store/movie/movie.thunks";
+import { MovieTableNames } from "core/_data/titles";
 
 interface Props {}
 

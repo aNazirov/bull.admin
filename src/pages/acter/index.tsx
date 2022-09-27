@@ -1,12 +1,12 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { ActerTbody } from "components/pages/acter";
-import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { ActerTbody } from "core/components/pages/acter";
+import { Table } from "core/components/pages/table";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setActer, setActers } from "store/acter/acter.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { ActerTableNames } from "_data/titles";
+import { getAll, setActer, setActers } from "core/store/acter/acter.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { ActerTableNames } from "core/_data/titles";
 
 interface Props {}
 

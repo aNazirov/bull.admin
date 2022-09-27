@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "./index.scss";
 import App from "./pages/App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./store";
+import { store } from "./core/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

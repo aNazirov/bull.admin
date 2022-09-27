@@ -1,8 +1,8 @@
-import { CTextarea, SlideoversFoot } from "components/shared";
+import { CTextarea, SlideoversFoot } from "core/components/shared";
 import { useForm } from "react-hook-form";
-import { Toast, updateService } from "services/index";
-import { getAll } from "store/comment/comment.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { Toast, updateService } from "core/services/index";
+import { getAll } from "core/store/comment/comment.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 
 interface Props {
   close: () => void;

@@ -1,11 +1,11 @@
-import { CInput, SlideoversFoot } from "components/shared";
+import { CInput, SlideoversFoot } from "core/components/shared";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { createService, filesUpload, Toast } from "services/index";
-import { getAll } from "store/producer/producer.thunks";
-import { useAppDispatch } from "store/hooks";
-import { formatData, imageUpload } from "utils/index";
-import { defaultAvatar } from "_data/datas";
+import { createService, filesUpload, Toast } from "core/services/index";
+import { getAll } from "core/store/producer/producer.thunks";
+import { useAppDispatch } from "core/store/hooks";
+import { formatData, imageUpload } from "core/utils/index";
+import { defaultAvatar } from "core/_data/datas";
 
 interface Props {
   close: () => void;

@@ -1,12 +1,12 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { GenreTbody } from "components/pages/genre";
-import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { GenreTbody } from "core/components/pages/genre";
+import { Table } from "core/components/pages/table";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setGenre, setGenres } from "store/genre/genre.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { GenreTableNames } from "_data/titles";
+import { getAll, setGenre, setGenres } from "core/store/genre/genre.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { GenreTableNames } from "core/_data/titles";
 
 interface Props {}
 

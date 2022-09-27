@@ -1,16 +1,16 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { ProducerTbody } from "components/pages/producer";
-import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { ProducerTbody } from "core/components/pages/producer";
+import { Table } from "core/components/pages/table";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import {
   getAll,
   setProducer,
   setProducers,
-} from "store/producer/producer.thunks";
-import { ProducerTableNames } from "_data/titles";
+} from "core/store/producer/producer.thunks";
+import { ProducerTableNames } from "core/_data/titles";
 
 interface Props {}
 

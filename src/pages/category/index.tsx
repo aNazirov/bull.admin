@@ -1,16 +1,16 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { CategoryTbody } from "components/pages/category";
-import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { CategoryTbody } from "core/components/pages/category";
+import { Table } from "core/components/pages/table";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   getAll,
   setCategories,
   setCategory,
-} from "store/category/category.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CategoryTableNames } from "_data/titles";
+} from "core/store/category/category.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { CategoryTableNames } from "core/_data/titles";
 
 interface Props {}
 

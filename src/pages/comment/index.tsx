@@ -1,12 +1,12 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { CommentTbody } from "components/pages/comment";
-import { Table } from "components/pages/table";
-import { CSearchSelect } from "components/shared";
+import { CommentTbody } from "core/components/pages/comment";
+import { Table } from "core/components/pages/table";
+import { CSearchSelect } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { getAll, setComment, setComments } from "store/comment/comment.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { CommentTableNames } from "_data/titles";
+import { getAll, setComment, setComments } from "core/store/comment/comment.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { CommentTableNames } from "core/_data/titles";
 
 interface Props {}
 

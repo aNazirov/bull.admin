@@ -1,16 +1,16 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { DirectorTbody } from "components/pages/director";
-import { Table } from "components/pages/table";
-import { CInput } from "components/shared";
+import { DirectorTbody } from "core/components/pages/director";
+import { Table } from "core/components/pages/table";
+import { CInput } from "core/components/shared";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   getAll,
   setDirector,
   setDirectors,
-} from "store/director/director.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { DirectorTableNames } from "_data/titles";
+} from "core/store/director/director.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { DirectorTableNames } from "core/_data/titles";
 
 interface Props {}
 

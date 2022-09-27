@@ -1,12 +1,12 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
-import { PageHead } from "components/pages/head";
-import { SceletonForPage } from "components/shared";
+import { PageHead } from "core/components/pages/head";
+import { SceletonForPage } from "core/components/shared";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { getOne, setUser } from "store/user/user.thunks";
-import { classNames, formatNumber } from "utils";
-import { RoleType } from "utils/enums";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getOne, setUser } from "core/store/user/user.thunks";
+import { classNames, formatNumber } from "core/utils";
+import { RoleType } from "core/utils/enums";
 import { EditUser } from "./edit";
 
 interface Props {}

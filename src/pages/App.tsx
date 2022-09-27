@@ -1,5 +1,5 @@
-import { Layout } from "components/global/layout";
-import { Login } from "components/pages/login";
+import { Layout } from "core/components/global/layout";
+import { Login } from "core/components/pages/login";
 import { useEffect, useState } from "react";
 import {
   Navigate,
@@ -8,8 +8,8 @@ import {
   useLocation,
   useNavigate,
 } from "react-router-dom";
-import { autoLogIn } from "store/global/global.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { autoLogIn } from "core/store/global/global.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import "./App.scss";
 
 function App() {

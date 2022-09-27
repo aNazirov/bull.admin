@@ -1,8 +1,8 @@
-import { CInput, SlideoversFoot } from "components/shared";
+import { CInput, SlideoversFoot } from "core/components/shared";
 import { useForm } from "react-hook-form";
-import { Toast, updateService } from "services/index";
-import { getAll } from "store/genre/genre.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
+import { Toast, updateService } from "core/services/index";
+import { getAll } from "core/store/genre/genre.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 
 interface Props {
   close: () => void;

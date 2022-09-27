@@ -1,9 +1,9 @@
-import { CCombobox, CInput, SlideoversFoot } from "components/shared";
+import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
 import { useForm } from "react-hook-form";
-import { createService, Toast } from "services/index";
-import { getAll } from "store/user/user.thunks";
-import { useAppDispatch, useAppSelector } from "store/hooks";
-import { RoleType } from "utils/enums";
+import { createService, Toast } from "core/services/index";
+import { getAll } from "core/store/user/user.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { RoleType } from "core/utils/enums";
 
 interface Props {
   close: () => void;

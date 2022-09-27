@@ -1,12 +1,12 @@
-import { CInput, CTextarea, SlideoversFoot } from "components/shared";
-import { CSearchSelectMulti } from "components/shared/CSearchSelectMulti";
+import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
+import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { createService, filesUpload, Toast } from "services/index";
-import { useAppDispatch } from "store/hooks";
-import { getAll } from "store/movie/movie.thunks";
-import { formatData, imageUpload } from "utils";
-import { defaultImage } from "_data/datas";
+import { createService, filesUpload, Toast } from "core/services/index";
+import { useAppDispatch } from "core/store/hooks";
+import { getAll } from "core/store/movie/movie.thunks";
+import { formatData, imageUpload } from "core/utils";
+import { defaultImage } from "core/_data/datas";
 
 interface Props {
   close: () => void;
