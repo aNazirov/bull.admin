@@ -86,6 +86,7 @@ export interface IGenre {
 export interface ISubscriptionType {
   id: number;
   title: string;
+  description?: string;
   price: number;
   poster: IFile;
   genres: IGenre[];

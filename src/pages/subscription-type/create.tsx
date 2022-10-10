@@ -1,4 +1,4 @@
-import { CInput, SlideoversFoot } from "core/components/shared";
+import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
 import { createService, filesUpload } from "core/services";
 import { useAppDispatch } from "core/store/hooks";
@@ -92,6 +92,16 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
           placeholder="Название"
           control={control}
           error={errors["title"]}
+        />
+      </div>
+
+      <div className="w-full mt-3">
+        <CTextarea
+          name="description"
+          title="Описание"
+          placeholder="Описание"
+          control={control}
+          error={errors["description"]}
         />
       </div>
 

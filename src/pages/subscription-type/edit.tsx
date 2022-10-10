@@ -1,4 +1,4 @@
-import { CInput, SlideoversFoot } from "core/components/shared";
+import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
 import { fileDelete, filesUpload, updateService } from "core/services";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
@@ -109,6 +109,17 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
           defaultValue={subscriptionType?.title}
           control={control}
           error={errors["title"]}
+        />
+      </div>
+
+      <div className="w-full mt-3">
+        <CTextarea
+          name="description"
+          title="Описание"
+          placeholder="Описание"
+          defaultValue={subscriptionType?.description}
+          control={control}
+          error={errors["description"]}
         />
       </div>
 
