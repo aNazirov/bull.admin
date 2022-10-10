@@ -67,7 +67,7 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             name="balance"
             title="Баланс"
             placeholder="Баланс"
-            defaultValue={user?.contact?.email}
+            defaultValue={user?.balance}
             type="number"
             control={control}
             error={errors["balance"]}
