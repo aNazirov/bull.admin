@@ -1,8 +1,8 @@
 import { IEpisode, IFile } from "core/interfaces";
+import { createEpisodes, filesUpload } from "core/services";
+import { formatData } from "core/utils";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { createEpisodes, filesUpload } from "core/services";
-import { formatData, Toast } from "core/utils";
 import { SceletonForDropzone } from "../Sceleton";
 
 interface Props {
@@ -22,6 +22,7 @@ export const CDropzone: React.FC<Props> = ({
 
   const uploadFiles = async (data: File[]) => {
     if (!data.length) return;
+
     setLoading(true);
     await filesUpload(formatData({ files: data }))
       .then(async (_files) => {
@@ -34,7 +35,6 @@ export const CDropzone: React.FC<Props> = ({
         });
       })
       .then((_episodes) => setEpisodes([...episodes, ..._episodes]))
-      .catch((e) => Toast.error(e))
       .finally(() => setLoading(false));
   };
 

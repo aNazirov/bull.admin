@@ -1,35 +1,13 @@
 import api from "core/api/index";
-import { AxiosError } from "axios";
 import { IAutoComplete, ILogin } from "core/interfaces";
-import { toast } from "react-toastify";
-
-class ToastClass {
-  options = undefined;
-
-  info(info: string) {
-    toast.info(info, this.options);
-  }
-  success(message: string) {
-    toast.success(message, this.options);
-  }
-  error(error: AxiosError<{ message?: string } | undefined>) {
-    let message =
-      error.response?.data?.message || error.message || "Server Side Error";
-    if (Array.isArray(message)) {
-      message = message.join(", ");
-    }
-
-    toast.error(message, this.options);
-  }
-  warning(warning: string) {
-    toast.warn(warning, this.options);
-  }
-}
-
-export const Toast = new ToastClass();
 
 export const loginService = (params: ILogin) => {
-  return api.post("/auth/login", params).then((res) => res.data);
+  return api
+    .post("/auth/login", params, undefined, {
+      pending: "Авторизация",
+      success: "Вы успешно авторизованы",
+    })
+    .then((res) => res.data);
 };
 
 export const getUserByToken = () => {
@@ -45,15 +23,30 @@ export const autoComplite = (params: IAutoComplete) => {
 };
 
 export const createService = (params: any, name: string) => {
-  return api.post(`/${name}`, params).then((res) => res.data);
+  return api
+    .post(`/${name}`, params, undefined, {
+      pending: "Создание ...",
+      success: "Cоздано",
+    })
+    .then((res) => res.data);
 };
 
 export const updateService = (id: number, params: any, name: string) => {
-  return api.patch(`/${name}/${id}`, params).then((res) => res.data);
+  return api
+    .patch(`/${name}/${id}`, params, undefined, {
+      pending: "Обновление ...",
+      success: "Обновлено",
+    })
+    .then((res) => res.data);
 };
 
 export const removeService = (id: number, name: string) => {
-  return api.delete(`/${name}/${id}`).then((res) => res.data);
+  return api
+    .delete(`/${name}/${id}`, undefined, {
+      pending: "Удаление ...",
+      success: "Удалено",
+    })
+    .then((res) => res.data);
 };
 
 export const getOneService = (id: number, name: string) => {
@@ -73,14 +66,27 @@ export const getAllService = (skip: number, params: any, name: string) => {
 
 export const filesUpload = (formData: any) => {
   return api
-    .post("/file/upload-many", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data; boundary=something",
+    .post(
+      "/file/upload-many",
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data; boundary=something",
+        },
       },
-    })
+      {
+        pending: "Загрузка файлов ...",
+        success: "Файлы загружены",
+      }
+    )
     .then((res) => res.data);
 };
 
 export const fileDelete = (id: number) => {
-  return api.delete(`/file/${id}`).then((res) => res.data);
+  return api
+    .delete(`/file/${id}`, undefined, {
+      pending: "Удаление файла ...",
+      success: "Файл удален",
+    })
+    .then((res) => res.data);
 };

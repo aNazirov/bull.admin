@@ -1,15 +1,15 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { CLink, PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateMovie } from "pages/movie/create";
-import { EditMovie } from "pages/movie/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll, setMovie } from "core/store/movie/movie.thunks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
+import { CreateMovie } from "pages/movie/create";
+import { EditMovie } from "pages/movie/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -26,15 +26,10 @@ export const MovieTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(movie!.id, "movie")
-      .then(() => {
-        Toast.success("Фильм удален");
-        dispatch(getAll());
-        dispatch(setMovie());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(movie!.id, "movie").then(() => {
+      dispatch(getAll());
+      dispatch(setMovie());
+    });
   };
 
   const close = () => {

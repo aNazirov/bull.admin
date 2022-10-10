@@ -1,11 +1,11 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { createService, filesUpload, Toast } from "core/services/index";
+import { createService, filesUpload } from "core/services/index";
 import { getAll } from "core/store/acter/acter.thunks";
 import { useAppDispatch } from "core/store/hooks";
 import { formatData, imageUpload } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -24,7 +24,6 @@ export const CreateActer: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание жанра`);
     let avatarId = undefined;
 
     if (avatar) {
@@ -37,15 +36,10 @@ export const CreateActer: React.FC<Props> = ({ close }) => {
         avatarId,
       },
       "acter"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(() => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

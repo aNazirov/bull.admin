@@ -1,10 +1,7 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateProducer } from "pages/producer/create";
-import { EditProducer } from "pages/producer/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { getAll } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { setProducer } from "core/store/producer/producer.thunks";
@@ -12,6 +9,9 @@ import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
+import { CreateProducer } from "pages/producer/create";
+import { EditProducer } from "pages/producer/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -28,15 +28,10 @@ export const ProducerTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(producer!.id, "producer")
-      .then(() => {
-        Toast.success("Продюсер удален");
-        dispatch(getAll());
-        dispatch(setProducer());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(producer!.id, "producer").then(() => {
+      dispatch(getAll());
+      dispatch(setProducer());
+    });
   };
 
   const close = () => {

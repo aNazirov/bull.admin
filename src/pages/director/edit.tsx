@@ -1,11 +1,11 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { fileDelete, filesUpload, Toast, updateService } from "core/services/index";
-import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { fileDelete, filesUpload, updateService } from "core/services/index";
 import { getAll } from "core/store/director/director.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { formatData, imageUpload } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -30,33 +30,25 @@ export const EditDirector: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
     let avatarId = undefined;
 
     if (avatar) {
       avatarId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
     }
 
-    return updateService(director!.id, { ...data, avatarId }, "director")
-      .then(({ name }) => {
-        Toast.success(`${name} обновлен`);
+    return updateService(director!.id, { ...data, avatarId }, "director").then(
+      ({ name }) => {
         dispatch(getAll());
         close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+      }
+    );
   };
 
   const imageDelete = (id: number) => {
     setLoadingPhoto(true);
-    return fileDelete(id)
-      .then(() => {
-        Toast.success("Файл удален");
-        setLoadingPhoto(false);
-      })
-      .catch((e) => Toast.error(e));
+    return fileDelete(id).then(() => {
+      setLoadingPhoto(false);
+    });
   };
 
   return (

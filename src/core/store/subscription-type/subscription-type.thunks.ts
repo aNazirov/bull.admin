@@ -1,18 +1,13 @@
 import { ISubscriptionType } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { subscriptionTypesAction } from "./subscription-type.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "subscription-type")
-      .then((res) => {
-        dispatch(setSubscriptionTypes(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "subscription-type").then((res) => {
+      dispatch(setSubscriptionTypes(res.count, res.data));
+    });
   };
 
 export const setSubscriptionTypes =
@@ -27,13 +22,9 @@ export const setSubscriptionTypes =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "subscription-type")
-    .then((subscriptionType) => {
-      dispatch(setSubscriptionType(subscriptionType));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "subscription-type").then((subscriptionType) => {
+    dispatch(setSubscriptionType(subscriptionType));
+  });
 };
 
 export const setSubscriptionType =

@@ -1,8 +1,8 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { Toast, updateService } from "core/services/index";
+import { updateService } from "core/services/index";
 import { getAll } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -19,17 +19,10 @@ export const EditGenre: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
-    return updateService(genre!.id, { ...data }, "genre")
-      .then(({ title }) => {
-        Toast.success(`${title} обновлен`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return updateService(genre!.id, { ...data }, "genre").then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

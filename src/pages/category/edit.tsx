@@ -1,8 +1,8 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { Toast, updateService } from "core/services/index";
+import { updateService } from "core/services/index";
 import { getAll } from "core/store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -19,17 +19,12 @@ export const EditCategory: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
-    return updateService(category!.id, { ...data }, "category")
-      .then(({ title }) => {
-        Toast.success(`${title} обновлен`);
+    return updateService(category!.id, { ...data }, "category").then(
+      ({ title }) => {
         dispatch(getAll());
         close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+      }
+    );
   };
 
   return (

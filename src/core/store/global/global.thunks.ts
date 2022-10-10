@@ -1,5 +1,5 @@
 import { ILogin, IUser } from "core/interfaces";
-import { getUserByToken, loginService, Toast } from "core/services/index";
+import { getUserByToken, loginService } from "core/services/index";
 import { globalAction } from "./global.slices";
 
 const clearStorage = () => {
@@ -13,12 +13,10 @@ export const userSet = (user: IUser) => async (dispatch: any) => {
 };
 
 export const loginByPassword = (params: ILogin) => async (dispatch: any) => {
-  return loginService(params)
-    .then(({ user, jwt }) => {
-      dispatch(userSet(user));
-      dispatch(login({ token: jwt }));
-    })
-    .catch((e) => Toast.error(e));
+  return loginService(params).then(({ user, jwt }) => {
+    dispatch(userSet(user));
+    dispatch(login({ token: jwt }));
+  });
 };
 
 export const autoLogIn = () => async (dispatch: any) => {
@@ -31,8 +29,6 @@ export const autoLogIn = () => async (dispatch: any) => {
         dispatch(globalAction.logIn({ token }));
       })
       .catch((e) => {
-        Toast.error(e);
-
         if (e.response?.status === 404) {
           dispatch(userLogout());
         }

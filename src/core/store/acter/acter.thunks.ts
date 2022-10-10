@@ -1,18 +1,13 @@
 import { IActer } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { actersAction } from "./acter.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "acter")
-      .then((res) => {
-        dispatch(setActers(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "acter").then((res) => {
+      dispatch(setActers(res.count, res.data));
+    });
   };
 
 export const setActers =
@@ -27,13 +22,9 @@ export const setActers =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "acter")
-    .then((acter) => {
-      dispatch(setActer(acter));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "acter").then((acter) => {
+    dispatch(setActer(acter));
+  });
 };
 
 export const setActer =

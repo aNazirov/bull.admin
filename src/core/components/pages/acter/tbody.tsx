@@ -1,10 +1,7 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateActer } from "pages/acter/create";
-import { EditActer } from "pages/acter/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { setActer } from "core/store/acter/acter.thunks";
 import { getAll } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
@@ -12,6 +9,9 @@ import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
+import { CreateActer } from "pages/acter/create";
+import { EditActer } from "pages/acter/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -28,15 +28,10 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(acter!.id, "acter")
-      .then(() => {
-        Toast.success("Актер удален");
-        dispatch(getAll());
-        dispatch(setActer());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(acter!.id, "acter").then(() => {
+      dispatch(getAll());
+      dispatch(setActer());
+    });
   };
 
   const close = () => {

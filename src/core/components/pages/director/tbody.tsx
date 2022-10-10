@@ -1,10 +1,7 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateDirector } from "pages/director/create";
-import { EditDirector } from "pages/director/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { setDirector } from "core/store/director/director.thunks";
 import { getAll } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
@@ -12,6 +9,9 @@ import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
+import { CreateDirector } from "pages/director/create";
+import { EditDirector } from "pages/director/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -28,15 +28,10 @@ export const DirectorTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(director!.id, "director")
-      .then(() => {
-        Toast.success("Режисер удален");
-        dispatch(getAll());
-        dispatch(setDirector());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(director!.id, "director").then(() => {
+      dispatch(getAll());
+      dispatch(setDirector());
+    });
   };
 
   const close = () => {

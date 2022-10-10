@@ -1,18 +1,13 @@
 import { IMovie } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { moviesAction } from "./movie.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "movie")
-      .then((res) => {
-        dispatch(setMovies(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "movie").then((res) => {
+      dispatch(setMovies(res.count, res.data));
+    });
   };
 
 export const setMovies =
@@ -27,13 +22,9 @@ export const setMovies =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "movie")
-    .then((movie) => {
-      dispatch(setMovie(movie));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "movie").then((movie) => {
+    dispatch(setMovie(movie));
+  });
 };
 
 export const setMovie =

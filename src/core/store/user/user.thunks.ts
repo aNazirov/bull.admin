@@ -1,18 +1,13 @@
 import { IUser } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { usersAction } from "./user.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "user")
-      .then((res) => {
-        dispatch(setUsers(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "user").then((res) => {
+      dispatch(setUsers(res.count, res.data));
+    });
   };
 
 export const setUsers =
@@ -27,13 +22,9 @@ export const setUsers =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "user")
-    .then((user) => {
-      dispatch(setUser(user));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "user").then((user) => {
+    dispatch(setUser(user));
+  });
 };
 
 export const setUser =

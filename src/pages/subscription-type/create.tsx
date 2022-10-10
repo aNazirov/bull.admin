@@ -1,6 +1,6 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
-import { createService, filesUpload, Toast } from "core/services";
+import { createService, filesUpload } from "core/services";
 import { useAppDispatch } from "core/store/hooks";
 import { getAll } from "core/store/subscription-type/subscription-type.thunks";
 import { formatData, imageUpload } from "core/utils";
@@ -25,7 +25,6 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание жанра`);
     let posterId = undefined;
 
     if (avatar) {
@@ -38,15 +37,10 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
         posterId,
       },
       "subscription-type"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

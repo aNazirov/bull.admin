@@ -1,9 +1,9 @@
 import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { Toast, updateService } from "core/services/index";
+import { updateService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll } from "core/store/user/user.thunks";
 import { RoleType } from "core/utils/enums";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -27,17 +27,10 @@ export const EditUser: React.FC<Props> = ({ close }) => {
   ];
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
-    return updateService(user!.id, { ...data }, "user")
-      .then(({ name }) => {
-        Toast.success(`${name} обновлен`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return updateService(user!.id, { ...data }, "user").then(({ name }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

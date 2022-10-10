@@ -1,5 +1,5 @@
 import { AxiosError } from "axios";
-import { toast } from "react-toastify";
+import { Id, toast, TypeOptions } from "react-toastify";
 
 export * as Enums from "./enums";
 
@@ -69,35 +69,6 @@ export const formatNumber = (
 export function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
-
-class ToastClass {
-  options = undefined;
-
-  info(info: string) {
-    toast.info(info, this.options);
-  }
-
-  success(message: string) {
-    toast.success(message, this.options);
-  }
-
-  error(error: AxiosError<any>) {
-    let message =
-      error.response?.data?.message || error.message || "Server Side Error";
-
-    if (Array.isArray(message)) {
-      message = message.join(", ");
-    }
-
-    toast.error(message, this.options);
-  }
-
-  warning(warning: string) {
-    toast.warn(warning, this.options);
-  }
-}
-
-export const Toast = new ToastClass();
 
 export const formatData = (formdata: any) => {
   const postData = new FormData();
@@ -175,3 +146,99 @@ export const pageSwitch = (path: string[]) => {
       return "";
   }
 };
+
+class ToastClass {
+  options = undefined;
+
+  info(info: string) {
+    toast.info(info, this.options);
+  }
+
+  success(message: string) {
+    toast.success(message, this.options);
+  }
+
+  error(error: AxiosError<any, any>) {
+    let message =
+      error.response?.data.message || error.message || "Server Side Error";
+
+    if (error.response?.data instanceof Blob) {
+      const fr = new FileReader();
+
+      fr.onload = function () {
+        if (typeof this.result === "string") {
+          const e = JSON.parse(this.result);
+          message = e.message;
+        }
+
+        toast.error(message);
+      };
+
+      return fr.readAsText(error.response?.data);
+    }
+
+    if (Array.isArray(message)) {
+      message = message.join(", ");
+    }
+
+    toast.error(message, this.options);
+  }
+
+  warning(warning: string) {
+    toast.warn(warning, this.options);
+  }
+
+  promise(
+    func: Promise<any>,
+    { pending, success }: { pending: string; success: string }
+  ) {
+    return toast.promise(func, {
+      pending,
+      success,
+      error: {
+        render({ data }) {
+          let message =
+            data.response?.data.message || data.message || "Server Side Error";
+
+          if (data.response?.data instanceof Blob) {
+            const fr = new FileReader();
+
+            fr.onload = function () {
+              if (typeof this.result === "string") {
+                const e = JSON.parse(this.result);
+                message = e.message;
+              }
+
+              toast.error(message);
+            };
+
+            return fr.readAsText(data.response?.data);
+          }
+
+          if (Array.isArray(message)) {
+            message = message.join(", ");
+          }
+          // When the promise reject, data will contains the error
+          return message;
+        },
+      },
+    });
+  }
+
+  loading(message: string): Id {
+    return toast.loading(message, this.options);
+  }
+
+  update(
+    id: Id,
+    data: {
+      render: string;
+      type: TypeOptions;
+      isLoading?: boolean;
+    }
+  ) {
+    toast.update(id, data);
+  }
+}
+
+export const Toast = new ToastClass();

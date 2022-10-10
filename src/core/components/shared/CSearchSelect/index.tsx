@@ -1,9 +1,9 @@
 import { Combobox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { autoComplite } from "core/services/index";
+import { classNames, meiliRange } from "core/utils/index";
 import { useEffect, useState } from "react";
 import { Control, useController } from "react-hook-form";
-import { autoComplite, Toast } from "core/services/index";
-import { classNames, meiliRange } from "core/utils/index";
 import { SceletonForInput } from "../Sceleton";
 
 interface Props {
@@ -61,12 +61,10 @@ const SearchSelect: React.FC<Props> = ({
   useEffect(() => {
     if (search && !items.length) {
       setSelectedItem(undefined);
-      autoComplite({ index, search, filter })
-        .then(({ hits, query }) => {
-          hits = hits.map((hit: any) => meiliRange(hit, query));
-          setItems(hits);
-        })
-        .catch((e) => Toast.error(e));
+      autoComplite({ index, search, filter }).then(({ hits, query }) => {
+        hits = hits.map((hit: any) => meiliRange(hit, query));
+        setItems(hits);
+      });
     }
   }, [search]);
 
@@ -74,23 +72,19 @@ const SearchSelect: React.FC<Props> = ({
     if (filter?.length && items.length) {
       setSelectedItem(undefined);
 
-      autoComplite({ index, search, filter })
-        .then(({ hits, query }) => {
-          hits = hits.map((hit: any) => meiliRange(hit, query));
-          setItems(hits);
-        })
-        .catch((e) => Toast.error(e));
+      autoComplite({ index, search, filter }).then(({ hits, query }) => {
+        hits = hits.map((hit: any) => meiliRange(hit, query));
+        setItems(hits);
+      });
     }
   }, [filter]);
 
   useEffect(() => {
     if (debouncedValue) {
-      autoComplite({ index, search: query, filter })
-        .then(({ hits, query }) => {
-          hits = hits.map((hit: any) => meiliRange(hit, query));
-          setItems(hits);
-        })
-        .catch((e) => Toast.error(e));
+      autoComplite({ index, search: query, filter }).then(({ hits, query }) => {
+        hits = hits.map((hit: any) => meiliRange(hit, query));
+        setItems(hits);
+      });
     }
   }, [debouncedValue]);
 

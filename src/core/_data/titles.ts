@@ -1,3 +1,4 @@
+import { TicketIcon } from "@heroicons/react/outline";
 import {
   ChatAltIcon,
   ColorSwatchIcon,
@@ -38,7 +39,7 @@ export const sidebarNavigation = [
   {
     name: "Подписки",
     href: "/subsctiption-type",
-    icon: FilmIcon,
+    icon: TicketIcon,
     permissions: [RoleType.Admin, RoleType.Moderator],
     current: false,
   },

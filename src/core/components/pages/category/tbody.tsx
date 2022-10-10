@@ -1,15 +1,15 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateCategory } from "pages/category/create";
-import { EditCategory } from "pages/category/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { getAll, setCategory } from "core/store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
+import { CreateCategory } from "pages/category/create";
+import { EditCategory } from "pages/category/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -26,15 +26,10 @@ export const CategoryTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(category!.id, "category")
-      .then(() => {
-        Toast.success("category deleted");
-        dispatch(getAll());
-        dispatch(setCategory());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(category!.id, "category").then(() => {
+      dispatch(getAll());
+      dispatch(setCategory());
+    });
   };
 
   const close = () => {

@@ -1,15 +1,15 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateGenre } from "pages/genre/create";
-import { EditGenre } from "pages/genre/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { getAll, setGenre } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
+import { CreateGenre } from "pages/genre/create";
+import { EditGenre } from "pages/genre/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -26,15 +26,10 @@ export const GenreTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(genre!.id, "genre")
-      .then(() => {
-        Toast.success("Жанр удален");
-        dispatch(getAll());
-        dispatch(setGenre());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(genre!.id, "genre").then(() => {
+      dispatch(getAll());
+      dispatch(setGenre());
+    });
   };
 
   const close = () => {

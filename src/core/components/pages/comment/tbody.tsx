@@ -1,16 +1,16 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { CreateComment } from "pages/comment/create";
-import { EditComment } from "pages/comment/edit";
-import { useContext, useState } from "react";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { setComment } from "core/store/comment/comment.thunks";
 import { getAll } from "core/store/genre/genre.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
+import { CreateComment } from "pages/comment/create";
+import { EditComment } from "pages/comment/edit";
+import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
@@ -27,15 +27,10 @@ export const CommentTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(comment!.id, "comment")
-      .then(() => {
-        Toast.success("Режисер удален");
-        dispatch(getAll());
-        dispatch(setComment());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(comment!.id, "comment").then(() => {
+      dispatch(getAll());
+      dispatch(setComment());
+    });
   };
 
   const close = () => {

@@ -1,8 +1,8 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { createService, Toast } from "core/services/index";
+import { createService } from "core/services/index";
 import { getAll } from "core/store/category/category.thunks";
 import { useAppDispatch } from "core/store/hooks";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -18,7 +18,6 @@ export const CreateCategory: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание жанра`);
     let fileId = undefined;
 
     return createService(
@@ -28,15 +27,10 @@ export const CreateCategory: React.FC<Props> = ({ close }) => {
         byBonus: data.byBonus || false,
       },
       "category"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

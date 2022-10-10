@@ -1,18 +1,13 @@
 import { IDirector } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { directorsAction } from "./director.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "director")
-      .then((res) => {
-        dispatch(setDirectors(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "director").then((res) => {
+      dispatch(setDirectors(res.count, res.data));
+    });
   };
 
 export const setDirectors =
@@ -27,13 +22,9 @@ export const setDirectors =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "director")
-    .then((director) => {
-      dispatch(setDirector(director));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "director").then((director) => {
+    dispatch(setDirector(director));
+  });
 };
 
 export const setDirector =

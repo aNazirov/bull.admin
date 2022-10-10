@@ -1,8 +1,12 @@
-import { CSearchSelect, CTextarea, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { createService, Toast } from "core/services/index";
+import {
+  CSearchSelect,
+  CTextarea,
+  SlideoversFoot,
+} from "core/components/shared";
+import { createService } from "core/services/index";
 import { getAll } from "core/store/comment/comment.thunks";
 import { useAppDispatch } from "core/store/hooks";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -18,17 +22,10 @@ export const CreateComment: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание комментария`);
-
-    return createService(data, "comment")
-      .then(({ title }) => {
-        Toast.success(`Комментарий создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return createService(data, "comment").then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

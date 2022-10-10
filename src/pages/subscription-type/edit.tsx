@@ -1,6 +1,6 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
-import { fileDelete, filesUpload, Toast, updateService } from "core/services";
+import { fileDelete, filesUpload, updateService } from "core/services";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll } from "core/store/subscription-type/subscription-type.thunks";
 import { formatData, imageUpload } from "core/utils";
@@ -33,8 +33,6 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Идет обновление`);
-
     let posterId = undefined;
 
     if (avatar) {
@@ -45,25 +43,17 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
       subscriptionType!.id,
       { ...data, posterId },
       "subscription-type"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} обновлен`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   const deleteFile = (id: number) => {
     setLoading(true);
-    return fileDelete(id)
-      .then(() => {
-        Toast.success("Файл удален");
-        setLoading(false);
-      })
-      .catch((e) => Toast.error(e));
+    return fileDelete(id).then(() => {
+      setLoading(false);
+    });
   };
 
   return (

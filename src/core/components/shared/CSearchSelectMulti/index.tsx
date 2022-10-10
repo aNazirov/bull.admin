@@ -1,9 +1,9 @@
+import { autoComplite } from "core/services";
+import { meiliRange } from "core/utils";
 import { useEffect, useState } from "react";
 import { Control, useController } from "react-hook-form";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import { autoComplite } from "core/services";
-import { meiliRange, Toast } from "core/utils";
 import { useDebounce } from "../CSearchSelect";
 import { SceletonForInput } from "../Sceleton";
 
@@ -68,42 +68,38 @@ const SearchSelect: React.FC<Props> = ({
 
   useEffect(() => {
     if (debouncedValue) {
-      autoComplite({ index, search: query, filter })
-        .then(({ hits, query }) => {
-          hits = hits.map((hit: any) => meiliRange(hit, query));
-          setItems(
-            hits
-              .filter((item: any) => {
-                if (item?.name) {
-                  return {
-                    value: item.id,
-                    label: item.name
-                      .toLowerCase()
-                      .includes(query.toLowerCase()),
-                  };
-                }
-
+      autoComplite({ index, search: query, filter }).then(({ hits, query }) => {
+        hits = hits.map((hit: any) => meiliRange(hit, query));
+        setItems(
+          hits
+            .filter((item: any) => {
+              if (item?.name) {
                 return {
                   value: item.id,
-                  label: item.title.toLowerCase().includes(query.toLowerCase()),
+                  label: item.name.toLowerCase().includes(query.toLowerCase()),
                 };
-              })
-              .map((item: any) => {
-                if (item?.name) {
-                  return {
-                    value: item.id,
-                    label: item.name,
-                  };
-                }
+              }
 
+              return {
+                value: item.id,
+                label: item.title.toLowerCase().includes(query.toLowerCase()),
+              };
+            })
+            .map((item: any) => {
+              if (item?.name) {
                 return {
                   value: item.id,
-                  label: item.title,
+                  label: item.name,
                 };
-              })
-          );
-        })
-        .catch((e) => Toast.error(e));
+              }
+
+              return {
+                value: item.id,
+                label: item.title,
+              };
+            })
+        );
+      });
     }
   }, [debouncedValue]);
 

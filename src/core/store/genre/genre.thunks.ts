@@ -1,18 +1,13 @@
 import { IGenre } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
-import { Toast } from "core/utils/index";
 import { genresAction } from "./genre.slices";
 
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "genre")
-      .then((res) => {
-        dispatch(setGenres(res.count, res.data));
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    return getAllService(skip, params, "genre").then((res) => {
+      dispatch(setGenres(res.count, res.data));
+    });
   };
 
 export const setGenres =
@@ -27,13 +22,9 @@ export const setGenres =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "genre")
-    .then((genre) => {
-      dispatch(setGenre(genre));
-    })
-    .catch((e) => {
-      Toast.error(e);
-    });
+  return getOneService(id, "genre").then((genre) => {
+    dispatch(setGenre(genre));
+  });
 };
 
 export const setGenre =

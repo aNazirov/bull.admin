@@ -1,7 +1,7 @@
 import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
-import { removeService, Toast } from "core/services/global.service";
+import { removeService } from "core/services/global.service";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import {
   getAll,
@@ -31,15 +31,10 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(subscriptionType!.id, "subscription-type")
-      .then(() => {
-        Toast.success("Тип подписки удален");
-        dispatch(getAll());
-        dispatch(setSubscriptionType());
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    removeService(subscriptionType!.id, "subscription-type").then(() => {
+      dispatch(getAll());
+      dispatch(setSubscriptionType());
+    });
   };
 
   const close = () => {
@@ -56,7 +51,7 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
               {x.title}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">

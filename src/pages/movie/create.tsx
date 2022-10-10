@@ -1,12 +1,12 @@
 import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { createService, filesUpload, Toast } from "core/services/index";
+import { createService, filesUpload } from "core/services/index";
 import { useAppDispatch } from "core/store/hooks";
 import { getAll } from "core/store/movie/movie.thunks";
 import { formatData, imageUpload } from "core/utils";
 import { defaultImage } from "core/_data/datas";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -28,8 +28,6 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Создание фильм`);
-
     let posterId = undefined;
 
     if (avatar) {
@@ -52,15 +50,10 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
         bySubscription: data["bySubscription"] || false,
       },
       "movie"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (

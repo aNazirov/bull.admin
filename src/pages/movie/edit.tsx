@@ -1,13 +1,13 @@
 import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
-import { fileDelete, filesUpload, Toast, updateService } from "core/services/index";
+import { fileDelete, filesUpload, updateService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll, setMovie } from "core/store/movie/movie.thunks";
 import { formatData, imageUpload } from "core/utils";
 import { defaultImage } from "core/_data/datas";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 
 interface Props {
   close: () => void;
@@ -40,8 +40,6 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    Toast.info(`Обновление фильма`);
-
     let posterId = undefined;
 
     if (avatar) {
@@ -65,30 +63,21 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
         bySubscription: data["bySubscription"] || false,
       },
       "movie"
-    )
-      .then((movie) => {
-        Toast.success(`${movie.title} обновлен`);
-
-        if (pathname === "/movies") {
-          dispatch(getAll());
-        } else {
-          dispatch(setMovie(movie));
-        }
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then((movie) => {
+      if (pathname === "/movies") {
+        dispatch(getAll());
+      } else {
+        dispatch(setMovie(movie));
+      }
+      close();
+    });
   };
 
   const deleteFile = (id: number) => {
     setLoading(true);
-    return fileDelete(id)
-      .then(() => {
-        Toast.success("Файл удален");
-        setLoading(false);
-      })
-      .catch((e) => Toast.error(e));
+    return fileDelete(id).then(() => {
+      setLoading(false);
+    });
   };
 
   return (

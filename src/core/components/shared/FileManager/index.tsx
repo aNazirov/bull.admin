@@ -1,6 +1,5 @@
 import { MinusIcon } from "@heroicons/react/solid";
 import { IEpisode } from "core/interfaces";
-import { useEffect, useState } from "react";
 import {
   createService,
   filesUpload,
@@ -11,7 +10,8 @@ import {
 } from "core/services";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getOne } from "core/store/movie/movie.thunks";
-import { classNames, formatData, Toast } from "core/utils";
+import { classNames, formatData } from "core/utils";
+import { useEffect, useState } from "react";
 import { CDropzone } from "../CDropzone";
 import { Spinner } from "../Loader";
 
@@ -47,44 +47,33 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
     return createService(
       { movieId: movie!.id, season: movie!.seasons!.length + 1 },
       "season"
-    )
-      .then(() => dispatch(getOne(movie!.id)))
-      .catch((e) => Toast.error(e));
+    ).then(() => dispatch(getOne(movie!.id)));
   };
 
   const removeSeason = (id: number) => () => {
-    removeService(id, "season")
-      .then(() => {
-        dispatch(getOne(movie!.id));
-        Toast.success("Успешно удален");
-      })
-      .catch((e) => Toast.error(e));
+    removeService(id, "season").then(() => {
+      dispatch(getOne(movie!.id));
+    });
   };
 
   const episodeUpdate = (id: number, episode: number) => {
     if (id && episode) {
-      updateEpisode(id, { episode })
-        .then((episode) => {
-          const _episodes = episodes.map((x) => {
-            if (x.id === episode.id) return episode;
-            return x;
-          });
+      updateEpisode(id, { episode }).then((episode) => {
+        const _episodes = episodes.map((x) => {
+          if (x.id === episode.id) return episode;
+          return x;
+        });
 
-          setEpisodes(_episodes);
-          Toast.success("Успешно обновлен");
-        })
-        .catch((e) => Toast.error(e));
+        setEpisodes(_episodes);
+      });
     }
   };
 
   const episodeRemove = (id: number) => () => {
-    removeEpisode(id)
-      .then(() => {
-        const _episodes = episodes.filter((x) => x.id !== id);
-        setEpisodes(_episodes);
-        Toast.success("Успешно обновлен");
-      })
-      .catch((e) => Toast.error(e));
+    removeEpisode(id).then(() => {
+      const _episodes = episodes.filter((x) => x.id !== id);
+      setEpisodes(_episodes);
+    });
   };
 
   return (
@@ -190,17 +179,13 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
     file?: File
   ) => {
     if (file) {
-      Toast.info(`Загрузка файла на сервер`);
       setLoading(true);
       const fileId = (await filesUpload(formatData({ files: [file] })))[0].id;
 
       if (typeof fileId === "number") {
-        await updateMovieFile(movie!.id, { [type]: fileId })
-          .then(() => {
-            Toast.success("Загрузка завершена");
-            dispatch(getOne(movie!.id));
-          })
-          .catch((e) => Toast.error(e));
+        await updateMovieFile(movie!.id, { [type]: fileId }).then(() => {
+          dispatch(getOne(movie!.id));
+        });
       }
 
       setLoading(false);
@@ -251,8 +236,6 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
             >
               {!movie?.file?.cd ? "Загрузить" : "Перезагрузить"}
             </label>
-
-            {loading && <Spinner size={8} />}
           </div>
 
           <div className="flex gap-3">

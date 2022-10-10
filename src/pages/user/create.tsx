@@ -1,9 +1,9 @@
 import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
-import { useForm } from "react-hook-form";
-import { createService, Toast } from "core/services/index";
-import { getAll } from "core/store/user/user.thunks";
+import { createService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getAll } from "core/store/user/user.thunks";
 import { RoleType } from "core/utils/enums";
+import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
@@ -26,22 +26,15 @@ export const CreateUser: React.FC<Props> = ({ close }) => {
   ];
 
   const submit = async (data: any) => {
-    Toast.info(`Создание пользователя`);
-
     return createService(
       {
         ...data,
       },
       "user"
-    )
-      .then(({ title }) => {
-        Toast.success(`${title} создан`);
-        dispatch(getAll());
-        close();
-      })
-      .catch((e) => {
-        Toast.error(e);
-      });
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (
