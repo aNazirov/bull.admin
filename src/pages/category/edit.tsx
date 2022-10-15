@@ -19,12 +19,14 @@ export const EditCategory: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    return updateService(category!.id, { ...data }, "category").then(
-      ({ title }) => {
-        dispatch(getAll());
-        close();
-      }
-    );
+    return updateService(
+      category!.id,
+      { ...data, addToMenu: data["addToMenu"] || false },
+      "category"
+    ).then(({ title }) => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (
@@ -53,6 +55,21 @@ export const EditCategory: React.FC<Props> = ({ close }) => {
             defaultValue={category?.slug}
             control={control}
             error={errors["slug"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="addToMenu"
+            required={false}
+            control={control}
+            defaultValue={category?.addToMenu}
+            title="Добавить в меню"
+            type="checkbox"
+            className=" "
+            error={errors["addToMenu"]}
           />
         </div>
       </div>

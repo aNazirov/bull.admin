@@ -60,6 +60,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
         treilerId,
         isNew: data["isNew"] || false,
         isSerial: data["isSerial"] || false,
+        isPremier: data["isPremier"] || false,
         bySubscription: data["bySubscription"] || false,
       },
       "movie"
@@ -376,6 +377,19 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             type="checkbox"
             className=" "
             error={errors["isNew"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
+            name="isPremier"
+            required={false}
+            control={control}
+            defaultValue={movie?.isPremier}
+            title="Премьера"
+            type="checkbox"
+            className=" "
+            error={errors["isPremier"]}
           />
         </div>
 

@@ -55,6 +55,7 @@ export interface ICategory {
   id: number;
   title: string;
   slug: string;
+  addToMenu?: boolean;
   movies?: IMovie[];
   createdAt: string;
 }
@@ -101,6 +102,7 @@ export interface IMovie {
   poster?: IFile;
   description?: string;
   isNew?: boolean;
+  isPremier?: boolean;
   isSerial?: boolean;
   bySubscription?: boolean;
   imdb?: number;

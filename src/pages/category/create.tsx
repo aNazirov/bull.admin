@@ -18,13 +18,10 @@ export const CreateCategory: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
-    let fileId = undefined;
-
     return createService(
       {
         ...data,
-        fileId,
-        byBonus: data.byBonus || false,
+        addToMenu: data["addToMenu"] || false,
       },
       "category"
     ).then(({ title }) => {
@@ -57,6 +54,20 @@ export const CreateCategory: React.FC<Props> = ({ close }) => {
             placeholder="Slug"
             control={control}
             error={errors["slug"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="addToMenu"
+            required={false}
+            control={control}
+            title="Добавить в меню"
+            type="checkbox"
+            className=" "
+            error={errors["addToMenu"]}
           />
         </div>
       </div>
