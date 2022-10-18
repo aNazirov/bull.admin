@@ -58,6 +58,7 @@ export const ActerTbody: React.FC<Props> = ({ path }) => {
                       : defaultAvatar
                   }
                   alt={x.avatar?.name}
+                  crossOrigin={'use-credentials'}
                 />
               </span>
             </td>

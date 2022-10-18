@@ -58,6 +58,7 @@ export const DirectorTbody: React.FC<Props> = ({ path }) => {
                       : defaultAvatar
                   }
                   alt={x.avatar?.name}
+                  crossOrigin={'use-credentials'}
                 />
               </div>
             </td>

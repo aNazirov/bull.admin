@@ -89,6 +89,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             src={preview}
             alt="preview"
             className="h-full w-full object-cover"
+            crossOrigin={'use-credentials'}
           />
         </div>
         <div className="flex gap-3 mt-1">

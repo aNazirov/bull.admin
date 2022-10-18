@@ -58,6 +58,7 @@ export const ProducerTbody: React.FC<Props> = ({ path }) => {
                       : defaultAvatar
                   }
                   alt={x.avatar?.name}
+                  crossOrigin={'use-credentials'}
                 />
               </div>
             </td>

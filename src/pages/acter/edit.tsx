@@ -63,6 +63,7 @@ export const EditActer: React.FC<Props> = ({ close }) => {
             src={preview}
             alt="preview"
             className="h-full w-full object-cover"
+            crossOrigin={'use-credentials'}
           />
         </span>
         <div>

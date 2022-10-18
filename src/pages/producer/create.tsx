@@ -54,6 +54,7 @@ export const CreateProducer: React.FC<Props> = ({ close }) => {
             src={preview || defaultAvatar}
             alt="preview"
             className="h-full w-full object-cover"
+            crossOrigin={'use-credentials'}
           />
         </span>
         <div>
