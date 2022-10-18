@@ -277,6 +277,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             <video
               src={treilerPreview}
               className="h-full w-full object-cover"
+              crossOrigin={'use-credentials'}
               controls
             />
           </div>

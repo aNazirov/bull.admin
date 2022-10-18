@@ -123,6 +123,7 @@ export const Seasons: React.FC<Props> = ({ cols = 4 }) => {
                 src={episode.file.url}
                 preload="none"
                 className="h-36 w-full object-cover rounded-sm bg-gray-400"
+                crossOrigin={'use-credentials'}
                 controls
               />
 
@@ -219,6 +220,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={movie?.file?.cd ? movie.file.cd?.url : ""}
             preload="metadata"
+            crossOrigin={'use-credentials'}
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
           />
@@ -257,6 +259,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={movie?.file?.hd ? movie.file.hd?.url : ""}
             preload="metadata"
+            crossOrigin={'use-credentials'}
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
           />
@@ -297,6 +300,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={movie?.file?.fullHD ? movie.file.fullHD?.url : ""}
             preload="metadata"
+            crossOrigin={'use-credentials'}
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
           />
@@ -337,6 +341,7 @@ export const FileManager: React.FC<Props> = ({ cols = 4 }) => {
           <video
             src={movie?.file?.uHD ? movie.file.uHD?.url : ""}
             preload="metadata"
+            crossOrigin={'use-credentials'}
             className="h-36 w-full object-cover rounded-sm bg-gray-400"
             controls
           />
