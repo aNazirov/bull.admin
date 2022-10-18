@@ -198,7 +198,7 @@ class ToastClass {
       error: {
         render({ data }) {
           let message =
-            data.response?.data.message || data.message || "Server Side Error";
+            data.response?.data?.message || data.message || "Server Side Error";
 
           if (data.response?.data instanceof Blob) {
             const fr = new FileReader();
