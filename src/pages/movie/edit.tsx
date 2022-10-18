@@ -24,17 +24,13 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
 
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
-    movie?.poster
-      ? `${process.env.REACT_APP_API_HOST}${movie.poster?.url}`
-      : defaultImage
+    movie?.poster ? movie.poster?.url : defaultImage
   );
   const [loading, setLoading] = useState(false);
 
   const [treiler, setTreiler] = useState<File | null>(null);
   const [treilerPreview, setTreilerPreview] = useState(
-    movie?.treiler
-      ? `${process.env.REACT_APP_API_HOST}${movie.treiler?.url}`
-      : undefined
+    movie?.treiler ? movie.treiler?.url : undefined
   );
 
   const dispatch = useAppDispatch();
@@ -373,6 +369,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             defaultValue={movie?.isNew}
+            defaultChecked={movie?.isNew}
             title="Новинка"
             type="checkbox"
             className=" "
@@ -386,6 +383,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             defaultValue={movie?.isPremier}
+            defaultChecked={movie?.isPremier}
             title="Премьера"
             type="checkbox"
             className=" "
@@ -399,6 +397,7 @@ export const EditMovie: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             defaultValue={movie?.bySubscription}
+            defaultChecked={movie?.bySubscription}
             title="По подписке"
             type="checkbox"
             className=" "

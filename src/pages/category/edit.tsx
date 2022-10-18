@@ -66,6 +66,7 @@ export const EditCategory: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             defaultValue={category?.addToMenu}
+            defaultChecked={category?.addToMenu}
             title="Добавить в меню"
             type="checkbox"
             className=" "

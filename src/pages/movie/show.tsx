@@ -7,12 +7,12 @@ import {
 import { PageHead } from "core/components/pages/head";
 import { SceletonForPage } from "core/components/shared";
 import { FileManager, Seasons } from "core/components/shared/FileManager";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getOne, setMovie } from "core/store/movie/movie.thunks";
 import { classNames } from "core/utils";
 import { RoleType } from "core/utils/enums";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { EditMovie } from "./edit";
 
 interface Props {}
@@ -186,10 +186,7 @@ export const ShowMovie: React.FC<Props> = () => {
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
                     {movie.treiler ? (
-                      <a
-                        href={`${process.env.REACT_APP_API_HOST}${movie.treiler?.url}`}
-                        download
-                      >
+                      <a href={movie.treiler?.url} download>
                         Скачать
                       </a>
                     ) : (

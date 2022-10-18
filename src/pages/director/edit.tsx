@@ -22,7 +22,7 @@ export const EditDirector: React.FC<Props> = ({ close }) => {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
     director?.avatar
-      ? `${process.env.REACT_APP_API_HOST}${director.avatar?.url}`
+      ? director.avatar?.url
       : defaultAvatar
   );
   const [loadingPhoto, setLoadingPhoto] = useState(false);

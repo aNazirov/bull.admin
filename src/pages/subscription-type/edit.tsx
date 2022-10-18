@@ -25,7 +25,7 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
   const [avatar, setAvatar] = useState<File | null>(null);
   const [preview, setPreview] = useState(
     subscriptionType?.poster
-      ? `${process.env.REACT_APP_API_HOST}${subscriptionType.poster?.url}`
+      ? subscriptionType.poster?.url
       : defaultImage
   );
   const [loading, setLoading] = useState(false);
