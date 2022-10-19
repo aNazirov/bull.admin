@@ -62,6 +62,18 @@ export const EditCategory: React.FC<Props> = ({ close }) => {
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
+            name="significance"
+            required={false}
+            control={control}
+            defaultValue={category?.significance}
+            title="Значимость"
+            type="number"
+            error={errors["significance"]}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
             name="addToMenu"
             required={false}
             control={control}

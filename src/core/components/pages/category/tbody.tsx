@@ -52,6 +52,9 @@ export const CategoryTbody: React.FC<Props> = ({ path }) => {
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
               {x.slug}
             </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+              {x.significance}
+            </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
                 {access && (

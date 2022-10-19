@@ -55,6 +55,7 @@ export interface ICategory {
   id: number;
   title: string;
   slug: string;
+  significance: boolean,
   addToMenu?: boolean;
   movies?: IMovie[];
   createdAt: string;

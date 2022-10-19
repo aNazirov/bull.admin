@@ -95,7 +95,12 @@ export const sidebarNavigation = [
 ];
 
 export const GenreTableNames = ["Название", "Slug", THead.edit];
-export const CategoryTableNames = ["Название", "Slug", THead.edit];
+export const CategoryTableNames = [
+  "Название",
+  "Slug",
+  "Значимость",
+  THead.edit,
+];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
 export const MovieTableNames = [
