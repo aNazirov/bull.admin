@@ -11,3 +11,5 @@ export * from "./MConfirm";
 export * from "./Private";
 export * from "./Sceleton";
 export * from "./Slideovers";
+export * from "./Photo";
+

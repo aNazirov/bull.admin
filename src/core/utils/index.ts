@@ -1,4 +1,5 @@
 import { AxiosError } from "axios";
+import { Dispatch, SetStateAction } from "react";
 import { Id, toast, TypeOptions } from "react-toastify";
 
 export * as Enums from "./enums";
@@ -106,7 +107,10 @@ export const formatData = (formdata: any) => {
 };
 
 export const imageUpload =
-  (setPreview: (preview: any) => void, setFile: (file: File) => void) =>
+  (
+    setPreview: Dispatch<SetStateAction<string>>,
+    setFile: Dispatch<SetStateAction<File | null>>
+  ) =>
   (e: any) => {
     const file = e.target.files[0];
     setFile(file);
@@ -114,8 +118,11 @@ export const imageUpload =
     const reader = new FileReader();
 
     reader.onload = () => {
-      setPreview(reader.result);
+      if (typeof reader.result === "string") {
+        setPreview(reader.result);
+      }
     };
+
     reader.readAsDataURL(file);
   };
 

@@ -1,10 +1,14 @@
-import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
+import {
+  CInput,
+  CTextarea,
+  Photo,
+  SlideoversFoot,
+} from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
-import { fileDelete, filesUpload, updateService } from "core/services";
+import { filesUpload, updateService } from "core/services";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll } from "core/store/subscription-type/subscription-type.thunks";
-import { formatData, imageUpload } from "core/utils";
-import { defaultImage } from "core/_data/datas";
+import { formatData } from "core/utils";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -22,21 +26,15 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
     (state) => state.subscriptionTypes
   );
 
-  const [avatar, setAvatar] = useState<File | null>(null);
-  const [preview, setPreview] = useState(
-    subscriptionType?.poster
-      ? subscriptionType.poster?.url
-      : defaultImage
-  );
-  const [loading, setLoading] = useState(false);
+  const [poster, setPoster] = useState<File | null>(null);
 
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
     let posterId = undefined;
 
-    if (avatar) {
-      posterId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
+    if (poster) {
+      posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
     }
 
     return updateService(
@@ -49,13 +47,6 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
     });
   };
 
-  const deleteFile = (id: number) => {
-    setLoading(true);
-    return fileDelete(id).then(() => {
-      setLoading(false);
-    });
-  };
-
   return (
     <form
       onSubmit={handleSubmit(submit)}
@@ -63,43 +54,12 @@ export const EditSubscriptionType: React.FC<Props> = ({ close }) => {
       autoComplete="off"
     >
       <div className="mt-1">
-        <div className="h-36 object-cover w-full rounded-sm overflow-hidden bg-gray-100">
-          <img
-            src={preview}
-            alt="preview"
-            className="h-full w-full object-cover"
-            crossOrigin={'use-credentials'}
-          />
-        </div>
-        <div className="flex gap-3 mt-1">
-          <label
-            htmlFor="upload-poster"
-            className=" bg-white py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Загрузить
-          </label>
-          <button
-            type="button"
-            className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            onClick={() => {
-              setPreview(defaultImage);
-              setAvatar(null);
-              subscriptionType?.poster &&
-                deleteFile(subscriptionType?.poster?.id);
-            }}
-            disabled={loading}
-          >
-            Удалить
-          </button>
-          <input
-            id="upload-poster"
-            type="file"
-            accept="image/*"
-            className="w-0"
-            disabled={loading}
-            onChange={imageUpload(setPreview, setAvatar)}
-          />
-        </div>
+        <Photo
+          title="Аватар"
+          setFile={setPoster}
+          previewId={subscriptionType?.poster?.id}
+          previewUrl={subscriptionType?.poster?.url}
+        />
       </div>
 
       <div className="w-full mt-3">

@@ -1,10 +1,14 @@
-import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
+import {
+  CInput,
+  CTextarea,
+  Photo,
+  SlideoversFoot,
+} from "core/components/shared";
 import { CSearchSelectMulti } from "core/components/shared/CSearchSelectMulti";
 import { createService, filesUpload } from "core/services/index";
 import { useAppDispatch } from "core/store/hooks";
 import { getAll } from "core/store/movie/movie.thunks";
 import { formatData, imageUpload } from "core/utils";
-import { defaultImage } from "core/_data/datas";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -19,24 +23,30 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
     control,
   } = useForm();
 
-  const [avatar, setAvatar] = useState<File | null>(null);
-  const [preview, setPreview] = useState(undefined);
+  const [poster, setPoster] = useState<File | null>(null);
+  const [posterForPremier, setPosterForPremier] = useState<File | null>(null);
 
   const [treiler, setTreiler] = useState<File | null>(null);
-  const [treilerPreview, setTreilerPreview] = useState(undefined);
+  const [treilerPreview, setTreilerPreview] = useState("");
 
   const dispatch = useAppDispatch();
 
   const submit = async (data: any) => {
     let posterId = undefined;
-
-    if (avatar) {
-      posterId = (await filesUpload(formatData({ files: [avatar] })))[0].id;
-    }
-
+    let posterForPremierId = undefined;
     let treilerId = undefined;
 
-    if (avatar) {
+    if (poster) {
+      posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
+    }
+
+    if (posterForPremier) {
+      posterForPremierId = (
+        await filesUpload(formatData({ files: [posterForPremier] }))
+      )[0].id;
+    }
+
+    if (poster) {
       treilerId = (await filesUpload(formatData({ files: [treiler] })))[0].id;
     }
 
@@ -44,6 +54,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
       {
         ...data,
         posterId,
+        posterForPremierId,
         treilerId,
         isNew: data["isNew"] || false,
         isSerial: data["isSerial"] || false,
@@ -51,7 +62,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
         bySubscription: data["bySubscription"] || false,
       },
       "movie"
-    ).then(({ title }) => {
+    ).then(() => {
       dispatch(getAll());
       close();
     });
@@ -63,40 +74,13 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
       className="h-full flex flex-col"
       autoComplete="off"
     >
-      <div className="mt-1">
-        <div className="h-36 object-cover w-full rounded-sm overflow-hidden bg-gray-100">
-          <img
-            src={preview || defaultImage}
-            alt="preview"
-            className="h-full w-full object-cover"
-            crossOrigin={'use-credentials'}
-          />
+      <div className="flex gap-3 justify-between">
+        <div className="mt-1 w-full">
+          <Photo title="Постер" setFile={setPoster} />
         </div>
-        <div className="flex gap-3 mt-1">
-          <label
-            htmlFor="upload-image"
-            className=" bg-white py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            Загрузить
-          </label>
-          <button
-            type="button"
-            className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-            onClick={() => {
-              setPreview(undefined);
-              setAvatar(null);
-            }}
-            disabled={false}
-          >
-            Удалить
-          </button>
-          <input
-            id="upload-image"
-            type="file"
-            accept="image/*"
-            className="w-0"
-            onChange={imageUpload(setPreview, setAvatar)}
-          />
+
+        <div className="mt-1 w-full">
+          <Photo title="Постер для слайдера" setFile={setPosterForPremier} />
         </div>
       </div>
 
@@ -277,7 +261,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             <video
               src={treilerPreview}
               className="h-full w-full object-cover"
-              crossOrigin={'use-credentials'}
+              crossOrigin={"use-credentials"}
               controls
             />
           </div>
@@ -296,7 +280,7 @@ export const CreateMovie: React.FC<Props> = ({ close }) => {
             type="button"
             className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
             onClick={() => {
-              setTreilerPreview(undefined);
+              setTreilerPreview("");
               setTreiler(null);
             }}
           >
