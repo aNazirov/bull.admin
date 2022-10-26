@@ -32,7 +32,7 @@ export const Categories: React.FC<Props> = () => {
   const { count } = useAppSelector((state) => state.categories);
 
   const getMore = (skip: number) => {
-    dispatch(getAll(skip, filter.current));
+    return dispatch(getAll(skip, filter.current));
   };
 
   return (

@@ -24,10 +24,10 @@ export const Movies: React.FC<Props> = () => {
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.acters);
+  const { count } = useAppSelector((state) => state.movies);
 
   const getMore = (skip: number) => {
-    dispatch(getAll(skip, filter.current));
+    return dispatch(getAll(skip, filter.current));
   };
 
   return (

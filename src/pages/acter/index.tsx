@@ -2,11 +2,11 @@ import { FilterIcon } from "@heroicons/react/solid";
 import { ActerTbody } from "core/components/pages/acter";
 import { Table } from "core/components/pages/table";
 import { CInput } from "core/components/shared";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { getAll, setActer, setActers } from "core/store/acter/acter.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { ActerTableNames } from "core/_data/titles";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {}
 
@@ -28,7 +28,7 @@ export const Acters: React.FC<Props> = () => {
   const { count } = useAppSelector((state) => state.acters);
 
   const getMore = (skip: number) => {
-    dispatch(getAll(skip, filter.current));
+    return dispatch(getAll(skip, filter.current));
   };
 
   return (
