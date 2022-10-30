@@ -2,8 +2,8 @@ version: "3.7"
 
 services:
   admin:
-    container_name: crm_admin
-    image: crm_admin
+    container_name: sunnyart_admin
+    image: sunnyart_admin
     build: .
     ports:
-      - 3003:90
+      - 3000:80

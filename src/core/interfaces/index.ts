@@ -20,7 +20,7 @@ export interface IType {
 }
 
 export interface ILogin {
-  phone: string;
+  email: string;
   password: string;
 }
 
@@ -33,7 +33,7 @@ export interface IAutoComplete {
 export interface IUser {
   id: number;
   name: string;
-  phone?: string;
+  email?: string;
   role?: IRole;
 }
 
