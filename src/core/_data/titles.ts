@@ -76,7 +76,7 @@ export const GenreTableNames = ["Название", "Slug", THead.edit];
 export const CategoryTableNames = ["Название", THead.edit];
 
 export const MaterialTableNames = ["Название", THead.edit];
-export const BannerTableNames = ["Название", THead.edit];
+export const BannerTableNames = ["Название", "Активный", THead.edit];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
 export const LessonTableNames = [

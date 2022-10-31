@@ -131,6 +131,8 @@ export const pageSwitch = (path: string[]) => {
       return "Категории";
     case "materials":
       return "Материалы";
+    case "banners":
+      return "Баннеры";
     case "users":
       return "Пользователи";
     case "lessons":

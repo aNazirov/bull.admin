@@ -56,8 +56,9 @@ export interface IMaterial {
 export interface IBanner {
   id: number;
   title: ITranslate;
-  descripiton: ITranslate;
+  description: ITranslate;
   poster: IFile;
+  active: boolean;
 }
 
 export interface ISubscriptionType {

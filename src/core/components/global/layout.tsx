@@ -3,6 +3,7 @@ import Sidebar from "core/components/global/sidebar";
 import { PrivateRoute } from "core/components/shared";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
+import { Banners } from "pages/banner";
 import { Categories } from "pages/category";
 import { Lessons } from "pages/lesson";
 import { ShowLesson } from "pages/lesson/show";
@@ -49,6 +50,15 @@ export const Layout: React.FC = () => {
                     element={
                       <PrivateRoute operation={[RoleType.Admin]}>
                         <Materials />
+                      </PrivateRoute>
+                    }
+                  />
+
+                  <Route
+                    path="/banners"
+                    element={
+                      <PrivateRoute operation={[RoleType.Admin]}>
+                        <Banners />
                       </PrivateRoute>
                     }
                   />

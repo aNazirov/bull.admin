@@ -1,9 +1,14 @@
-import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
+import {
+  ArchiveIcon,
+  CheckIcon,
+  MinusIcon,
+  PencilIcon,
+} from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
 import { removeService } from "core/services/global.service";
-import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll, setBanner } from "core/store/banner/banner.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
@@ -48,6 +53,13 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.title.ru}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+              {x.active ? (
+                <CheckIcon className="h-6 w-6" />
+              ) : (
+                <MinusIcon className="h-6 w-6" />
+              )}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>

@@ -19,6 +19,7 @@ interface Props {
 type FormData = {
   title: ITranslate;
   description: ITranslate;
+  active: boolean;
 };
 
 export const EditBanner: React.FC<Props> = ({ close }) => {
@@ -36,16 +37,20 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
   const submit = async (data: FormData) => {
     let posterId = undefined;
 
-    if (!banner?.id && !poster) return Toast.warning("Загрузите постер");
+    if (!banner?.poster.id && !poster) return Toast.warning("Загрузите постер");
 
-    posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
+    if (poster) {
+      posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
+    }
 
-    return updateService(banner!.id, { ...data, posterId }, "banner").then(
-      () => {
-        dispatch(getAll());
-        close();
-      }
-    );
+    return updateService(
+      banner!.id,
+      { ...data, posterId, active: data["active"] || false },
+      "banner"
+    ).then(() => {
+      dispatch(getAll());
+      close();
+    });
   };
 
   return (
@@ -59,8 +64,8 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
           <Photo
             title="Постер"
             setFile={setPoster}
-            previewId={banner?.poster?.id}
-            previewUrl={banner?.poster?.url}
+            previewId={banner?.poster.id}
+            previewUrl={banner?.poster.url}
           />
         </div>
       </div>
@@ -71,6 +76,7 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             name="title.ru"
             title="Название (ru)"
             placeholder="Название (ru)"
+            defaultValue={banner?.title.ru}
             control={control}
             error={errors.title?.ru}
           />
@@ -80,6 +86,7 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             name="title.uz"
             title="Название (uz)"
             placeholder="Название (uz)"
+            defaultValue={banner?.title.uz}
             control={control}
             error={errors.title?.uz}
           />
@@ -92,6 +99,7 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             name="description.ru"
             title="Описание (ru)"
             placeholder="Описание (ru)"
+            defaultValue={banner?.description.ru}
             control={control}
             error={errors.description?.ru}
           />
@@ -101,8 +109,25 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             name="description.uz"
             title="Описание (uz)"
             placeholder="Описание (uz)"
+            defaultValue={banner?.description.uz}
             control={control}
             error={errors.description?.uz}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="active"
+            required={false}
+            control={control}
+            title="Активный"
+            defaultChecked={banner?.active}
+            defaultValue={banner?.active}
+            type="checkbox"
+            className=" "
+            error={errors["active"]}
           />
         </div>
       </div>

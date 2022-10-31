@@ -19,6 +19,7 @@ interface Props {
 type FormData = {
   title: ITranslate;
   description: ITranslate;
+  active: Boolean;
 };
 
 export const CreateBanner: React.FC<Props> = ({ close }) => {
@@ -35,7 +36,7 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
   const submit = async (data: FormData) => {
     let posterId = undefined;
 
-    if (poster) return Toast.warning("Загрузите постер");
+    if (!poster) return Toast.warning("Загрузите постер");
 
     posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
 
@@ -43,6 +44,7 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
       {
         ...data,
         posterId,
+        active: data["active"] || false,
       },
       "banner"
     ).then(() => {
@@ -101,6 +103,20 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
             placeholder="Описание (uz)"
             control={control}
             error={errors.description?.uz}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="active"
+            required={false}
+            control={control}
+            title="Активный"
+            type="checkbox"
+            className=" "
+            error={errors["active"]}
           />
         </div>
       </div>
