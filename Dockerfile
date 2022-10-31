@@ -11,4 +11,4 @@ RUN npm run build
 FROM nginx:1.20.1
 COPY --from=build-step /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-step /usr/src/app/build /usr/share/nginx/html
-EXPOSE 4200:90
+EXPOSE 4200:80
