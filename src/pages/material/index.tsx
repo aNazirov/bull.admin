@@ -4,9 +4,9 @@ import { Table } from "core/components/pages/table";
 import { CInput } from "core/components/shared";
 import {
   getAll,
-  setCategories,
-  setCategory,
-} from "core/store/category/category.thunks";
+  setMaterials,
+  setMaterial,
+} from "core/store/material/material.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { MaterialTableNames } from "core/_data/titles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
@@ -24,12 +24,12 @@ export const Materials: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setCategory());
-      dispatch(setCategories());
+      dispatch(setMaterial());
+      dispatch(setMaterials());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.lessons);
+  const { count } = useAppSelector((state) => state.materials);
 
   const getMore = (skip: number) => {
     return dispatch(getAll(skip, filter.current));
