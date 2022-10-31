@@ -1,5 +1,11 @@
-import { TicketIcon } from "@heroicons/react/outline";
-import { ColorSwatchIcon, FilmIcon, UserIcon } from "@heroicons/react/solid";
+import {
+  AcademicCapIcon,
+  CollectionIcon,
+  ColorSwatchIcon,
+  CreditCardIcon,
+  PhotographIcon,
+  UserIcon,
+} from "@heroicons/react/solid";
 import { RoleType, THead } from "core/utils/enums";
 
 export const navigation = [
@@ -23,23 +29,30 @@ export const userNavigation = [
 
 export const sidebarNavigation = [
   {
-    name: "Lessons",
+    name: "Уроки",
     href: "/lessons",
-    icon: FilmIcon,
+    icon: AcademicCapIcon,
+    permissions: [RoleType.Admin],
+    current: false,
+  },
+  {
+    name: "Баннеры",
+    href: "/banners",
+    icon: PhotographIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
   {
     name: "Подписки",
     href: "/subsctiption-type",
-    icon: TicketIcon,
+    icon: CreditCardIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
   {
     name: "Категории",
     href: "/categories",
-    icon: ColorSwatchIcon,
+    icon: CollectionIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
@@ -63,6 +76,7 @@ export const GenreTableNames = ["Название", "Slug", THead.edit];
 export const CategoryTableNames = ["Название", THead.edit];
 
 export const MaterialTableNames = ["Название", THead.edit];
+export const BannerTableNames = ["Название", THead.edit];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
 export const LessonTableNames = [
@@ -72,6 +86,7 @@ export const LessonTableNames = [
   "Бесплатный",
   THead.edit,
 ];
+
 export const SubscriptionTypeTableNames = [
   "Название",
   "Продолжительность",

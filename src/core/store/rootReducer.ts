@@ -5,6 +5,7 @@ import {
   Reducer,
   StateFromReducersMapObject,
 } from "@reduxjs/toolkit";
+import { bannersReducer } from "./banner/banner.slices";
 import { categoriesReducer } from "./category/category.slices";
 import { globalReducer } from "./global/global.slices";
 import { lessonsReducer } from "./lesson/lesson.slices";
@@ -18,6 +19,7 @@ const State = {
   global: globalReducer,
   categories: categoriesReducer,
   materials: materialsReducer,
+  banners: bannersReducer,
   users: usersReducer,
   lessons: lessonsReducer,
   subscriptionTypes: subscriptionTypesReducer,
