@@ -1,10 +1,9 @@
 import { CInput } from "core/components/shared/CInput";
 import { ILogin } from "core/interfaces";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { loginByPassword } from "core/store/global/global.thunks";
 import { useAppDispatch } from "core/store/hooks";
-import logo from "../../global/logo.png";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export const Login: React.FC = () => {
   const {
@@ -23,9 +22,9 @@ export const Login: React.FC = () => {
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img className="mx-auto h-12 w-auto" src={logo} alt="Workflow" />
+          {/* <img className="mx-auto h-12 w-auto" src={logo} alt="Workflow" /> */}
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Kinouz
+            Sunny Art
           </h2>
         </div>
 
@@ -57,7 +56,7 @@ export const Login: React.FC = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-500 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                 >
                   Войти
                 </button>

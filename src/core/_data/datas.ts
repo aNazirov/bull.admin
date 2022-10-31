@@ -1,3 +1,5 @@
+import { DifficultyLevel, Gender } from "core/utils/enums";
+
 export const defaultAvatar =
   "https://e7.pngegg.com/pngimages/831/88/png-clipart-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design.png";
 
@@ -11,3 +13,16 @@ export const statusStyles = {
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
 };
+
+export const difficultyLevels = [
+  { title: 1, id: DifficultyLevel.first },
+  { title: 2, id: DifficultyLevel.second },
+  { title: 3, id: DifficultyLevel.third },
+  { title: 4, id: DifficultyLevel.fourth },
+  { title: 5, id: DifficultyLevel.fifth },
+];
+
+export const genders = [
+  { title: "Для мальчиков", id: Gender.male },
+  { title: "Для девочек", id: Gender.female },
+];

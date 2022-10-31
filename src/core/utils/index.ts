@@ -5,28 +5,25 @@ import { Id, toast, TypeOptions } from "react-toastify";
 export * as Enums from "./enums";
 
 export function meiliRange(item: any, query: string) {
-  if (item.name) {
-    item.meili = `<div>${item.name.replace(query, `<mark>${query}</mark>`)}${
-      item?.meta ? `<p class="text-gray-500 text-sm">${item?.meta}</p>` : ""
+  const obj = { ...item };
+
+  if (obj.name) {
+    obj.meili = `<div>${obj.name.replace(query, `<mark>${query}</mark>`)}${
+      obj?.meta ? `<p class="text-gray-500 text-sm">${obj?.meta}</p>` : ""
     }<div>`;
   }
 
-  if (item.displayName) {
-    item.meili = `<div>${item.displayName.replace(
-      query,
-      `<mark>${query}</mark>`
-    )}${
-      item?.meta ? `<p class="text-gray-500 text-sm">${item?.meta}</p>` : ""
+  if (obj.title) {
+    if (obj.title instanceof Object) {
+      obj.title = obj.title.ru.match(query) ? obj.title.ru : obj.title.uz;
+    }
+
+    obj.meili = `<div>${obj.title.replace(query, `<mark>${query}</mark>`)}${
+      obj?.meta ? `<p class="text-gray-500 text-sm">${obj?.meta}</p>` : ""
     }<div>`;
   }
 
-  if (item.title) {
-    item.meili = `<div>${item.title.replace(query, `<mark>${query}</mark>`)}${
-      item?.meta ? `<p class="text-gray-500 text-sm">${item?.meta}</p>` : ""
-    }<div>`;
-  }
-
-  return item;
+  return obj;
 }
 
 export const sort = (
@@ -130,22 +127,14 @@ export const pageSwitch = (path: string[]) => {
   const page = path[0];
 
   switch (page) {
-    case "genres":
-      return "Жанры";
-    case "acters":
-      return "Актеры";
     case "categories":
       return "Категории";
-    case "producers":
-      return "Продюсеры";
-    case "directors":
-      return "Режисеры";
+    case "materials":
+      return "Материалы";
     case "users":
       return "Пользователи";
-    case "movies":
-      return "Фильмы";
-    case "comments":
-      return "Комментарии";
+    case "lessons":
+      return "Уроки";
     case "subsctiption-type":
       return "Подписки";
 

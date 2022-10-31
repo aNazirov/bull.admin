@@ -47,13 +47,7 @@ export const CategoryTbody: React.FC<Props> = ({ path }) => {
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.title}
-            </td>
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.slug}
-            </td>
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.significance}
+              {x.title.ru}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -99,7 +93,7 @@ export const CategoryTbody: React.FC<Props> = ({ path }) => {
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: category.id, name: category.title }}
+            data={{ id: category.id, name: category.title.ru }}
           />
         )}
       </PrivateComponent>
@@ -107,7 +101,7 @@ export const CategoryTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={category?.title || "Категория"}
+            title={category?.title.ru || "Тематика"}
             close={close}
             Edit={EditCategory}
             Create={CreateCategory}

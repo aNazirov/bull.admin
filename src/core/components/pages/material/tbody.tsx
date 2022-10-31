@@ -3,25 +3,20 @@ import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
 import { removeService } from "core/services/global.service";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import {
-  getAll,
-  setSubscriptionType,
-} from "core/store/subscription-type/subscription-type.thunks";
+import { getAll, setMaterial } from "core/store/material/material.thunks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
-import { CreateSubscriptionType } from "pages/subscription-type/create";
-import { EditSubscriptionType } from "pages/subscription-type/edit";
+import { CreateMaterial } from "pages/material/create";
+import { EditMaterial } from "pages/material/edit";
 import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
 }
 
-export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
-  const { subscriptionType, subscriptionTypes } = useAppSelector(
-    (state) => state.subscriptionTypes
-  );
+export const MaterialTbody: React.FC<Props> = ({ path }) => {
+  const { material, materials } = useAppSelector((state) => state.materials);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -31,36 +26,28 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(subscriptionType!.id, "subscription-type").then(() => {
+    removeService(material!.id, "material").then(() => {
       dispatch(getAll());
-      dispatch(setSubscriptionType());
+      dispatch(setMaterial());
     });
   };
 
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setSubscriptionType());
+    dispatch(setMaterial());
   };
 
   return (
     <>
       <tbody>
-        {subscriptionTypes.map((x, idx) => (
+        {materials.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.title.ru}
-            </td>
-
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.months}
-            </td>
-
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.price}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -72,7 +59,7 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setSubscriptionType(x));
+                          dispatch(setMaterial(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -85,7 +72,7 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setSubscriptionType(x));
+                          dispatch(setMaterial(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -101,12 +88,12 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {subscriptionType && (
+        {material && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: subscriptionType.id, name: subscriptionType.title.ru }}
+            data={{ id: material.id, name: material.title.ru }}
           />
         )}
       </PrivateComponent>
@@ -114,10 +101,10 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={subscriptionType?.title.ru || "Тип подписки"}
+            title={material?.title.ru || "Материал"}
             close={close}
-            Edit={EditSubscriptionType}
-            Create={CreateSubscriptionType}
+            Edit={EditMaterial}
+            Create={CreateMaterial}
           />
         )}
       </PrivateComponent>

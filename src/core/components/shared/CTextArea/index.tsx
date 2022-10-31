@@ -7,7 +7,7 @@ interface Props extends React.HTMLProps<HTMLTextAreaElement> {
     message?: string;
   };
   className?: string;
-  control: Control;
+  control: Control<any, any>;
   loading?: boolean;
   defaultValue?: any;
 }

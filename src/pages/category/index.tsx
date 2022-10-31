@@ -2,8 +2,6 @@ import { FilterIcon } from "@heroicons/react/solid";
 import { CategoryTbody } from "core/components/pages/category";
 import { Table } from "core/components/pages/table";
 import { CInput } from "core/components/shared";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import {
   getAll,
   setCategories,
@@ -11,6 +9,8 @@ import {
 } from "core/store/category/category.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { CategoryTableNames } from "core/_data/titles";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {}
 
@@ -69,7 +69,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
   const filter = (data: any) => {
     params.current = { ...data };
 
-    dispatch(getAll(0, params)).then(() => {
+    dispatch(getAll(0, params.current)).then(() => {
       setPage(1);
     });
   };
@@ -91,16 +91,6 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
                 error={errors["title"]}
               />
             </div>
-
-            <div className="w-full sm:w-2/12">
-              <CInput
-                name="slug"
-                required={false}
-                control={control}
-                title="Slug"
-                error={errors["slug"]}
-              />
-            </div>
           </div>
 
           <div className="col-span-full mt-2 flex justify-end">
@@ -113,7 +103,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
             </button>
             <button
               type="submit"
-              className="transition duration-300 ease-in-out rounded-3xl inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white bg-orange-500 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="transition duration-300 ease-in-out rounded-3xl inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               disabled={isSubmitting}
             >
               Фильтровать

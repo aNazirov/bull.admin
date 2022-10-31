@@ -3,6 +3,7 @@ import { updateService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll } from "core/store/user/user.thunks";
 import { RoleType } from "core/utils/enums";
+import moment from "moment";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -15,16 +16,10 @@ export const EditUser: React.FC<Props> = ({ close }) => {
     formState: { errors, isSubmitting },
     control,
   } = useForm();
-  const { user: MainUser } = useAppSelector((state) => state.global);
   const { user } = useAppSelector((state) => state.users);
 
   const dispatch = useAppDispatch();
-  const roles = [
-    MainUser?.role?.id === RoleType.Admin
-      ? { id: RoleType.Moderator, title: "Модератор" }
-      : {},
-    { id: RoleType.User, title: "Пользователь" },
-  ];
+  const roles = [{ id: RoleType.User, title: "Пользователь" }];
 
   const submit = async (data: any) => {
     return updateService(user!.id, { ...data }, "user").then(({ name }) => {
@@ -68,20 +63,23 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             title="Баланс"
             placeholder="Баланс"
             defaultValue={user?.balance}
+            required={false}
             type="number"
             control={control}
             error={errors["balance"]}
           />
         </div>
+
         <div className="w-full">
           <CInput
-            name="ageRemark"
-            title="Возрастное ограничение"
+            name="activeBefore"
+            title="Оплачен до"
+            placeholder="yyyy-mm-dd"
             required={false}
-            defaultValue={user?.ageRemark}
-            type="number"
+            defaultValue={moment(user?.activeBefore).format("YYYY-MM-DD")}
+            type="date"
             control={control}
-            error={errors["ageRemark"]}
+            error={errors["activeBefore"]}
           />
         </div>
       </div>

@@ -1,12 +1,5 @@
 import { TicketIcon } from "@heroicons/react/outline";
-import {
-  ChatAltIcon,
-  ColorSwatchIcon,
-  FilmIcon,
-  SwitchHorizontalIcon,
-  UserCircleIcon,
-  UserIcon,
-} from "@heroicons/react/solid";
+import { ColorSwatchIcon, FilmIcon, UserIcon } from "@heroicons/react/solid";
 import { RoleType, THead } from "core/utils/enums";
 
 export const navigation = [
@@ -30,96 +23,58 @@ export const userNavigation = [
 
 export const sidebarNavigation = [
   {
-    name: "Фильмы",
-    href: "/movies",
+    name: "Lessons",
+    href: "/lessons",
     icon: FilmIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
+    permissions: [RoleType.Admin],
     current: false,
   },
   {
     name: "Подписки",
     href: "/subsctiption-type",
     icon: TicketIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Комментарии",
-    href: "/comments",
-    icon: ChatAltIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Жанры",
-    href: "/genres",
-    icon: SwitchHorizontalIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Актеры",
-    href: "/acters",
-    icon: UserIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Продюсеры",
-    href: "/producers",
-    icon: UserCircleIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
-    current: false,
-  },
-  {
-    name: "Режисеры",
-    href: "/directors",
-    icon: UserCircleIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
+    permissions: [RoleType.Admin],
     current: false,
   },
   {
     name: "Категории",
     href: "/categories",
     icon: ColorSwatchIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
+    permissions: [RoleType.Admin],
+    current: false,
+  },
+  {
+    name: "Материалы",
+    href: "/materials",
+    icon: ColorSwatchIcon,
+    permissions: [RoleType.Admin],
     current: false,
   },
   {
     name: "Пользователи",
     href: "/users",
     icon: UserIcon,
-    permissions: [RoleType.Admin, RoleType.Moderator],
+    permissions: [RoleType.Admin],
     current: false,
   },
 ];
 
 export const GenreTableNames = ["Название", "Slug", THead.edit];
-export const CategoryTableNames = [
-  "Название",
-  "Slug",
-  "Значимость",
-  THead.edit,
-];
+export const CategoryTableNames = ["Название", THead.edit];
+
+export const MaterialTableNames = ["Название", THead.edit];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
-export const MovieTableNames = [
+export const LessonTableNames = [
   "Название",
-  "Жанры",
-  "Категории",
-  "Страны",
+  "Тематики",
+  "Материалы",
+  "Бесплатный",
   THead.edit,
 ];
-
-export const CommentTableNames = [
-  "Пользователь",
-  "Фильм",
-  "Комментарий",
+export const SubscriptionTypeTableNames = [
+  "Название",
+  "Продолжительность",
+  "Цена",
   THead.edit,
 ];
-
-export const SubscriptionTypeTableNames = ["Название", "Цена", THead.edit];
-
-export const ActerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
-export const ProducerTableNames = [THead.avatar, "Имя", "Slug", THead.edit];
-export const DirectorTableNames = [THead.avatar, "Имя", "Slug", THead.edit];

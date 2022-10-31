@@ -22,7 +22,7 @@ interface Props {
   error?: {
     message?: string;
   };
-  control: Control;
+  control: Control<any, any>;
   index: string;
   placeholder?: string;
   loading?: boolean;

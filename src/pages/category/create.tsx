@@ -1,30 +1,45 @@
-import { CInput, SlideoversFoot } from "core/components/shared";
-import { createService } from "core/services/index";
+import { CInput, Photo, SlideoversFoot } from "core/components/shared";
+import { ITranslate } from "core/interfaces";
+import { createService, filesUpload } from "core/services/index";
 import { getAll } from "core/store/category/category.thunks";
 import { useAppDispatch } from "core/store/hooks";
+import { formatData } from "core/utils";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Props {
   close: () => void;
 }
 
+type FormData = {
+  title: ITranslate;
+};
+
 export const CreateCategory: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
-  } = useForm();
+  } = useForm<FormData>();
+
+  const [poster, setPoster] = useState<File | null>(null);
 
   const dispatch = useAppDispatch();
 
-  const submit = async (data: any) => {
+  const submit = async (data: FormData) => {
+    let posterId = undefined;
+
+    if (poster) {
+      posterId = (await filesUpload(formatData({ files: [poster] })))[0].id;
+    }
+
     return createService(
       {
         ...data,
-        addToMenu: data["addToMenu"] || false,
+        posterId,
       },
       "category"
-    ).then(({ title }) => {
+    ).then(() => {
       dispatch(getAll());
       close();
     });
@@ -36,49 +51,29 @@ export const CreateCategory: React.FC<Props> = ({ close }) => {
       className="h-full flex flex-col"
       autoComplete="off"
     >
-      <div className="w-full">
-        <CInput
-          name="title"
-          title="Название"
-          placeholder="Название"
-          control={control}
-          error={errors["title"]}
-        />
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
-            name="slug"
-            title="Slug"
-            placeholder="Slug"
-            control={control}
-            error={errors["slug"]}
-          />
+      <div className="flex gap-3 justify-between">
+        <div className="mt-1 w-full">
+          <Photo title="Постер" setFile={setPoster} />
         </div>
       </div>
 
-      <div className="mt-3 flex items-center gap-3">
+      <div className="flex mt-3 gap-3">
         <div className="w-full">
           <CInput
-            name="significance"
-            required={false}
+            name="title.ru"
+            title="Название (ru)"
+            placeholder="Название (ru)"
             control={control}
-            title="Значимость"
-            type="number"
-            error={errors["significance"]}
+            error={errors.title?.ru}
           />
         </div>
-
         <div className="w-full">
           <CInput
-            name="addToMenu"
-            required={false}
+            name="title.uz"
+            title="Название (uz)"
+            placeholder="Название (uz)"
             control={control}
-            title="Добавить в меню"
-            type="checkbox"
-            className=" "
-            error={errors["addToMenu"]}
+            error={errors.title?.uz}
           />
         </div>
       </div>

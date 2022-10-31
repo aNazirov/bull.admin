@@ -1,20 +1,20 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { SubscriptionTypeTbody } from "core/components/pages/subscription-type";
+import { MaterialTbody } from "core/components/pages/material";
 import { Table } from "core/components/pages/table";
 import { CInput } from "core/components/shared";
-import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import {
   getAll,
-  setSubscriptionType,
-  setSubscriptionTypes,
-} from "core/store/subscription-type/subscription-type.thunks";
-import { SubscriptionTypeTableNames } from "core/_data/titles";
+  setCategories,
+  setCategory,
+} from "core/store/category/category.thunks";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { MaterialTableNames } from "core/_data/titles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Props {}
 
-export const SubscriptionTypes: React.FC<Props> = () => {
+export const Materials: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -24,12 +24,12 @@ export const SubscriptionTypes: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setSubscriptionType());
-      dispatch(setSubscriptionTypes());
+      dispatch(setCategory());
+      dispatch(setCategories());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.subscriptionTypes);
+  const { count } = useAppSelector((state) => state.lessons);
 
   const getMore = (skip: number) => {
     return dispatch(getAll(skip, filter.current));
@@ -37,12 +37,12 @@ export const SubscriptionTypes: React.FC<Props> = () => {
 
   return (
     <>
-      {/* <Filter params={filter} setPage={setPage} /> */}
+      <Filter params={filter} setPage={setPage} />
       <Table
-        tableNames={SubscriptionTypeTableNames}
+        tableNames={MaterialTableNames}
         page={page}
         setPage={setPage}
-        tBody={SubscriptionTypeTbody}
+        tBody={MaterialTbody}
         getMore={getMore}
         count={count}
       />
@@ -69,7 +69,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
   const filter = (data: any) => {
     params.current = { ...data };
 
-    dispatch(getAll(0, params)).then(() => {
+    dispatch(getAll(0, params.current)).then(() => {
       setPage(1);
     });
   };

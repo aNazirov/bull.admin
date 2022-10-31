@@ -1,6 +1,6 @@
 import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
 import { createService } from "core/services/index";
-import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { useAppDispatch } from "core/store/hooks";
 import { getAll } from "core/store/user/user.thunks";
 import { RoleType } from "core/utils/enums";
 import { useForm } from "react-hook-form";
@@ -9,29 +9,26 @@ interface Props {
   close: () => void;
 }
 
+type FormData = {
+  name: string;
+  email: string;
+  roleId: number;
+  balance: number;
+  activeBefore: string;
+  password: string;
+};
+
 export const CreateUser: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
-  } = useForm();
-  const { user } = useAppSelector((state) => state.global);
-
+  } = useForm<FormData>();
   const dispatch = useAppDispatch();
-  const roles = [
-    user?.role?.id === RoleType.Admin
-      ? { id: RoleType.Moderator, title: "Модератор" }
-      : {},
-    { id: RoleType.User, title: "Пользователь" },
-  ];
+  const roles = [{ id: RoleType.User, name: "Пользователь" }];
 
-  const submit = async (data: any) => {
-    return createService(
-      {
-        ...data,
-      },
-      "user"
-    ).then(({ title }) => {
+  const submit = async (data: FormData) => {
+    return createService(data, "user").then(() => {
       dispatch(getAll());
       close();
     });
@@ -70,18 +67,21 @@ export const CreateUser: React.FC<Props> = ({ close }) => {
             title="Баланс"
             placeholder="Баланс"
             type="number"
+            required={false}
             control={control}
             error={errors["balance"]}
           />
         </div>
+
         <div className="w-full">
           <CInput
-            name="ageRemark"
-            title="Возрастное ограничение"
-            required={false}
-            type="number"
+            name="activeBefore"
+            title="Оплачен до"
+            placeholder="yyyy-mm-dd"
+            type="date"
             control={control}
-            error={errors["ageRemark"]}
+            error={errors["activeBefore"]}
+            required={false}
           />
         </div>
       </div>

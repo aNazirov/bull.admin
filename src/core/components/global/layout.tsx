@@ -3,14 +3,10 @@ import Sidebar from "core/components/global/sidebar";
 import { PrivateRoute } from "core/components/shared";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
-import { Acters } from "pages/acter";
 import { Categories } from "pages/category";
-import { Comments } from "pages/comment";
-import { Directors } from "pages/director";
-import { Genres } from "pages/genre";
-import { Movies } from "pages/movie";
-import { ShowMovie } from "pages/movie/show";
-import { Producers } from "pages/producer";
+import { Lessons } from "pages/lesson";
+import { ShowLesson } from "pages/lesson/show";
+import { Materials } from "pages/material";
 import { SubscriptionTypes } from "pages/subscription-type";
 import { Users } from "pages/user";
 import { ShowUser } from "pages/user/show";
@@ -42,54 +38,17 @@ export const Layout: React.FC = () => {
                   <Route
                     path="/subsctiption-type"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
+                      <PrivateRoute operation={[RoleType.Admin]}>
                         <SubscriptionTypes />
                       </PrivateRoute>
                     }
                   />
 
                   <Route
-                    path="/genres"
+                    path="/materials"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Genres />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route
-                    path="/acters"
-                    element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Acters />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route
-                    path="/producers"
-                    element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Producers />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route
-                    path="/directors"
-                    element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Directors />
+                      <PrivateRoute operation={[RoleType.Admin]}>
+                        <Materials />
                       </PrivateRoute>
                     }
                   />
@@ -97,9 +56,7 @@ export const Layout: React.FC = () => {
                   <Route
                     path="/categories"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
+                      <PrivateRoute operation={[RoleType.Admin]}>
                         <Categories />
                       </PrivateRoute>
                     }
@@ -108,9 +65,7 @@ export const Layout: React.FC = () => {
                   <Route
                     path="/users"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
+                      <PrivateRoute operation={[RoleType.Admin]}>
                         <Users />
                       </PrivateRoute>
                     }
@@ -119,48 +74,31 @@ export const Layout: React.FC = () => {
                   <Route
                     path="/users/show/:id"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
+                      <PrivateRoute operation={[RoleType.Admin]}>
                         <ShowUser />
                       </PrivateRoute>
                     }
                   />
 
                   <Route
-                    path="/movies"
+                    path="/lessons"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Movies />
+                      <PrivateRoute operation={[RoleType.Admin]}>
+                        <Lessons />
                       </PrivateRoute>
                     }
                   />
 
                   <Route
-                    path="/movies/show/:id"
+                    path="/lessons/show/:id"
                     element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <ShowMovie />
+                      <PrivateRoute operation={[RoleType.Admin]}>
+                        <ShowLesson />
                       </PrivateRoute>
                     }
                   />
 
-                  <Route
-                    path="/comments"
-                    element={
-                      <PrivateRoute
-                        operation={[RoleType.Admin, RoleType.Moderator]}
-                      >
-                        <Comments />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route path="/*" element={<Navigate to="/movies" />} />
+                  <Route path="/*" element={<Navigate to="/lessons" />} />
                 </Routes>
               </section>
             </main>

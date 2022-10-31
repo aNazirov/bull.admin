@@ -2,8 +2,6 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { PlusCircleIcon } from "@heroicons/react/solid";
 import { CLink, PrivateComponent } from "core/components/shared";
-import React, { Fragment, useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
 import { userLogout } from "core/store/global/global.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
@@ -11,7 +9,9 @@ import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames, pageSwitch } from "core/utils/index";
 import { defaultAvatar } from "core/_data/datas";
 import { sidebarNavigation, userNavigation } from "core/_data/titles";
-import logo from "./logo.png";
+import React, { Fragment, useContext, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// import logo from "./logo.png";
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -22,9 +22,9 @@ const Header: React.FC = () => {
       <div className="absolute inset-y-0 left-0 md:static md:flex-shrink-0">
         <CLink
           to="/"
-          className="flex items-center justify-center h-16 w-16 bg-orange-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-600 md:w-28"
+          className="flex items-center justify-center h-16 w-16 bg-blue-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-orange-600 md:w-28"
         >
-          <img className="h-8 w-auto" src={logo} alt="Workflow" />
+          {/* <img className="h-8 w-auto" src={logo} alt="Workflow" /> */}
         </CLink>
       </div>
       {/* Picker area */}
@@ -292,7 +292,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     {user?.name}
                   </div>
                   <div className="text-sm font-medium text-gray-500 truncate">
-                    {user?.phone}
+                    {user?.contact.email}
                   </div>
                 </div>
               </div>

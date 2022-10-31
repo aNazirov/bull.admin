@@ -8,7 +8,7 @@ interface Props extends React.HTMLProps<HTMLInputElement> {
     message?: string;
   };
   className?: string;
-  control: Control;
+  control: Control<any, any>;
   loading?: boolean;
   defaultValue?: any;
   required?: boolean;

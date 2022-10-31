@@ -1,6 +1,5 @@
 export enum RoleType {
   Admin = 1,
-  Moderator,
   User,
 }
 
@@ -14,4 +13,17 @@ export enum SlideoverModes {
 export enum THead {
   avatar = "Avatar",
   edit = "Edit",
+}
+
+export enum DifficultyLevel {
+  first = "first",
+  second = "second",
+  third = "third",
+  fourth = "fourth",
+  fifth = "fifth",
+}
+
+export enum Gender {
+  male = "male",
+  female = "female",
 }

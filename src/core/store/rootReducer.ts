@@ -5,14 +5,10 @@ import {
   Reducer,
   StateFromReducersMapObject,
 } from "@reduxjs/toolkit";
-import { actersReducer } from "./acter/acter.slices";
 import { categoriesReducer } from "./category/category.slices";
-import { commentsReducer } from "./comment/comment.slices";
-import { directorsReducer } from "./director/director.slices";
-import { genresReducer } from "./genre/genre.slices";
 import { globalReducer } from "./global/global.slices";
-import { moviesReducer } from "./movie/movie.slices";
-import { producersReducer } from "./producer/producer.slices";
+import { lessonsReducer } from "./lesson/lesson.slices";
+import { materialsReducer } from "./material/material.slices";
 import { subscriptionTypesReducer } from "./subscription-type/subscription-type.slices";
 import { usersReducer } from "./user/user.slices";
 
@@ -20,14 +16,10 @@ import { usersReducer } from "./user/user.slices";
 
 const State = {
   global: globalReducer,
-  genres: genresReducer,
-  acters: actersReducer,
-  producers: producersReducer,
-  directors: directorsReducer,
   categories: categoriesReducer,
+  materials: materialsReducer,
   users: usersReducer,
-  movies: moviesReducer,
-  comments: commentsReducer,
+  lessons: lessonsReducer,
   subscriptionTypes: subscriptionTypesReducer,
 };
 

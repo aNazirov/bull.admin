@@ -115,7 +115,7 @@ const SearchSelect: React.FC<Props> = ({
             return item.name.toLowerCase().includes(query.toLowerCase());
           }
 
-          return item.title.toLowerCase().includes(query.toLowerCase());
+          return item.title?.toLowerCase().includes(query.toLowerCase());
         });
 
   const displayValue = (item: any) => {
@@ -164,7 +164,7 @@ const SearchSelect: React.FC<Props> = ({
               className={({ active }) =>
                 classNames(
                   "relative cursor-default select-none py-2 pl-3 pr-9",
-                  active ? "bg-orange-500 text-white" : "text-gray-900"
+                  active ? "bg-blue-500 text-white" : "text-gray-900"
                 )
               }
             >
@@ -177,7 +177,7 @@ const SearchSelect: React.FC<Props> = ({
                 className={({ active }) =>
                   classNames(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
-                    active ? "bg-orange-500 text-white" : "text-gray-900"
+                    active ? "bg-blue-500 text-white" : "text-gray-900"
                   )
                 }
               >

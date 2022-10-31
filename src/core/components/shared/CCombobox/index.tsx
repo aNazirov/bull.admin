@@ -1,20 +1,21 @@
 import { Combobox } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
+import { classNames } from "core/utils/index";
 import { useEffect, useState } from "react";
 import { Control, useController } from "react-hook-form";
-import { classNames } from "core/utils/index";
 import { SceletonForInput } from "../Sceleton";
 
 interface Props {
   title: string;
   items: any[];
-  defaultValue?: number;
+  defaultValue?: any;
   name: string;
   error?: {
     message?: string;
   };
   control: Control<any>;
   loading?: boolean;
+  multiple?: boolean;
   required?: boolean;
   disabled?: boolean;
 }
@@ -23,6 +24,7 @@ export const CCombobox: React.FC<Props> = ({
   loading = false,
   required = true,
   disabled = false,
+  multiple = false,
   ...props
 }) => {
   return (
@@ -30,7 +32,12 @@ export const CCombobox: React.FC<Props> = ({
       {loading ? (
         <SceletonForInput />
       ) : (
-        <Combox required={required} disabled={disabled} {...props} />
+        <Combox
+          required={required}
+          disabled={disabled}
+          multiple={multiple}
+          {...props}
+        />
       )}
     </>
   );
@@ -40,6 +47,7 @@ export const Combox: React.FC<Props> = ({
   title,
   items,
   defaultValue,
+  multiple,
   name,
   control,
   error,
@@ -72,14 +80,6 @@ export const Combox: React.FC<Props> = ({
             return item.name.toLowerCase().includes(query.toLowerCase());
           }
 
-          if (item?.displayName) {
-            return item.displayName.toLowerCase().includes(query.toLowerCase());
-          }
-
-          if (item?.part) {
-            return item.part.toLowerCase().includes(query.toLowerCase());
-          }
-
           return item.title.toLowerCase().includes(query.toLowerCase());
         });
 
@@ -88,6 +88,7 @@ export const Combox: React.FC<Props> = ({
       <Combobox
         as="div"
         disabled={disabled}
+        multiple={multiple}
         value={selectedItem}
         onChange={(item: any) => {
           field.onChange(item.id);
@@ -105,9 +106,11 @@ export const Combox: React.FC<Props> = ({
               "w-full rounded-sm border bg-white py-1 pl-2 pr-10 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 sm:text-sm"
             )}
             onChange={(event) => setQuery(event.target.value)}
-            displayValue={(item: any) =>
-              item?.name || item?.displayName || item?.title || ""
-            }
+            displayValue={(item: any) => {
+              let label = item?.name || item?.title || "";
+
+              return label;
+            }}
           />
           <Combobox.Button className="absolute inset-y-0 right-0 flex items-center rounded-r-md px-2 focus:outline-none">
             <SelectorIcon
@@ -123,7 +126,7 @@ export const Combox: React.FC<Props> = ({
                 className={({ active }) =>
                   classNames(
                     "relative cursor-default select-none py-2 pl-3 pr-9",
-                    active ? "bg-orange-500 text-white" : "text-gray-900"
+                    active ? "bg-blue-500 text-white" : "text-gray-900"
                   )
                 }
               >
@@ -131,8 +134,7 @@ export const Combox: React.FC<Props> = ({
               </Combobox.Option>
 
               {filteredItems.map((item) => {
-                const label =
-                  item?.name || item?.displayName || item?.title || item?.part;
+                let label = item?.name || item?.title;
 
                 return (
                   <Combobox.Option
@@ -141,7 +143,7 @@ export const Combox: React.FC<Props> = ({
                     className={({ active }) =>
                       classNames(
                         "relative cursor-default select-none py-2 pl-3 pr-9",
-                        active ? "bg-orange-500 text-white" : "text-gray-900"
+                        active ? "bg-blue-500 text-white" : "text-gray-900"
                       )
                     }
                   >

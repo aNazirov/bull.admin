@@ -1,8 +1,8 @@
 import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
 import { ITranslate } from "core/interfaces";
-import { createService } from "core/services";
-import { useAppDispatch } from "core/store/hooks";
-import { getAll } from "core/store/subscription-type/subscription-type.thunks";
+import { updateService } from "core/services/index";
+import { useAppDispatch, useAppSelector } from "core/store/hooks";
+import { getAll } from "core/store/material/material.thunks";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -12,21 +12,20 @@ interface Props {
 type FormData = {
   title: ITranslate;
   description: ITranslate;
-  months: number;
-  price: number;
 };
 
-export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
+export const EditMaterial: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
   } = useForm<FormData>();
+  const { material } = useAppSelector((state) => state.materials);
 
   const dispatch = useAppDispatch();
 
   const submit = async (data: FormData) => {
-    return createService(data, "subscription-type").then(() => {
+    return updateService(material!.id, data, "material").then(({ title }) => {
       dispatch(getAll());
       close();
     });
@@ -44,6 +43,8 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
             name="title.ru"
             title="Название (ru)"
             placeholder="Название (ru)"
+            defaultValue={material?.title.ru}
+            loading={!material}
             control={control}
             error={errors.title?.ru}
           />
@@ -54,6 +55,8 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
             name="title.uz"
             title="Название (uz)"
             placeholder="Название (uz)"
+            defaultValue={material?.title.uz}
+            loading={!material}
             control={control}
             error={errors.title?.uz}
           />
@@ -64,8 +67,10 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
         <div className="w-full">
           <CTextarea
             name="description.ru"
-            title="Описание (ru)"
-            placeholder="Описание (ru)"
+            title="Необходимые принадлежности (ru)"
+            placeholder="Необходимые принадлежности (ru)"
+            defaultValue={material?.description?.ru}
+            loading={!material}
             control={control}
             error={errors.description?.ru}
           />
@@ -74,37 +79,12 @@ export const CreateSubscriptionType: React.FC<Props> = ({ close }) => {
         <div className="w-full">
           <CTextarea
             name="description.uz"
-            title="Описание (uz)"
-            placeholder="Описание (uz)"
+            title="Необходимые принадлежности (uz)"
+            placeholder="Необходимые принадлежности (uz)"
+            defaultValue={material?.description?.uz}
+            loading={!material}
             control={control}
             error={errors.description?.uz}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
-            name="price"
-            title="Цена"
-            type="number"
-            placeholder="0.00"
-            step={0.01}
-            control={control}
-            error={errors["price"]}
-          />
-        </div>
-
-        <div className="w-full">
-          <CInput
-            name="months"
-            title="Продолжительность"
-            type="number"
-            min={0}
-            max={12}
-            placeholder="1"
-            control={control}
-            error={errors["months"]}
           />
         </div>
       </div>

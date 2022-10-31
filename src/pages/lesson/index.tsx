@@ -1,20 +1,16 @@
 import { FilterIcon } from "@heroicons/react/solid";
-import { SubscriptionTypeTbody } from "core/components/pages/subscription-type";
+import { LessonTbody } from "core/components/pages/lesson";
 import { Table } from "core/components/pages/table";
-import { CInput } from "core/components/shared";
+import { CInput, CSearchSelect } from "core/components/shared";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import {
-  getAll,
-  setSubscriptionType,
-  setSubscriptionTypes,
-} from "core/store/subscription-type/subscription-type.thunks";
-import { SubscriptionTypeTableNames } from "core/_data/titles";
+import { getAll, setLessons } from "core/store/lesson/lesson.thunks";
+import { LessonTableNames } from "core/_data/titles";
 import { MutableRefObject, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface Props {}
 
-export const SubscriptionTypes: React.FC<Props> = () => {
+export const Lessons: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -24,12 +20,11 @@ export const SubscriptionTypes: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setSubscriptionType());
-      dispatch(setSubscriptionTypes());
+      dispatch(setLessons());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.subscriptionTypes);
+  const { count } = useAppSelector((state) => state.lessons);
 
   const getMore = (skip: number) => {
     return dispatch(getAll(skip, filter.current));
@@ -37,12 +32,12 @@ export const SubscriptionTypes: React.FC<Props> = () => {
 
   return (
     <>
-      {/* <Filter params={filter} setPage={setPage} /> */}
+      <Filter params={filter} setPage={setPage} />
       <Table
-        tableNames={SubscriptionTypeTableNames}
+        tableNames={LessonTableNames}
         page={page}
         setPage={setPage}
-        tBody={SubscriptionTypeTbody}
+        tBody={LessonTbody}
         getMore={getMore}
         count={count}
       />
@@ -69,7 +64,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
   const filter = (data: any) => {
     params.current = { ...data };
 
-    dispatch(getAll(0, params)).then(() => {
+    dispatch(getAll(0, params.current)).then(() => {
       setPage(1);
     });
   };
@@ -89,6 +84,28 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
                 control={control}
                 title="Название"
                 error={errors["title"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="categoryId"
+                required={false}
+                control={control}
+                title="Тематика"
+                index="categories"
+                error={errors["categoryId"]}
+              />
+            </div>
+
+            <div className="w-full sm:w-2/12">
+              <CSearchSelect
+                name="materialId"
+                required={false}
+                control={control}
+                title="Материал"
+                index="materials"
+                error={errors["materialId"]}
               />
             </div>
           </div>

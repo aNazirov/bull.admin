@@ -2,11 +2,11 @@ import { FilterIcon } from "@heroicons/react/solid";
 import { Table } from "core/components/pages/table";
 import { UserTbody } from "core/components/pages/user";
 import { CInput } from "core/components/shared";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll, setUsers } from "core/store/user/user.thunks";
 import { UserTableNames } from "core/_data/titles";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface Props {}
 
@@ -77,23 +77,13 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
           onSubmit={handleSubmit(filter)}
         >
           <div className="col-span-full flex flex-col sm:flex-row gap-3">
-            <div className="w-full sm:w-2/12">
+            <div className="w-full sm:w-6/12">
               <CInput
-                name="name"
+                name="search"
                 required={false}
                 control={control}
-                title="Имя"
-                error={errors["name"]}
-              />
-            </div>
-
-            <div className="w-full sm:w-2/12">
-              <CInput
-                name="email"
-                required={false}
-                control={control}
-                title="Email"
-                error={errors["email"]}
+                title="Поиск"
+                error={errors["search"]}
               />
             </div>
           </div>
@@ -108,7 +98,7 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
             </button>
             <button
               type="submit"
-              className="transition duration-300 ease-in-out rounded-3xl inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white bg-orange-500 hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="transition duration-300 ease-in-out rounded-3xl inline-flex justify-center py-2 px-4 border border-transparent text-sm font-medium text-white bg-blue-500 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               disabled={isSubmitting}
             >
               Фильтровать

@@ -2,18 +2,18 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/solid";
 import { PageHead } from "core/components/pages/head";
 import { SceletonForPage } from "core/components/shared";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { getOne, setUser } from "core/store/user/user.thunks";
-import { classNames, formatNumber } from "core/utils";
+import { getOne, setLesson } from "core/store/lesson/lesson.thunks";
+import { classNames } from "core/utils";
 import { RoleType } from "core/utils/enums";
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { EditUser } from "./edit";
+import { EditLesson } from "./edit";
 
 interface Props {}
 
-export const ShowUser: React.FC<Props> = () => {
+export const ShowLesson: React.FC<Props> = () => {
   const { id } = useParams();
+  const { lesson } = useAppSelector((state) => state.lessons);
 
   const [showInfo, setShowInfo] = useState(true);
 
@@ -25,17 +25,15 @@ export const ShowUser: React.FC<Props> = () => {
     if (id) {
       dispatch(getOne(+id));
     } else if (!id) {
-      navigate("/users");
+      navigate("/lessons");
     }
 
     return () => {
-      dispatch(setUser());
+      dispatch(setLesson());
     };
-  }, [dispatch, id, navigate]);
+  }, [id]);
 
-  const { user } = useAppSelector((state) => state.users);
-
-  if (!user) {
+  if (!lesson) {
     return <SceletonForPage />;
   }
 
@@ -43,15 +41,14 @@ export const ShowUser: React.FC<Props> = () => {
     <div className="flex flex-col">
       <div className="bg-white">
         <PageHead
-          title={user?.name}
-          description={user?.role?.title}
+          title={lesson.title.ru}
           operation={accessRoles}
-          Edit={EditUser}
+          Edit={EditLesson}
         />
 
         <div className="border-t border-gray-200 px-4 py-5 sm:px-6">
           <div>
-            <div className="flex justify-between items-center text-lg font-medium text-black ">
+            <div className="flex justify-between items-center text-lg font-medium text-black">
               <div className="flex items-center gap-2 border-b-2 border-blue-600">
                 Основная информация{" "}
                 <span
@@ -73,32 +70,36 @@ export const ShowUser: React.FC<Props> = () => {
                 "mt-3 bg-gray-50 shadow-sm p-4 rounded-md"
               )}
             >
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
                 <div className="sm:col-span-1">
-                  <div className="text-sm font-medium text-gray-500">Email</div>
+                  <div className="text-sm font-medium text-gray-500">
+                    Категории
+                  </div>
                   <div className="mt-1 text-sm text-gray-900">
-                    {user?.contact?.email || "----"}
+                    {lesson.categories?.map((x) => x.title.ru).join(", ") ||
+                      "----"}
                   </div>
                 </div>
 
                 <div className="sm:col-span-1">
                   <div className="text-sm font-medium text-gray-500">
-                    Баланс
+                    Материалы
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
-                    {formatNumber(user?.balance || 0, "UZB")}
+                    {lesson.materials?.map((x) => x.title.ru).join(", ") ||
+                      "----"}
                   </div>
                 </div>
 
                 <div className="sm:col-span-1">
                   <div className="text-sm font-medium text-gray-500">
-                    Оплачено до:
+                    Уровень сложности
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
-                    {moment(user.activeBefore).format("DD-MM-YYYY hh:mm")}
+                    {lesson.difficultyLevel}
                   </div>
                 </div>
-              </dl>
+              </div>
             </div>
           </div>
         </div>
