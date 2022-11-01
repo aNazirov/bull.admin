@@ -8,8 +8,12 @@ export const filter = (params: any) => {
   const obj = { ...params };
 
   Object.keys(obj).forEach((key) => {
-    if (obj[key] instanceof Object && !Object.keys(obj[key]).length) {
-      delete obj[key];
+    if (obj[key] instanceof Object) {
+      const values = Object.values(obj[key]).filter(
+        (x: any) => ![null, undefined].includes(x)
+      );
+
+      if (!values.length) delete obj[key];
     }
   });
 
