@@ -4,6 +4,18 @@ import { Id, toast, TypeOptions } from "react-toastify";
 
 export * as Enums from "./enums";
 
+export const filter = (params: any) => {
+  const obj = { ...params };
+
+  Object.keys(obj).forEach((key) => {
+    if (obj[key] instanceof Object && !Object.keys(obj[key]).length) {
+      delete obj[key];
+    }
+  });
+
+  return obj;
+};
+
 export function meiliRange(item: any, query: string) {
   const obj = { ...item };
 

@@ -21,6 +21,7 @@ interface Props {
 
 type FormData = {
   title: ITranslate;
+  description: ITranslate;
   difficultyLevel: DifficultyLevel;
   genders: Gender[];
   categories: number[];
@@ -59,7 +60,7 @@ export const CreateLesson: React.FC<Props> = ({ close }) => {
         ...data,
         posterId,
         videoId,
-        free: data["free"] || false,
+        free: data["free"] ?? false,
       },
       "lesson"
     ).then(() => {
@@ -98,6 +99,28 @@ export const CreateLesson: React.FC<Props> = ({ close }) => {
             placeholder="Название (uz)"
             control={control}
             error={errors.title?.uz}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-3 mt-3">
+        <div className="w-full">
+          <CInput
+            name="description.ru"
+            title="Описание (ru)"
+            placeholder="Описание (ru)"
+            control={control}
+            error={errors.description?.ru}
+          />
+        </div>
+
+        <div className="w-full">
+          <CInput
+            name="description.uz"
+            title="Описание (uz)"
+            placeholder="Описание (uz)"
+            control={control}
+            error={errors.description?.uz}
           />
         </div>
       </div>

@@ -72,6 +72,7 @@ export interface ISubscriptionType {
 export interface ILesson {
   id: number;
   title: ITranslate;
+  description?: ITranslate;
   poster?: IFile;
   video?: IFile;
   free: boolean;

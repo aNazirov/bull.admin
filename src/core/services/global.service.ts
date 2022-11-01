@@ -1,7 +1,10 @@
 import { api, fileApi } from "core/api";
 import { IAutoComplete, ILogin } from "core/interfaces";
+import { filter } from "core/utils";
 
 export const loginService = (params: ILogin) => {
+  params = filter(params);
+
   return api
     .post("/auth/login", params, undefined, {
       pending: "Авторизация",
@@ -15,6 +18,8 @@ export const getUserByToken = () => {
 };
 
 export const autoComplite = (params: IAutoComplete) => {
+  params = filter(params);
+
   return api
     .get("/global/autoComplete", {
       params,
@@ -23,6 +28,8 @@ export const autoComplite = (params: IAutoComplete) => {
 };
 
 export const createService = (params: any, name: string) => {
+  params = filter(params);
+
   return api
     .post(`/${name}`, params, undefined, {
       pending: "Создание ...",
@@ -32,6 +39,8 @@ export const createService = (params: any, name: string) => {
 };
 
 export const updateService = (id: number, params: any, name: string) => {
+  params = filter(params);
+
   return api
     .patch(`/${name}/${id}`, params, undefined, {
       pending: "Обновление ...",
@@ -54,6 +63,8 @@ export const getOneService = (id: number, name: string) => {
 };
 
 export const getAllService = (skip: number, params: any, name: string) => {
+  params = filter(params);
+
   return api
     .get(`/${name}`, {
       params: {

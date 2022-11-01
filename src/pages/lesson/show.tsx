@@ -99,6 +99,15 @@ export const ShowLesson: React.FC<Props> = () => {
                     {lesson.difficultyLevel}
                   </div>
                 </div>
+
+                <div className="sm:col-span-full">
+                  <div className="text-sm font-medium text-gray-500">
+                    Описание
+                  </div>
+                  <div className="mt-1 text-sm text-gray-900">
+                    {lesson.description?.ru || "----"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
