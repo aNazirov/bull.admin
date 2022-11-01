@@ -78,7 +78,11 @@ export const CreateLesson: React.FC<Props> = ({ close }) => {
     >
       <div className="flex gap-3 justify-between">
         <div className="mt-1 w-full">
-          <Photo title="Постер" setFile={setPoster} />
+          <Photo
+            title="Постер"
+            setFile={setPoster}
+            previewClassName={"flex justify-start w-36 h-36 rounded-md"}
+          />
         </div>
       </div>
 

@@ -100,6 +100,7 @@ export const EditLesson: React.FC<Props> = ({ close }) => {
             setFile={setPoster}
             previewId={lesson?.poster?.id}
             previewUrl={lesson?.poster?.url}
+            previewClassName={"flex justify-start w-36 h-36 rounded-md"}
           />
         </div>
       </div>
