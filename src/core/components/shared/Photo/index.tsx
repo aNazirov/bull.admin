@@ -55,6 +55,15 @@ export const Photo: React.FC<Props> = ({
         >
           Загрузить
         </label>
+
+        {preview && (
+          <a
+            href={preview}
+            className=" bg-white py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Загрузить
+          </a>
+        )}
         <button
           type="button"
           className=" bg-red-600 py-2 px-3 border border-gray-300 rounded-sm shadow-sm text-sm leading-4 font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
