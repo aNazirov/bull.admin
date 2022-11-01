@@ -1,6 +1,7 @@
 import {
   CCombobox,
   CInput,
+  CTextarea,
   Photo,
   SlideoversFoot,
 } from "core/components/shared";
@@ -105,20 +106,22 @@ export const CreateLesson: React.FC<Props> = ({ close }) => {
 
       <div className="flex gap-3 mt-3">
         <div className="w-full">
-          <CInput
+          <CTextarea
             name="description.ru"
             title="Описание (ru)"
             placeholder="Описание (ru)"
+            required={false}
             control={control}
             error={errors.description?.ru}
           />
         </div>
 
         <div className="w-full">
-          <CInput
+          <CTextarea
             name="description.uz"
             title="Описание (uz)"
             placeholder="Описание (uz)"
+            required={false}
             control={control}
             error={errors.description?.uz}
           />
