@@ -94,13 +94,13 @@ export const EditLesson: React.FC<Props> = ({ close }) => {
       autoComplete="off"
     >
       <div className="flex gap-3 justify-between">
-        <div className="mt-1 w-full">
+        <div className="mt-1">
           <Photo
             title="Постер"
             setFile={setPoster}
             previewId={lesson?.poster?.id}
             previewUrl={lesson?.poster?.url}
-            previewClassName={"flex justify-start w-36 h-36 rounded-md"}
+            previewClassName="h-36"
           />
         </div>
       </div>

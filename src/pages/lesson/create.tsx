@@ -77,12 +77,8 @@ export const CreateLesson: React.FC<Props> = ({ close }) => {
       autoComplete="off"
     >
       <div className="flex gap-3 justify-between">
-        <div className="mt-1 w-full">
-          <Photo
-            title="Постер"
-            setFile={setPoster}
-            previewClassName={"flex justify-start w-36 h-36 rounded-md"}
-          />
+        <div className="mt-1 ">
+          <Photo title="Постер" setFile={setPoster} previewClassName="h-36" />
         </div>
       </div>
 
