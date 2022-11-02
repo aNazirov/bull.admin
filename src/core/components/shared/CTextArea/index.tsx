@@ -24,6 +24,7 @@ const TextArea: React.FC<Props> = ({
   className,
   error,
   loading = false,
+  required = true,
   ...props
 }) => {
   const defaultClassName = `${
@@ -31,6 +32,18 @@ const TextArea: React.FC<Props> = ({
   } mt-1 block w-full h-20 border border-gray-300 min-h-40 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`;
 
   const { field } = useController({
+    rules: {
+      required: required && "Should not be empty",
+      ...(props.type === "tel"
+        ? {
+            pattern: {
+              value:
+                /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+              message: "Please enter a valid phone number",
+            },
+          }
+        : {}),
+    },
     control,
     defaultValue,
     name,
