@@ -86,6 +86,8 @@ export interface IUser {
   id: number;
   name: string;
   contact: IContact;
+  firstDevice?: string;
+  secondDevice?: string;
   role: IRole;
   balance?: number;
   activeBefore: Date;

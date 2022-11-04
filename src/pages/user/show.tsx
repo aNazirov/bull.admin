@@ -73,7 +73,7 @@ export const ShowUser: React.FC<Props> = () => {
                 "mt-3 bg-gray-50 shadow-sm p-4 rounded-md"
               )}
             >
-              <dl className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
                 <div className="sm:col-span-1">
                   <div className="text-sm font-medium text-gray-500">Email</div>
                   <div className="mt-1 text-sm text-gray-900">
@@ -98,7 +98,26 @@ export const ShowUser: React.FC<Props> = () => {
                     {moment(user.activeBefore).format("DD-MM-YYYY hh:mm")}
                   </div>
                 </div>
-              </dl>
+              </div>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 mt-3">
+                <div className="sm:col-span-1">
+                  <div className="text-sm font-medium text-gray-500">
+                    Устройство №1
+                  </div>
+                  <div className="mt-1 text-sm text-gray-900">
+                    {user?.firstDevice || "----"}
+                  </div>
+                </div>
+
+                <div className="sm:col-span-1">
+                  <div className="text-sm font-medium text-gray-500">
+                    Устройство №2
+                  </div>
+                  <div className="mt-1 text-sm text-gray-900">
+                    {user.secondDevice || "----"}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
