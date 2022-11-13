@@ -70,6 +70,7 @@ export const EditMaterial: React.FC<Props> = ({ close }) => {
             title="Необходимые принадлежности (ru)"
             placeholder="Необходимые принадлежности (ru)"
             defaultValue={material?.description?.ru}
+            required={false}
             loading={!material}
             control={control}
             error={errors.description?.ru}
@@ -82,6 +83,7 @@ export const EditMaterial: React.FC<Props> = ({ close }) => {
             title="Необходимые принадлежности (uz)"
             placeholder="Необходимые принадлежности (uz)"
             defaultValue={material?.description?.uz}
+            required={false}
             loading={!material}
             control={control}
             error={errors.description?.uz}

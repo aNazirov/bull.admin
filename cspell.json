@@ -12,7 +12,8 @@
     "libphonenumber",
     "webchat",
     "vsmarketplacebadge",
-    "visualstudio"
+    "visualstudio",
+    "toastify"
   ],
   "ignorePaths": ["node_modules/**"]
   // flagWords - list of words to be always considered incorrect

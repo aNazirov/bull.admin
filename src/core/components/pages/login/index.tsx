@@ -33,11 +33,10 @@ export const Login: React.FC = () => {
             <form onSubmit={handleSubmit(submit)} className="space-y-6">
               <div className="mt-1">
                 <CInput
-                  name="email"
-                  type="mail"
-                  title="Email"
+                  name="login"
+                  title="Номер телефона или почта"
                   control={control}
-                  error={errors["email"]}
+                  error={errors["login"]}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>

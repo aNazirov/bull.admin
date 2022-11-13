@@ -12,6 +12,7 @@ interface Props {
 type FormData = {
   name: string;
   email: string;
+  phone: string;
   roleId: number;
   balance: number;
   activeBefore: string;
@@ -94,6 +95,15 @@ export const CreateUser: React.FC<Props> = ({ close }) => {
             placeholder="Email"
             control={control}
             error={errors["email"]}
+          />
+        </div>
+        <div className="w-full">
+          <CInput
+            name="phone"
+            title="Номер телефона"
+            placeholder="+*** ** *** ****"
+            control={control}
+            error={errors["phone"]}
           />
         </div>
         <div className="w-full">

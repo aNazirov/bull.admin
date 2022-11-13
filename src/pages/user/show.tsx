@@ -83,6 +83,15 @@ export const ShowUser: React.FC<Props> = () => {
 
                 <div className="sm:col-span-1">
                   <div className="text-sm font-medium text-gray-500">
+                    Номер телефона
+                  </div>
+                  <div className="mt-1 text-sm text-gray-900">
+                    {user?.contact?.phone || "----"}
+                  </div>
+                </div>
+
+                <div className="sm:col-span-1">
+                  <div className="text-sm font-medium text-gray-500">
                     Баланс
                   </div>
                   <div className="mt-1 text-sm text-gray-900">

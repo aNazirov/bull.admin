@@ -95,6 +95,18 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             error={errors["email"]}
           />
         </div>
+
+        <div className="w-full">
+          <CInput
+            name="phone"
+            title="Номер телефона"
+            placeholder="+*** ** *** ****"
+            defaultValue={user?.contact?.phone}
+            control={control}
+            error={errors["phone"]}
+          />
+        </div>
+
         <div className="w-full">
           <CInput
             name="password"

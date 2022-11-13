@@ -95,6 +95,7 @@ export interface IUser {
 
 export interface IContact {
   email: string;
+  phone: string;
 }
 
 export interface IFile {
