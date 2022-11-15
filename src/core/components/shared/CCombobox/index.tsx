@@ -80,7 +80,11 @@ export const Combox: React.FC<Props> = ({
             return item.name.toLowerCase().includes(query.toLowerCase());
           }
 
-          return item.title.toLowerCase().includes(query.toLowerCase());
+          if (item?.title) {
+            return item.title.toLowerCase().includes(query.toLowerCase());
+          }
+
+          return query.toLowerCase();
         });
 
   return (

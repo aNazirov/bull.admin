@@ -15,11 +15,11 @@ export const statusStyles = {
 };
 
 export const difficultyLevels = [
-  { title: 1, id: DifficultyLevel.first },
-  { title: 2, id: DifficultyLevel.second },
-  { title: 3, id: DifficultyLevel.third },
-  { title: 4, id: DifficultyLevel.fourth },
-  { title: 5, id: DifficultyLevel.fifth },
+  { title: "1", id: DifficultyLevel.first },
+  { title: "2", id: DifficultyLevel.second },
+  { title: "3", id: DifficultyLevel.third },
+  { title: "4", id: DifficultyLevel.fourth },
+  { title: "5", id: DifficultyLevel.fifth },
 ];
 
 export const genders = [
