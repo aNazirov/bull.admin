@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-RUN npm run build
+RUN node --max_old_space_size=1024 ./node_modules/react-scripts/bin/react-scripts.js build
 
 FROM nginx:1.20.1
 COPY --from=build-step /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
