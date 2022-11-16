@@ -58,6 +58,7 @@ export interface IBanner {
   title: ITranslate;
   description: ITranslate;
   poster: IFile;
+  link: string;
   active: boolean;
 }
 

@@ -54,6 +54,9 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.title.ru}
             </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.link}
+            </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
               {x.active ? (
                 <CheckIcon className="h-6 w-6" />

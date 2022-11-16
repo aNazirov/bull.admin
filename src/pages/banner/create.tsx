@@ -19,6 +19,7 @@ interface Props {
 type FormData = {
   title: ITranslate;
   description: ITranslate;
+  link: string;
   active: Boolean;
 };
 
@@ -103,6 +104,18 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
             placeholder="Описание (uz)"
             control={control}
             error={errors.description?.uz}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            title="Ссылка"
+            name="link"
+            control={control}
+            placeholder="Ссылка"
+            error={errors["link"]}
           />
         </div>
       </div>
