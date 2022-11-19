@@ -108,6 +108,15 @@ export const ShowLesson: React.FC<Props> = () => {
                     {lesson.description?.ru || "----"}
                   </div>
                 </div>
+
+                <div className="sm:col-span-full">
+                  <div className="text-sm font-medium text-gray-500">
+                    Необходимые принадлежности
+                  </div>
+                  <div className="mt-1 text-sm text-gray-900">
+                    {lesson.needs?.ru || "----"}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

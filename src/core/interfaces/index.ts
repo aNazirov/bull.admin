@@ -50,7 +50,6 @@ export interface ICategory {
 export interface IMaterial {
   id: number;
   title: ITranslate;
-  description?: ITranslate;
 }
 
 export interface IBanner {
@@ -74,6 +73,7 @@ export interface ILesson {
   id: number;
   title: ITranslate;
   description?: ITranslate;
+  needs?: ITranslate;
   poster?: IFile;
   video?: IFile;
   free: boolean;

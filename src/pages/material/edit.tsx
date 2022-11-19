@@ -1,4 +1,4 @@
-import { CInput, CTextarea, SlideoversFoot } from "core/components/shared";
+import { CInput, SlideoversFoot } from "core/components/shared";
 import { ITranslate } from "core/interfaces";
 import { updateService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
@@ -11,7 +11,6 @@ interface Props {
 
 type FormData = {
   title: ITranslate;
-  description: ITranslate;
 };
 
 export const EditMaterial: React.FC<Props> = ({ close }) => {
@@ -59,34 +58,6 @@ export const EditMaterial: React.FC<Props> = ({ close }) => {
             loading={!material}
             control={control}
             error={errors.title?.uz}
-          />
-        </div>
-      </div>
-
-      <div className="flex gap-3 mt-3">
-        <div className="w-full">
-          <CTextarea
-            name="description.ru"
-            title="Необходимые принадлежности (ru)"
-            placeholder="Необходимые принадлежности (ru)"
-            defaultValue={material?.description?.ru}
-            required={false}
-            loading={!material}
-            control={control}
-            error={errors.description?.ru}
-          />
-        </div>
-
-        <div className="w-full">
-          <CTextarea
-            name="description.uz"
-            title="Необходимые принадлежности (uz)"
-            placeholder="Необходимые принадлежности (uz)"
-            defaultValue={material?.description?.uz}
-            required={false}
-            loading={!material}
-            control={control}
-            error={errors.description?.uz}
           />
         </div>
       </div>

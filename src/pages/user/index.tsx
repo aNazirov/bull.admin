@@ -86,6 +86,18 @@ const Filter: React.FC<FilterProps> = ({ params, setPage }) => {
                 error={errors["search"]}
               />
             </div>
+
+            <div className="w-full sm:w-6/12">
+              <CInput
+                name="active"
+                type="checkbox"
+                required={false}
+                control={control}
+                className=" "
+                title="Активные"
+                error={errors["active"]}
+              />
+            </div>
           </div>
 
           <div className="col-span-full mt-2 flex justify-end">

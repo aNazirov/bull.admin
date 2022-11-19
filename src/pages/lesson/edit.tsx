@@ -24,6 +24,7 @@ interface Props {
 type FormData = {
   title: ITranslate;
   description: ITranslate;
+  needs: ITranslate;
   difficultyLevel: DifficultyLevel;
   genders: Gender[];
   categories: number[];
@@ -151,6 +152,32 @@ export const EditLesson: React.FC<Props> = ({ close }) => {
             required={false}
             control={control}
             error={errors.description?.uz}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-3 mt-3">
+        <div className="w-full">
+          <CTextarea
+            name="needs.ru"
+            title="Необходимые принадлежности (ru)"
+            placeholder="Необходимые принадлежности (ru)"
+            defaultValue={lesson?.needs?.ru}
+            required={false}
+            control={control}
+            error={errors.needs?.ru}
+          />
+        </div>
+
+        <div className="w-full">
+          <CTextarea
+            name="needs.uz"
+            title="Необходимые принадлежности (uz)"
+            placeholder="Необходимые принадлежности (uz)"
+            defaultValue={lesson?.needs?.uz}
+            required={false}
+            control={control}
+            error={errors.needs?.uz}
           />
         </div>
       </div>
