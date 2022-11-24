@@ -2,8 +2,8 @@ version: "3.7"
 
 services:
   admin:
-    container_name: sunnyart_admin
-    image: sunnyart_admin
+    container_name: admin
+    image: admin
     build: .
     ports:
       - 3000:80
