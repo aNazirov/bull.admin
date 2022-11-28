@@ -1,8 +1,7 @@
 import { CInput, SlideoversFoot } from "core/components/shared";
-import { ITranslate } from "core/interfaces";
 import { createService } from "core/services/index";
+import { getAll } from "core/store/chain/chain.thunks";
 import { useAppDispatch } from "core/store/hooks";
-import { getAll } from "core/store/material/material.thunks";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -10,10 +9,11 @@ interface Props {
 }
 
 type FormData = {
-  title: ITranslate;
+  price: number;
+  active: string;
 };
 
-export const CreateMaterial: React.FC<Props> = ({ close }) => {
+export const CreateChain: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -23,7 +23,10 @@ export const CreateMaterial: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: FormData) => {
-    return createService(data, "material").then(({ title }) => {
+    return createService(
+      { ...data, active: data["active"] ? JSON.parse(data["active"]) : false },
+      "chain"
+    ).then(() => {
       dispatch(getAll());
       close();
     });
@@ -35,24 +38,29 @@ export const CreateMaterial: React.FC<Props> = ({ close }) => {
       className="h-full flex flex-col"
       autoComplete="off"
     >
-      <div className="flex gap-3">
+      <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            name="title.ru"
-            title="Название (ru)"
-            placeholder="Название (ru)"
+            title="Цена"
+            name="price"
+            type="number"
             control={control}
-            error={errors.title?.ru}
+            placeholder="Цена"
+            error={errors["price"]}
           />
         </div>
+      </div>
 
+      <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            name="title.uz"
-            title="Название (uz)"
-            placeholder="Название (uz)"
+            title="Активный"
+            name="active"
+            type="checkbox"
             control={control}
-            error={errors.title?.uz}
+            className=" "
+            placeholder="Активный"
+            error={errors["active"]}
           />
         </div>
       </div>

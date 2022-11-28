@@ -4,11 +4,8 @@ import { PrivateRoute } from "core/components/shared";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { Banners } from "pages/banner";
-import { Categories } from "pages/category";
-import { Lessons } from "pages/lesson";
-import { ShowLesson } from "pages/lesson/show";
-import { Materials } from "pages/material";
-import { SubscriptionTypes } from "pages/subscription-type";
+import { Chains } from "pages/chain";
+import { Contexts } from "pages/context";
 import { Users } from "pages/user";
 import { ShowUser } from "pages/user/show";
 import React, { useState } from "react";
@@ -37,24 +34,6 @@ export const Layout: React.FC = () => {
               >
                 <Routes>
                   <Route
-                    path="/subsctiption-type"
-                    element={
-                      <PrivateRoute operation={[RoleType.Admin]}>
-                        <SubscriptionTypes />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route
-                    path="/materials"
-                    element={
-                      <PrivateRoute operation={[RoleType.Admin]}>
-                        <Materials />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route
                     path="/banners"
                     element={
                       <PrivateRoute operation={[RoleType.Admin]}>
@@ -64,10 +43,10 @@ export const Layout: React.FC = () => {
                   />
 
                   <Route
-                    path="/categories"
+                    path="/contexts"
                     element={
                       <PrivateRoute operation={[RoleType.Admin]}>
-                        <Categories />
+                        <Contexts />
                       </PrivateRoute>
                     }
                   />
@@ -91,24 +70,15 @@ export const Layout: React.FC = () => {
                   />
 
                   <Route
-                    path="/lessons"
+                    path="/chains"
                     element={
                       <PrivateRoute operation={[RoleType.Admin]}>
-                        <Lessons />
+                        <Chains />
                       </PrivateRoute>
                     }
                   />
 
-                  <Route
-                    path="/lessons/show/:id"
-                    element={
-                      <PrivateRoute operation={[RoleType.Admin]}>
-                        <ShowLesson />
-                      </PrivateRoute>
-                    }
-                  />
-
-                  <Route path="/*" element={<Navigate to="/lessons" />} />
+                  <Route path="/*" element={<Navigate to="/users" />} />
                 </Routes>
               </section>
             </main>

@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getOne, setUser } from "core/store/user/user.thunks";
 import { classNames, formatNumber } from "core/utils";
 import { RoleType } from "core/utils/enums";
-import moment from "moment";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { EditUser } from "./edit";
@@ -77,7 +76,7 @@ export const ShowUser: React.FC<Props> = () => {
                 <div className="sm:col-span-1">
                   <div className="text-sm font-medium text-gray-500">Email</div>
                   <div className="mt-1 text-sm text-gray-900">
-                    {user?.contact?.email || "----"}
+                    {user?.email || "----"}
                   </div>
                 </div>
 
@@ -86,7 +85,7 @@ export const ShowUser: React.FC<Props> = () => {
                     Номер телефона
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
-                    {user?.contact?.phone || "----"}
+                    {user?.phone || "----"}
                   </div>
                 </div>
 
@@ -96,34 +95,6 @@ export const ShowUser: React.FC<Props> = () => {
                   </div>
                   <div className="mt-1 text-sm text-gray-900">
                     {formatNumber(user?.balance || 0, "UZB")}
-                  </div>
-                </div>
-
-                <div className="sm:col-span-1">
-                  <div className="text-sm font-medium text-gray-500">
-                    Оплачено до:
-                  </div>
-                  <div className="mt-1 text-sm text-gray-900">
-                    {moment(user.activeBefore).format("DD-MM-YYYY hh:mm")}
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-3 lg:grid-cols-4 mt-3">
-                <div className="sm:col-span-1">
-                  <div className="text-sm font-medium text-gray-500">
-                    Устройство №1
-                  </div>
-                  <div className="mt-1 text-sm text-gray-900">
-                    {user?.firstDevice || "----"}
-                  </div>
-                </div>
-
-                <div className="sm:col-span-1">
-                  <div className="text-sm font-medium text-gray-500">
-                    Устройство №2
-                  </div>
-                  <div className="mt-1 text-sm text-gray-900">
-                    {user.secondDevice || "----"}
                   </div>
                 </div>
               </div>

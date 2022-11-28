@@ -1,22 +1,27 @@
-import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
+import {
+  ArchiveIcon,
+  CheckIcon,
+  MinusIcon,
+  PencilIcon,
+} from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
 import { removeService } from "core/services/global.service";
+import { getAll, setChain } from "core/store/chain/chain.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { getAll, setMaterial } from "core/store/material/material.thunks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
-import { CreateMaterial } from "pages/material/create";
-import { EditMaterial } from "pages/material/edit";
+import { CreateChain } from "pages/chain/create";
+import { EditChain } from "pages/chain/edit";
 import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
 }
 
-export const MaterialTbody: React.FC<Props> = ({ path }) => {
-  const { material, materials } = useAppSelector((state) => state.materials);
+export const ChainTbody: React.FC<Props> = ({ path }) => {
+  const { chain, chains } = useAppSelector((state) => state.chains);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -26,28 +31,35 @@ export const MaterialTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(material!.id, "material").then(() => {
+    removeService(chain!.id, "chain").then(() => {
       dispatch(getAll());
-      dispatch(setMaterial());
+      dispatch(setChain());
     });
   };
 
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setMaterial());
+    dispatch(setChain());
   };
 
   return (
     <>
       <tbody>
-        {materials.map((x, idx) => (
+        {chains.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.title.ru}
+              {x.price}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+              {x.active ? (
+                <CheckIcon className="h-6 w-6" />
+              ) : (
+                <MinusIcon className="h-6 w-6" />
+              )}
             </td>
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
@@ -59,7 +71,7 @@ export const MaterialTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setMaterial(x));
+                          dispatch(setChain(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -72,7 +84,7 @@ export const MaterialTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setMaterial(x));
+                          dispatch(setChain(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -88,12 +100,12 @@ export const MaterialTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {material && (
+        {chain && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: material.id, name: material.title.ru }}
+            data={{ id: chain.id, name: "" }}
           />
         )}
       </PrivateComponent>
@@ -101,10 +113,10 @@ export const MaterialTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={material?.title.ru || "Материал"}
+            title={"Цепочка"}
             close={close}
-            Edit={EditMaterial}
-            Create={CreateMaterial}
+            Edit={EditChain}
+            Create={CreateChain}
           />
         )}
       </PrivateComponent>

@@ -6,23 +6,19 @@ import {
   StateFromReducersMapObject,
 } from "@reduxjs/toolkit";
 import { bannersReducer } from "./banner/banner.slices";
-import { categoriesReducer } from "./category/category.slices";
+import { chainsReducer } from "./chain/chain.slices";
+import { contextsReducer } from "./context/context.slices";
 import { globalReducer } from "./global/global.slices";
-import { lessonsReducer } from "./lesson/lesson.slices";
-import { materialsReducer } from "./material/material.slices";
-import { subscriptionTypesReducer } from "./subscription-type/subscription-type.slices";
 import { usersReducer } from "./user/user.slices";
 
 // export type RootState = ReturnType<typeof combinedReducer>;
 
 const State = {
   global: globalReducer,
-  categories: categoriesReducer,
-  materials: materialsReducer,
   banners: bannersReducer,
   users: usersReducer,
-  lessons: lessonsReducer,
-  subscriptionTypes: subscriptionTypesReducer,
+  chains: chainsReducer,
+  contexts: contextsReducer,
 };
 
 export const appReducer = combineReducers(State);

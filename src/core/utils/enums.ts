@@ -15,15 +15,14 @@ export enum THead {
   edit = "Edit",
 }
 
-export enum DifficultyLevel {
-  first = "first",
-  second = "second",
-  third = "third",
-  fourth = "fourth",
-  fifth = "fifth",
+export enum BannerPosition {
+  full = "full",
+  right = "right",
+  left = "left",
 }
 
-export enum Gender {
-  male = "male",
-  female = "female",
+export enum ContextPriority {
+  urgent = "urgent",
+  medium = "medium",
+  low = "low",
 }

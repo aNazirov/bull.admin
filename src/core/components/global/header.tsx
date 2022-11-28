@@ -292,7 +292,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
                     {user?.name}
                   </div>
                   <div className="text-sm font-medium text-gray-500 truncate">
-                    {user?.contact.email}
+                    {user?.email}
                   </div>
                 </div>
               </div>

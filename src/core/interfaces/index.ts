@@ -1,4 +1,4 @@
-import { DifficultyLevel, Gender } from "core/utils/enums";
+import { BannerPosition, ContextPriority } from "core/utils/enums";
 import { ReactElement } from "react";
 
 export interface ILinkObj {
@@ -21,14 +21,8 @@ export interface IType {
 }
 
 export interface ILogin {
-  email: string;
+  login: string;
   password: string;
-}
-
-export interface IAutoComplete {
-  index: string;
-  search: string;
-  filter?: string[];
 }
 
 export interface IRole {
@@ -36,67 +30,35 @@ export interface IRole {
   title: string;
 }
 
-export type ITranslate = {
-  ru: string;
-  uz: string;
-};
-
-export interface ICategory {
+export interface IBannerType {
   id: number;
-  title: ITranslate;
-  poster?: IFile;
+  name: string;
+  size: string;
+  price: number;
+  index?: number;
+  position: BannerPosition;
 }
 
-export interface IMaterial {
+export interface IChainType {
   id: number;
-  title: ITranslate;
-}
-
-export interface IBanner {
-  id: number;
-  title: ITranslate;
-  description: ITranslate;
-  poster: IFile;
-  link: string;
+  price: number;
   active: boolean;
 }
 
-export interface ISubscriptionType {
+export interface IContextType {
   id: number;
-  title: ITranslate;
-  description?: ITranslate;
-  months: number;
+  name: string;
   price: number;
-}
-
-export interface ILesson {
-  id: number;
-  title: ITranslate;
-  description?: ITranslate;
-  needs?: ITranslate;
-  poster?: IFile;
-  video?: IFile;
-  free: boolean;
-  difficultyLevel: DifficultyLevel;
-  genders: Gender[];
-  categories: ICategory[];
-  materials: IMaterial[];
+  priority: ContextPriority;
 }
 
 export interface IUser {
   id: number;
   name: string;
-  contact: IContact;
-  firstDevice?: string;
-  secondDevice?: string;
-  role: IRole;
-  balance?: number;
-  activeBefore: Date;
-}
-
-export interface IContact {
   email: string;
   phone: string;
+  role: IRole;
+  balance?: number;
 }
 
 export interface IFile {

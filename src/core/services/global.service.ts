@@ -1,5 +1,5 @@
 import { api, fileApi } from "core/api";
-import { IAutoComplete, ILogin } from "core/interfaces";
+import { ILogin } from "core/interfaces";
 import { filter } from "core/utils";
 
 export const loginService = (params: ILogin) => {
@@ -15,16 +15,6 @@ export const loginService = (params: ILogin) => {
 
 export const getUserByToken = () => {
   return api.get("/user/token").then((res) => res.data);
-};
-
-export const autoComplite = (params: IAutoComplete) => {
-  params = filter(params);
-
-  return api
-    .get("/global/autoComplete", {
-      params,
-    })
-    .then((res) => res.data);
 };
 
 export const createService = (params: any, name: string) => {

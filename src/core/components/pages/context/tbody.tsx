@@ -2,26 +2,22 @@ import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
 import { removeService } from "core/services/global.service";
+import { getAll, setContext } from "core/store/context/context.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import {
-  getAll,
-  setSubscriptionType,
-} from "core/store/subscription-type/subscription-type.thunks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
-import { CreateSubscriptionType } from "pages/subscription-type/create";
-import { EditSubscriptionType } from "pages/subscription-type/edit";
+import { contextPriorities } from "core/_data/datas";
+import { CreateContext } from "pages/context/create";
+import { EditContext } from "pages/context/edit";
 import { useContext, useState } from "react";
 
 interface Props {
   path: string[];
 }
 
-export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
-  const { subscriptionType, subscriptionTypes } = useAppSelector(
-    (state) => state.subscriptionTypes
-  );
+export const ContextTbody: React.FC<Props> = ({ path }) => {
+  const { context, contexts } = useAppSelector((state) => state.contexts);
   const { setOpen, setMode } = useContext(AppContext);
 
   const [dOPen, setDOpen] = useState(false);
@@ -31,37 +27,36 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
   const access = path.length < 2;
 
   const handleDelete = () => {
-    removeService(subscriptionType!.id, "subscription-type").then(() => {
+    removeService(context!.id, "context").then(() => {
       dispatch(getAll());
-      dispatch(setSubscriptionType());
+      dispatch(setContext());
     });
   };
 
   const close = () => {
     setOpen(false);
     setMode(SlideoverModes.none);
-    dispatch(setSubscriptionType());
+    dispatch(setContext());
   };
 
   return (
     <>
       <tbody>
-        {subscriptionTypes.map((x, idx) => (
+        {contexts.map((x, idx) => (
           <tr
             key={x.id}
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.title.ru}
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.name}
             </td>
-
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
-              {x.months}
-            </td>
-
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.price}
             </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {contextPriorities.find((y) => y.id === x.priority)?.title}
+            </td>
+
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
                 {access && (
@@ -72,7 +67,7 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
                           e.stopPropagation();
                           setOpen(true);
                           setMode(SlideoverModes.edit);
-                          dispatch(setSubscriptionType(x));
+                          dispatch(setContext(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -85,7 +80,7 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
                         onClick={(e) => {
                           e.stopPropagation();
                           setDOpen(true);
-                          dispatch(setSubscriptionType(x));
+                          dispatch(setContext(x));
                         }}
                         className="text-gray-600 hover:text-blue-900 cursor-pointer"
                       >
@@ -101,12 +96,12 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
       </tbody>
 
       <PrivateComponent operation={accessRoles}>
-        {subscriptionType && (
+        {context && (
           <MDelete
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: subscriptionType.id, name: subscriptionType.title.ru }}
+            data={{ id: context.id, name: context.name }}
           />
         )}
       </PrivateComponent>
@@ -114,10 +109,10 @@ export const SubscriptionTypeTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={subscriptionType?.title.ru || "Тип подписки"}
+            title={context?.name || "Контекст"}
             close={close}
-            Edit={EditSubscriptionType}
-            Create={CreateSubscriptionType}
+            Edit={EditContext}
+            Create={CreateContext}
           />
         )}
       </PrivateComponent>

@@ -20,28 +20,6 @@ export const filter = (params: any) => {
   return obj;
 };
 
-export function meiliRange(item: any, query: string) {
-  const obj = { ...item };
-
-  if (obj.name) {
-    obj.meili = `<div>${obj.name.replace(query, `<mark>${query}</mark>`)}${
-      obj?.meta ? `<p class="text-gray-500 text-sm">${obj?.meta}</p>` : ""
-    }<div>`;
-  }
-
-  if (obj.title) {
-    if (obj.title instanceof Object) {
-      obj.title = obj.title.ru.match(query) ? obj.title.ru : obj.title.uz;
-    }
-
-    obj.meili = `<div>${obj.title.replace(query, `<mark>${query}</mark>`)}${
-      obj?.meta ? `<p class="text-gray-500 text-sm">${obj?.meta}</p>` : ""
-    }<div>`;
-  }
-
-  return obj;
-}
-
 export const sort = (
   a: any,
   b: any,
@@ -143,18 +121,14 @@ export const pageSwitch = (path: string[]) => {
   const page = path[0];
 
   switch (page) {
-    case "categories":
-      return "Категории";
-    case "materials":
-      return "Материалы";
+    case "chains":
+      return "Типы цепочек";
+    case "contexts":
+      return "Типы контекста";
     case "banners":
-      return "Баннеры";
+      return "Типы баннеров";
     case "users":
       return "Пользователи";
-    case "lessons":
-      return "Уроки";
-    case "subsctiption-type":
-      return "Подписки";
 
     default:
       return "";

@@ -1,9 +1,9 @@
 import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
 import { updateService } from "core/services";
-import { getAll } from "core/store/banner/banner.thunks";
+import { getAll } from "core/store/context/context.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { BannerPosition } from "core/utils/enums";
-import { bannerPositions } from "core/_data/datas";
+import { ContextPriority } from "core/utils/enums";
+import { contextPriorities } from "core/_data/datas";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -12,24 +12,22 @@ interface Props {
 
 type FormData = {
   name: string;
-  size: string;
   price: number;
-  index?: number;
-  position: BannerPosition;
+  priority: ContextPriority;
 };
 
-export const EditBanner: React.FC<Props> = ({ close }) => {
+export const EditContext: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
     control,
   } = useForm<FormData>();
-  const { banner } = useAppSelector((state) => state.banners);
+  const { context } = useAppSelector((state) => state.contexts);
 
   const dispatch = useAppDispatch();
 
   const submit = async (data: FormData) => {
-    return updateService(banner!.id, data, "banner").then(() => {
+    return updateService(context!.id, data, "context").then(() => {
       dispatch(getAll());
       close();
     });
@@ -48,21 +46,8 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             title="Название"
             placeholder="Название"
             control={control}
-            defaultValue={banner?.name}
+            defaultValue={context?.name}
             error={errors.name}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
-            title="Размер"
-            name="size"
-            control={control}
-            placeholder="Размер"
-            defaultValue={banner?.size}
-            error={errors["size"]}
           />
         </div>
       </div>
@@ -75,7 +60,7 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
             type="number"
             control={control}
             placeholder="Цена"
-            defaultValue={banner?.price}
+            defaultValue={context?.price}
             error={errors["price"]}
           />
         </div>
@@ -83,27 +68,13 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
 
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
-          <CInput
-            title="Ряд"
-            name="index"
-            type="number"
-            control={control}
-            defaultValue={banner?.index}
-            placeholder="Ряд"
-            error={errors["index"]}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
           <CCombobox
-            title="Позиция"
-            name="position"
+            title="Приоритет"
+            name="priority"
             control={control}
-            defaultValue={banner?.position}
-            items={bannerPositions}
-            error={errors["position"]}
+            defaultValue={context?.priority}
+            items={contextPriorities}
+            error={errors["priority"]}
           />
         </div>
       </div>

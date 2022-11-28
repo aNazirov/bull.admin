@@ -3,7 +3,6 @@ import { updateService } from "core/services/index";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { getAll } from "core/store/user/user.thunks";
 import { RoleType } from "core/utils/enums";
-import moment from "moment";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -69,19 +68,6 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             error={errors["balance"]}
           />
         </div>
-
-        <div className="w-full">
-          <CInput
-            name="activeBefore"
-            title="Оплачен до"
-            placeholder="yyyy-mm-dd"
-            required={false}
-            defaultValue={moment(user?.activeBefore).format("YYYY-MM-DD")}
-            type="date"
-            control={control}
-            error={errors["activeBefore"]}
-          />
-        </div>
       </div>
 
       <div className="mt-3 flex items-center gap-3">
@@ -90,7 +76,7 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             name="email"
             title="Email"
             placeholder="Email"
-            defaultValue={user?.contact?.email}
+            defaultValue={user?.email}
             control={control}
             error={errors["email"]}
           />
@@ -101,7 +87,7 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             name="phone"
             title="Номер телефона"
             placeholder="+*** ** *** ****"
-            defaultValue={user?.contact?.phone}
+            defaultValue={user?.phone}
             control={control}
             error={errors["phone"]}
           />

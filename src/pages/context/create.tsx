@@ -1,9 +1,9 @@
 import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
 import { createService } from "core/services/index";
-import { getAll } from "core/store/banner/banner.thunks";
+import { getAll } from "core/store/context/context.thunks";
 import { useAppDispatch } from "core/store/hooks";
-import { BannerPosition } from "core/utils/enums";
-import { bannerPositions } from "core/_data/datas";
+import { ContextPriority } from "core/utils/enums";
+import { contextPriorities } from "core/_data/datas";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -12,13 +12,11 @@ interface Props {
 
 type FormData = {
   name: string;
-  size: string;
   price: number;
-  index?: number;
-  position: BannerPosition;
+  priority: ContextPriority;
 };
 
-export const CreateBanner: React.FC<Props> = ({ close }) => {
+export const CreateContext: React.FC<Props> = ({ close }) => {
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -28,7 +26,7 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: FormData) => {
-    return createService(data, "banner").then(() => {
+    return createService(data, "context").then(() => {
       dispatch(getAll());
       close();
     });
@@ -55,18 +53,6 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            title="Размер"
-            name="size"
-            control={control}
-            placeholder="Размер"
-            error={errors["size"]}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
             title="Цена"
             name="price"
             type="number"
@@ -79,25 +65,12 @@ export const CreateBanner: React.FC<Props> = ({ close }) => {
 
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
-          <CInput
-            title="Ряд"
-            name="index"
-            type="number"
-            control={control}
-            placeholder="Ряд"
-            error={errors["index"]}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
           <CCombobox
-            title="Позиция"
-            name="position"
+            title="Приоритет"
+            name="priority"
             control={control}
-            items={bannerPositions}
-            error={errors["position"]}
+            items={contextPriorities}
+            error={errors["priority"]}
           />
         </div>
       </div>

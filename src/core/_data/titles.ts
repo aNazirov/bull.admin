@@ -1,8 +1,6 @@
 import {
-  AcademicCapIcon,
-  CollectionIcon,
   ColorSwatchIcon,
-  CreditCardIcon,
+  DocumentTextIcon,
   PhotographIcon,
   UserIcon,
 } from "@heroicons/react/solid";
@@ -29,9 +27,9 @@ export const userNavigation = [
 
 export const sidebarNavigation = [
   {
-    name: "Уроки",
-    href: "/lessons",
-    icon: AcademicCapIcon,
+    name: "Пользователи",
+    href: "/users",
+    icon: UserIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
@@ -43,53 +41,31 @@ export const sidebarNavigation = [
     current: false,
   },
   {
-    name: "Подписки",
-    href: "/subsctiption-type",
-    icon: CreditCardIcon,
+    name: "Контексты",
+    href: "/contexts",
+    icon: DocumentTextIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
   {
-    name: "Категории",
-    href: "/categories",
-    icon: CollectionIcon,
-    permissions: [RoleType.Admin],
-    current: false,
-  },
-  {
-    name: "Материалы",
-    href: "/materials",
+    name: "Цепочки",
+    href: "/chains",
     icon: ColorSwatchIcon,
     permissions: [RoleType.Admin],
     current: false,
   },
-  {
-    name: "Пользователи",
-    href: "/users",
-    icon: UserIcon,
-    permissions: [RoleType.Admin],
-    current: false,
-  },
 ];
 
-export const GenreTableNames = ["Название", "Slug", THead.edit];
-export const CategoryTableNames = ["Название", THead.edit];
+export const BannerTableNames = [
+  "Название",
+  "Размер",
+  "Цена",
+  "Ряд",
+  "Позиция",
+  THead.edit,
+];
 
-export const MaterialTableNames = ["Название", THead.edit];
-export const BannerTableNames = ["Название", "Активный", THead.edit];
+export const ChainTableNames = ["Цена", "Активный", THead.edit];
+export const ContextTableNames = ["Название", "Цена", "Приоритет", THead.edit];
 
 export const UserTableNames = ["Имя", "Email", "Роль", THead.edit];
-export const LessonTableNames = [
-  "Название",
-  "Тематики",
-  "Материалы",
-  "Бесплатный",
-  THead.edit,
-];
-
-export const SubscriptionTypeTableNames = [
-  "Название",
-  "Продолжительность",
-  "Цена",
-  THead.edit,
-];

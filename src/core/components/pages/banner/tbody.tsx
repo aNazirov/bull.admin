@@ -1,9 +1,4 @@
-import {
-  ArchiveIcon,
-  CheckIcon,
-  MinusIcon,
-  PencilIcon,
-} from "@heroicons/react/solid";
+import { ArchiveIcon, PencilIcon } from "@heroicons/react/solid";
 import { PrivateComponent, SlideOvers } from "core/components/shared";
 import { MDelete } from "core/components/shared/MDelete";
 import { removeService } from "core/services/global.service";
@@ -12,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
+import { bannerPositions } from "core/_data/datas";
 import { CreateBanner } from "pages/banner/create";
 import { EditBanner } from "pages/banner/edit";
 import { useContext, useState } from "react";
@@ -52,18 +48,27 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
             className={classNames(idx % 2 === 0 ? "bg-white" : "bg-gray-50")}
           >
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.title.ru}
+              {x.name}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.link}
+              {x.size}
             </td>
-            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.price}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {x.index}
+            </td>
+            <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
+              {bannerPositions.find((y) => y.id === x.position)?.title}
+            </td>
+            {/* <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900">
               {x.active ? (
                 <CheckIcon className="h-6 w-6" />
               ) : (
                 <MinusIcon className="h-6 w-6" />
               )}
-            </td>
+            </td> */}
             <td className="flex justify-end px-6 py-3.5 whitespace-nowrap text-right text-sm font-medium space-x-4">
               <PrivateComponent operation={accessRoles}>
                 {access && (
@@ -108,7 +113,7 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
             handleDelete={handleDelete}
             open={dOPen}
             setOpen={setDOpen}
-            data={{ id: banner.id, name: banner.title.ru }}
+            data={{ id: banner.id, name: banner.name }}
           />
         )}
       </PrivateComponent>
@@ -116,7 +121,7 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
       <PrivateComponent operation={accessRoles}>
         {access && (
           <SlideOvers
-            title={banner?.title.ru || "Баннер"}
+            title={banner?.name || "Баннер"}
             close={close}
             Edit={EditBanner}
             Create={CreateBanner}

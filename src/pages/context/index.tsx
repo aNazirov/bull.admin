@@ -1,13 +1,17 @@
-import { BannerTbody } from "core/components/pages/banner";
+import { ContextTbody } from "core/components/pages/context";
 import { Table } from "core/components/pages/table";
-import { getAll, setBanner, setBanners } from "core/store/banner/banner.thunks";
+import {
+  getAll,
+  setContext,
+  setContexts,
+} from "core/store/context/context.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { BannerTableNames } from "core/_data/titles";
+import { ContextTableNames } from "core/_data/titles";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {}
 
-export const Banners: React.FC<Props> = () => {
+export const Contexts: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -17,12 +21,12 @@ export const Banners: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setBanner());
-      dispatch(setBanners());
+      dispatch(setContext());
+      dispatch(setContexts());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.banners);
+  const { count } = useAppSelector((state) => state.contexts);
 
   const getMore = (skip: number) => {
     return dispatch(getAll(skip, filter.current));
@@ -31,10 +35,10 @@ export const Banners: React.FC<Props> = () => {
   return (
     <>
       <Table
-        tableNames={BannerTableNames}
+        tableNames={ContextTableNames}
         page={page}
         setPage={setPage}
-        tBody={BannerTbody}
+        tBody={ContextTbody}
         getMore={getMore}
         count={count}
       />

@@ -1,4 +1,4 @@
-import { IBanner } from "core/interfaces";
+import { IBannerType } from "core/interfaces";
 import { getAllService, getOneService } from "core/services/global.service";
 import { bannersAction } from "./banner.slices";
 
@@ -11,7 +11,7 @@ export const getAll =
   };
 
 export const setBanners =
-  (count: number = 0, banners: IBanner[] = []) =>
+  (count: number = 0, banners: IBannerType[] = []) =>
   (dispatch: any) => {
     return dispatch(
       bannersAction.setBanners({
@@ -28,7 +28,7 @@ export const getOne = (id: number) => (dispatch: any) => {
 };
 
 export const setBanner =
-  (banner: IBanner | null = null) =>
+  (banner: IBannerType | null = null) =>
   (dispatch: any) => {
     return dispatch(
       bannersAction.setBanner({

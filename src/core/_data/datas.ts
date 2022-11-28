@@ -1,4 +1,4 @@
-import { DifficultyLevel, Gender } from "core/utils/enums";
+import { BannerPosition, ContextPriority } from "core/utils/enums";
 
 export const defaultAvatar =
   "https://e7.pngegg.com/pngimages/831/88/png-clipart-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design.png";
@@ -14,15 +14,14 @@ export const statusStyles = {
   failed: "bg-gray-100 text-gray-800",
 };
 
-export const difficultyLevels = [
-  { title: "1", id: DifficultyLevel.first },
-  { title: "2", id: DifficultyLevel.second },
-  { title: "3", id: DifficultyLevel.third },
-  { title: "4", id: DifficultyLevel.fourth },
-  { title: "5", id: DifficultyLevel.fifth },
-];
+export const contextPriorities = [
+  { id: ContextPriority.urgent, title: "Топ" },
+  { id: ContextPriority.medium, title: "Средний" },
+  { id: ContextPriority.low, title: "Низкий" },
+]
 
-export const genders = [
-  { title: "Для мальчиков", id: Gender.male },
-  { title: "Для девочек", id: Gender.female },
-];
+export const bannerPositions = [
+  { id: BannerPosition.full, title: "На всю длину" },
+  { id: BannerPosition.left, title: "Слева" },
+  { id: BannerPosition.right, title: "Справа" },
+]

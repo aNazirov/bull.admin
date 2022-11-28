@@ -1,13 +1,13 @@
-import { BannerTbody } from "core/components/pages/banner";
+import { ChainTbody } from "core/components/pages/chain";
 import { Table } from "core/components/pages/table";
-import { getAll, setBanner, setBanners } from "core/store/banner/banner.thunks";
+import { getAll, setChain, setChains } from "core/store/chain/chain.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { BannerTableNames } from "core/_data/titles";
+import { ChainTableNames } from "core/_data/titles";
 import { useEffect, useRef, useState } from "react";
 
 interface Props {}
 
-export const Banners: React.FC<Props> = () => {
+export const Chains: React.FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState(1);
@@ -17,12 +17,12 @@ export const Banners: React.FC<Props> = () => {
     dispatch(getAll());
 
     return () => {
-      dispatch(setBanner());
-      dispatch(setBanners());
+      dispatch(setChain());
+      dispatch(setChains());
     };
   }, [dispatch]);
 
-  const { count } = useAppSelector((state) => state.banners);
+  const { count } = useAppSelector((state) => state.chains);
 
   const getMore = (skip: number) => {
     return dispatch(getAll(skip, filter.current));
@@ -31,10 +31,10 @@ export const Banners: React.FC<Props> = () => {
   return (
     <>
       <Table
-        tableNames={BannerTableNames}
+        tableNames={ChainTableNames}
         page={page}
         setPage={setPage}
-        tBody={BannerTbody}
+        tBody={ChainTbody}
         getMore={getMore}
         count={count}
       />
