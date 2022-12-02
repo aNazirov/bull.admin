@@ -5,7 +5,7 @@ import { bannersAction } from "./banner.slices";
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "banner").then((res) => {
+    return getAllService(skip, params, "banner/type").then((res) => {
       dispatch(setBanners(res.count, res.data));
     });
   };
@@ -22,7 +22,7 @@ export const setBanners =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "banner").then((banner) => {
+  return getOneService(id, "banner/type").then((banner) => {
     dispatch(setBanner(banner));
   });
 };

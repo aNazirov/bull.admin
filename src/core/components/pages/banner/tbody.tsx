@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { AppContext } from "core/utils/contexts";
 import { RoleType, SlideoverModes } from "core/utils/enums";
 import { classNames } from "core/utils/index";
-import { bannerPositions } from "core/_data/datas";
+import { bannerPositions, bannerSizes } from "core/_data/datas";
 import { CreateBanner } from "pages/banner/create";
 import { EditBanner } from "pages/banner/edit";
 import { useContext, useState } from "react";
@@ -51,7 +51,7 @@ export const BannerTbody: React.FC<Props> = ({ path }) => {
               {x.name}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
-              {x.size}
+              {bannerSizes.find((y) => y.id === x.size)?.title}
             </td>
             <td className="px-6 py-3.5 whitespace-nowrap text-sm font-medium text-gray-900 cursor-pointer">
               {x.price}

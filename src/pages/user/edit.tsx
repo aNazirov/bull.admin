@@ -58,21 +58,6 @@ export const EditUser: React.FC<Props> = ({ close }) => {
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            name="balance"
-            title="Баланс"
-            placeholder="Баланс"
-            defaultValue={user?.balance}
-            required={false}
-            type="number"
-            control={control}
-            error={errors["balance"]}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
             name="email"
             title="Email"
             placeholder="Email"
@@ -90,6 +75,21 @@ export const EditUser: React.FC<Props> = ({ close }) => {
             defaultValue={user?.phone}
             control={control}
             error={errors["phone"]}
+          />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="balance"
+            title="Баланс"
+            placeholder="Баланс"
+            defaultValue={user?.balance}
+            required={false}
+            type="number"
+            control={control}
+            error={errors["balance"]}
           />
         </div>
 

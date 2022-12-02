@@ -3,7 +3,7 @@ import { updateService } from "core/services";
 import { getAll } from "core/store/banner/banner.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
 import { BannerPosition } from "core/utils/enums";
-import { bannerPositions } from "core/_data/datas";
+import { bannerPositions, bannerSizes } from "core/_data/datas";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -56,13 +56,13 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
 
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
-          <CInput
+          <CCombobox
             title="Размер"
             name="size"
             control={control}
-            placeholder="Размер"
+            items={bannerSizes}
             defaultValue={banner?.size}
-            error={errors["size"]}
+            error={errors["position"]}
           />
         </div>
       </div>

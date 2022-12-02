@@ -5,7 +5,7 @@ import { contextsAction } from "./context.slices";
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "context").then((res) => {
+    return getAllService(skip, params, "context/type").then((res) => {
       dispatch(setContexts(res.count, res.data));
     });
   };
@@ -22,7 +22,7 @@ export const setContexts =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "context").then((context) => {
+  return getOneService(id, "context/type").then((context) => {
     dispatch(setContext(context));
   });
 };

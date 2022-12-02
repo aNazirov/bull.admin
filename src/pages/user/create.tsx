@@ -64,32 +64,6 @@ export const CreateUser: React.FC<Props> = ({ close }) => {
       <div className="mt-3 flex items-center gap-3">
         <div className="w-full">
           <CInput
-            name="balance"
-            title="Баланс"
-            placeholder="Баланс"
-            type="number"
-            required={false}
-            control={control}
-            error={errors["balance"]}
-          />
-        </div>
-
-        <div className="w-full">
-          <CInput
-            name="activeBefore"
-            title="Оплачен до"
-            placeholder="yyyy-mm-dd"
-            type="date"
-            control={control}
-            error={errors["activeBefore"]}
-            required={false}
-          />
-        </div>
-      </div>
-
-      <div className="mt-3 flex items-center gap-3">
-        <div className="w-full">
-          <CInput
             name="email"
             title="Email"
             placeholder="Email"
@@ -106,6 +80,21 @@ export const CreateUser: React.FC<Props> = ({ close }) => {
             error={errors["phone"]}
           />
         </div>
+      </div>
+
+      <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CInput
+            name="balance"
+            title="Баланс"
+            placeholder="Баланс"
+            type="number"
+            required={false}
+            control={control}
+            error={errors["balance"]}
+          />
+        </div>
+
         <div className="w-full">
           <CInput
             name="password"

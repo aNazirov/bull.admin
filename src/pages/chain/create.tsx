@@ -25,7 +25,7 @@ export const CreateChain: React.FC<Props> = ({ close }) => {
   const submit = async (data: FormData) => {
     return createService(
       { ...data, active: data["active"] ? JSON.parse(data["active"]) : false },
-      "chain"
+      "chain/type"
     ).then(() => {
       dispatch(getAll());
       close();

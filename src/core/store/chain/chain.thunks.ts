@@ -5,7 +5,7 @@ import { chainsAction } from "./chain.slices";
 export const getAll =
   (skip: number = 0, params: any = {}) =>
   (dispatch: any) => {
-    return getAllService(skip, params, "chain").then((res) => {
+    return getAllService(skip, params, "chain/type").then((res) => {
       dispatch(setChains(res.count, res.data));
     });
   };
@@ -22,7 +22,7 @@ export const setChains =
   };
 
 export const getOne = (id: number) => (dispatch: any) => {
-  return getOneService(id, "chain").then((chain) => {
+  return getOneService(id, "chain/type").then((chain) => {
     dispatch(setChain(chain));
   });
 };

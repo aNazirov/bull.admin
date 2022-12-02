@@ -26,7 +26,7 @@ export const CreateContext: React.FC<Props> = ({ close }) => {
   const dispatch = useAppDispatch();
 
   const submit = async (data: FormData) => {
-    return createService(data, "context").then(() => {
+    return createService(data, "context/type").then(() => {
       dispatch(getAll());
       close();
     });

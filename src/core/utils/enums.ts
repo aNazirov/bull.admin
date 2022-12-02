@@ -26,3 +26,11 @@ export enum ContextPriority {
   medium = "medium",
   low = "low",
 }
+
+export enum BannerSize {
+  size_1600x200 = "size_1600x200",
+  size_728x90 = "size_728x90",
+  size_1200x150 = "size_1200x150",
+  size_160x600 = "size_160x600",
+  size_150x150 = "size_150x150",
+}
