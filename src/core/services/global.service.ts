@@ -1,4 +1,4 @@
-import { api, fileApi } from "core/api";
+import { api } from "core/api";
 import { ILogin } from "core/interfaces";
 import { filter } from "core/utils";
 
@@ -66,7 +66,7 @@ export const getAllService = (skip: number, params: any, name: string) => {
 };
 
 export const filesUpload = (formData: any) => {
-  return fileApi
+  return api
     .post(
       "/file/upload-many",
       formData,
@@ -84,7 +84,7 @@ export const filesUpload = (formData: any) => {
 };
 
 export const fileDelete = (id: number) => {
-  return fileApi
+  return api
     .delete(`/file/${id}`, undefined, {
       pending: "Удаление файла ...",
       success: "Файл удален",

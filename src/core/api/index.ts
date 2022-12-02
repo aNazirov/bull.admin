@@ -5,10 +5,6 @@ const instance = axios.create({
   baseURL: process.env.REACT_APP_API_HOST,
 });
 
-const fileInstance = axios.create({
-  baseURL: process.env.REACT_APP_FILE_HOST,
-});
-
 instance.interceptors.request.use(function (config: AxiosRequestConfig) {
   const token = window.localStorage.getItem("token");
 
@@ -22,40 +18,6 @@ instance.interceptors.request.use(function (config: AxiosRequestConfig) {
 });
 
 instance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async function (error) {
-    if (
-      error.response?.status === 401 &&
-      window.location.pathname !== "/login"
-    ) {
-      window.location.href = window.location.href.replace(
-        window.location.pathname,
-        "/login"
-      );
-
-      localStorage.removeItem("token");
-      return;
-    }
-
-    return Promise.reject(error);
-  }
-);
-
-fileInstance.interceptors.request.use(function (config: AxiosRequestConfig) {
-  const token = window.localStorage.getItem("token");
-
-  if (token) {
-    if (config.headers) {
-      config.headers.Authorization = token ? `Bearer ${token}` : "";
-    }
-  }
-
-  return config;
-});
-
-fileInstance.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -128,6 +90,5 @@ class Api {
 }
 
 const api = Object.freeze(new Api(instance));
-const fileApi = Object.freeze(new Api(fileInstance));
 
-export { api, fileApi };
+export { api };
