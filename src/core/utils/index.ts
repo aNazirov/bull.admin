@@ -26,8 +26,6 @@ export const sort = (
   sortBy: string,
   orderBy: "asc" | "desc" = "asc"
 ) => {
-  console.log(a, b);
-
   if (orderBy === "asc") {
     if (a[sortBy] > b[sortBy]) {
       return 1;

@@ -28,7 +28,7 @@ export const bannerPositions = [
 
 export const bannerSizes = [
   { id: BannerSize.size_1600x200, title: "1600x200" },
-  { id: BannerSize.size_1200x150, title: "1300x150" },
+  { id: BannerSize.size_1200x150, title: "1200x150" },
   { id: BannerSize.size_728x90, title: "728x90" },
   { id: BannerSize.size_160x600, title: "160x600" },
   { id: BannerSize.size_150x150, title: "150x150" },
