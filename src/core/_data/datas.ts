@@ -1,4 +1,4 @@
-import { BannerPosition, BannerSize, ContextPriority } from "core/utils/enums";
+import { BannerComponent, BannerPosition, BannerSize, ContextPriority } from "core/utils/enums";
 
 export const defaultAvatar =
   "https://e7.pngegg.com/pngimages/831/88/png-clipart-user-profile-computer-icons-user-interface-mystique-miscellaneous-user-interface-design.png";
@@ -18,6 +18,13 @@ export const contextPriorities = [
   { id: ContextPriority.urgent, title: "Топ" },
   { id: ContextPriority.medium, title: "Средний" },
   { id: ContextPriority.low, title: "Низкий" },
+];
+
+export const bannerComponents = [
+  { id: BannerComponent.header, title: "Шапка" },
+  { id: BannerComponent.main, title: "Боковое меню" },
+  { id: BannerComponent.sidebar, title: "Основной контент" },
+  { id: BannerComponent.footer, title: "Подвал" },
 ];
 
 export const bannerPositions = [

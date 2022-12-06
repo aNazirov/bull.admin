@@ -15,6 +15,13 @@ export enum THead {
   edit = "Edit",
 }
 
+export enum BannerComponent {
+  header = 'header',
+  sidebar = 'sidebar',
+  main = 'main',
+  footer = 'footer'
+}
+
 export enum BannerPosition {
   full = "full",
   right = "right",

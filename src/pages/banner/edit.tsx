@@ -2,8 +2,12 @@ import { CCombobox, CInput, SlideoversFoot } from "core/components/shared";
 import { updateService } from "core/services";
 import { getAll } from "core/store/banner/banner.thunks";
 import { useAppDispatch, useAppSelector } from "core/store/hooks";
-import { BannerPosition } from "core/utils/enums";
-import { bannerPositions, bannerSizes } from "core/_data/datas";
+import { BannerComponent, BannerPosition } from "core/utils/enums";
+import {
+  bannerComponents,
+  bannerPositions,
+  bannerSizes,
+} from "core/_data/datas";
 import { useForm } from "react-hook-form";
 
 interface Props {
@@ -16,6 +20,7 @@ type FormData = {
   price: number;
   index?: number;
   position: BannerPosition;
+  component: BannerComponent;
 };
 
 export const EditBanner: React.FC<Props> = ({ close }) => {
@@ -96,6 +101,17 @@ export const EditBanner: React.FC<Props> = ({ close }) => {
       </div>
 
       <div className="mt-3 flex items-center gap-3">
+        <div className="w-full">
+          <CCombobox
+            title="Раздел"
+            name="component"
+            control={control}
+            defaultValue={banner?.component}
+            items={bannerComponents}
+            error={errors["component"]}
+          />
+        </div>
+
         <div className="w-full">
           <CCombobox
             title="Позиция"

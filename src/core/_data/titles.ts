@@ -61,6 +61,7 @@ export const BannerTableNames = [
   "Размер",
   "Цена",
   "Ряд",
+  "Раздел",
   "Позиция",
   THead.edit,
 ];

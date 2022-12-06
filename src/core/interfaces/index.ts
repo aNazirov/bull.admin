@@ -1,4 +1,9 @@
-import { BannerPosition, BannerSize, ContextPriority } from "core/utils/enums";
+import {
+  BannerComponent,
+  BannerPosition,
+  BannerSize,
+  ContextPriority,
+} from "core/utils/enums";
 
 export interface IStatus {
   id: number;
@@ -29,6 +34,7 @@ export interface IBannerType {
   price: number;
   index?: number;
   position: BannerPosition;
+  component: BannerComponent;
 }
 
 export interface IBanner {
