@@ -22,8 +22,8 @@ export const contextPriorities = [
 
 export const bannerComponents = [
   { id: BannerComponent.header, title: "Шапка" },
-  { id: BannerComponent.main, title: "Боковое меню" },
-  { id: BannerComponent.sidebar, title: "Основной контент" },
+  { id: BannerComponent.main, title: "Основной контент" },
+  { id: BannerComponent.sidebar, title: "Боковое меню" },
   { id: BannerComponent.footer, title: "Подвал" },
 ];
 
